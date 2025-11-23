@@ -126,7 +126,8 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
               <TechTag
                 key={tag}
                 tag={tag}
-                className="px-2 py-1 border border-border"
+                variant="primary"
+                className="px-2 py-1 border"
               />
             ))}
           </div>

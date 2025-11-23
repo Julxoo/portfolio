@@ -1,64 +1,64 @@
 {
   "Navigation": {
-    "home": "home",
-    "projects": "projects",
-    "experience": "experience",
-    "blog": "blog",
-    "contact": "contact"
+    "home": "Home",
+    "projects": "Projects",
+    "experience": "Experience",
+    "blog": "Blog",
+    "contact": "Contact"
   },
   "HomePage": {
-    "name": "jules toussenel",
-    "title": "student • full-stack developer",
-    "badge": "1st place • hackathon le match'up"
+    "name": "Jules Toussenel",
+    "title": "Student • Full-Stack Developer",
+    "badge": "1st Place • Hackathon Le Match'Up"
   },
   "ProjectsSection": {
-    "title": "selected projects",
+    "title": "Selected Projects",
     "empty": "Projects coming soon..."
   },
   "ProjectsPage": {
-    "title": "all projects",
-    "projectsCompleted": "project completed",
-    "projectsCompletedPlural": "projects completed"
+    "title": "All Projects",
+    "projectsCompleted": "Project completed",
+    "projectsCompletedPlural": "Projects completed"
   },
   "ExperienceSection": {
-    "title": "experience"
+    "title": "Experience"
   },
   "BlogSection": {
-    "title": "latest articles",
+    "title": "Latest Articles",
     "empty": "Articles coming soon..."
   },
   "ContactSection": {
-    "title": "contact",
-    "github": "github",
-    "linkedin": "linkedin"
+    "title": "Contact",
+    "github": "GitHub",
+    "linkedin": "LinkedIn"
   },
   "ProjectPage": {
-    "backToProjects": "← back to projects",
-    "github": "github →",
-    "liveDemo": "live demo →",
+    "backToProjects": "← Back to projects",
+    "github": "GitHub →",
+    "liveDemo": "Live Demo →",
     "notFound": "Project not found"
   },
   "BlogPage": {
-    "title": "articles",
-    "empty": "Coming soon - blog under construction",
+    "title": "Articles",
+    "empty": "Coming soon - Blog under construction",
     "emptyDescription": "The blog is currently under construction. Come back soon to discover:",
     "upcomingItem1": "Technical tutorials and guides",
     "upcomingItem2": "Project experience feedback",
     "upcomingItem3": "Useful tools and resources",
     "upcomingItem4": "Thoughts on design and UX",
-    "articlesPublished": "article published",
-    "articlesPublishedPlural": "articles published"
+    "articlesPublished": "Article published",
+    "articlesPublishedPlural": "Articles published"
   },
   "BlogPostPage": {
-    "backToBlog": "← back to blog",
+    "backToBlog": "← Back to blog",
     "notFound": "Article not found"
   },
   "Footer": {
-    "navigation": "navigation",
-    "stack": "stack",
-    "contact": "contact",
-    "builtWith": "built with",
-    "location": "aix-en-provence, france",
-    "email": "email"
+    "navigation": "Navigation",
+    "stack": "Stack",
+    "contact": "Contact",
+    "builtWith": "Built with",
+    "location": "Aix-en-Provence, France",
+    "email": "Email"
   }
 }

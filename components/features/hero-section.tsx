@@ -22,7 +22,7 @@ export function HeroSection({ name, title, description, badge }: HeroSectionProp
                 rel="noopener noreferrer"
                 className="inline-block"
               >
-                <span className="inline-flex items-center gap-1.5 px-2.5 py-1 text-xs border border-border bg-background hover:bg-muted transition-colors">
+                <span className="inline-flex items-center gap-1.5 px-2.5 py-1 text-xs border border-primary text-primary hover:bg-primary hover:text-background transition-colors">
                   <span>{badge.text}</span>
                 </span>
               </a>

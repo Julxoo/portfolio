@@ -6,12 +6,12 @@ import { routing } from "@/i18n/routing";
 import { useState, useRef, useEffect } from "react";
 
 const LOCALE_LABELS: Record<string, string> = {
-  fr: "français",
-  en: "english",
-  es: "español",
-  de: "deutsch",
-  it: "italiano",
-  pt: "português",
+  fr: "Français",
+  en: "English",
+  es: "Español",
+  de: "Deutsch",
+  it: "Italiano",
+  pt: "Português",
 };
 
 export function LanguageSwitcher() {
@@ -64,7 +64,7 @@ export function LanguageSwitcher() {
         aria-label="Select language"
         aria-expanded={isOpen}
       >
-        <span>{currentLocale}</span>
+        <span>{currentLocale.toUpperCase()}</span>
         <svg
           className={`w-3 h-3 transition-transform ${
             isOpen ? "rotate-180" : ""
@@ -95,7 +95,7 @@ export function LanguageSwitcher() {
               }`}
               aria-label={`Switch to ${LOCALE_LABELS[locale] || locale}`}
             >
-              <span className="font-medium">{locale}</span>
+              <span className="font-medium">{locale.toUpperCase()}</span>
               {LOCALE_LABELS[locale] && (
                 <span className="ml-2 opacity-60">
                   {LOCALE_LABELS[locale]}

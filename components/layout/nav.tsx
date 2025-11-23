@@ -6,28 +6,28 @@ export async function Nav() {
   const t = await getTranslations("Navigation");
 
   return (
-    <nav className="border-b border-border">
+    <nav className="sticky top-0 z-50 bg-background border-b border-border">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 py-4 flex justify-between items-center">
-        <Link href="/" className="text-sm hover:text-muted-foreground transition-colors">
-          portfolio
+        <Link href="/" className="text-sm hover:text-primary transition-colors">
+          Portfolio
         </Link>
         <div className="flex items-center gap-4 sm:gap-6">
           <div className="flex gap-4 sm:gap-8 text-xs sm:text-sm text-muted-foreground">
             <Link
               href="/projects"
-              className="hover:text-foreground transition-colors"
+              className="hover:text-primary transition-colors"
             >
               {t("projects")}
             </Link>
             <Link
               href="/blog"
-              className="hover:text-foreground transition-colors"
+              className="hover:text-primary transition-colors"
             >
               {t("blog")}
             </Link>
             <Link
-              href="/#contact"
-              className="hover:text-foreground transition-colors"
+              href="/#footer"
+              className="hover:text-primary transition-colors"
             >
               {t("contact")}
             </Link>

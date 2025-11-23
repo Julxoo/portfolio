@@ -26,7 +26,7 @@ export function Section({
       {(title || description) && (
         <div className="mb-6 sm:mb-8">
           {title && (
-            <h2 className="text-xs sm:text-sm text-muted-foreground mb-2">
+            <h2 className="text-xs sm:text-sm text-primary mb-2">
               {title}
             </h2>
           )}

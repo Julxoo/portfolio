@@ -21,7 +21,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
       {project.tags.length > 0 && (
         <div className="flex flex-wrap gap-2 mt-2">
           {project.tags.slice(0, 3).map((tag) => (
-            <TechTag key={tag} tag={tag} />
+            <TechTag key={tag} tag={tag} clickable={false} />
           ))}
         </div>
       )}

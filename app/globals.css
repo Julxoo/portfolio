@@ -12,6 +12,7 @@
   --color-muted-foreground: var(--muted-foreground);
   --color-accent: var(--accent);
   --color-accent-foreground: var(--accent-foreground);
+  --color-primary: var(--primary);
   --font-mono: var(--font-geist-mono);
   --radius-sm: 0;
   --radius-md: 0;
@@ -27,9 +28,10 @@
   --card-foreground: oklch(0.95 0 0);
   --border: oklch(0.29 0.007 265); /* bordures subtiles */
   --muted: oklch(0.22 0.007 265); /* éléments discrets */
-  --muted-foreground: oklch(0.62 0 0); /* texte secondaire */
-  --accent: oklch(0.92 0 0); /* accent clair */
-  --accent-foreground: oklch(0.16 0.007 265);
+  --muted-foreground: oklch(0.75 0 0); /* texte secondaire - éclairci */
+  --accent: oklch(0.75 0.18 60); /* #FFA200 - orange doré vibrant */
+  --accent-foreground: oklch(0.95 0 0);
+  --primary: oklch(0.75 0.18 60); /* couleur principale - #FFA200 orange doré */
 }
 
 .dark {
@@ -40,9 +42,10 @@
   --card-foreground: oklch(0.95 0 0);
   --border: oklch(0.25 0.007 265);
   --muted: oklch(0.18 0.007 265);
-  --muted-foreground: oklch(0.60 0 0);
-  --accent: oklch(0.90 0 0);
-  --accent-foreground: oklch(0.12 0.007 265);
+  --muted-foreground: oklch(0.72 0 0); /* texte secondaire - éclairci */
+  --accent: oklch(0.75 0.18 60); /* #FFA200 - orange doré vibrant */
+  --accent-foreground: oklch(0.95 0 0);
+  --primary: oklch(0.75 0.18 60); /* couleur principale - #FFA200 orange doré */
 }
 
 @layer base {
@@ -51,5 +54,14 @@
   }
   body {
     @apply bg-background text-foreground font-mono;
+  }
+
+  /* Liens avec couleur primaire */
+  a.underline {
+    @apply decoration-primary;
+  }
+
+  a.underline:hover {
+    @apply text-primary;
   }
 }

@@ -9,6 +9,7 @@ import {
 } from "@/components/ui/table";
 import { Separator } from "@/components/ui/separator";
 import { Alert, AlertDescription } from "@/components/ui/alert";
+import { CodeBlock } from "@/components/blog/code-block";
 
 export const MDXComponents = {
   h1: (props: React.HTMLAttributes<HTMLHeadingElement>) => (
@@ -19,7 +20,7 @@ export const MDXComponents = {
   ),
   h2: (props: React.HTMLAttributes<HTMLHeadingElement>) => (
     <h2
-      className="text-xl sm:text-2xl font-semibold mb-4 mt-8 border-b border-border pb-2"
+      className="text-xl sm:text-2xl font-semibold mb-4 mt-8 border-b border-primary pb-2"
       {...props}
     />
   ),
@@ -42,7 +43,7 @@ export const MDXComponents = {
     <li className="leading-relaxed" {...props} />
   ),
   blockquote: (props: React.HTMLAttributes<HTMLQuoteElement>) => (
-    <Alert className="my-6 border-l-4 border-l-foreground">
+    <Alert className="my-6 border-l-4 border-l-primary">
       <AlertDescription className="text-sm italic">
         {props.children}
       </AlertDescription>
@@ -53,7 +54,7 @@ export const MDXComponents = {
     if (!className) {
       return (
         <code
-          className="relative rounded bg-muted px-[0.4em] py-[0.2em] font-mono text-xs sm:text-sm border border-border"
+          className="relative rounded bg-primary/5 px-[0.4em] py-[0.2em] font-mono text-xs sm:text-sm border border-primary/20"
           {...props}
         >
           {children}
@@ -68,12 +69,9 @@ export const MDXComponents = {
     );
   },
   pre: ({ children, ...props }: React.HTMLAttributes<HTMLPreElement>) => (
-    <pre
-      className="mb-6 overflow-x-auto rounded-lg border border-border bg-muted p-4 font-mono text-xs sm:text-sm leading-relaxed"
-      {...props}
-    >
+    <CodeBlock {...props}>
       {children}
-    </pre>
+    </CodeBlock>
   ),
   table: (props: React.TableHTMLAttributes<HTMLTableElement>) => (
     <div className="my-6">

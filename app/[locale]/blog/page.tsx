@@ -59,7 +59,7 @@ export default async function BlogPage({
           <BreadcrumbWithJsonLd items={breadcrumbItems} />
         </div>
       <Section
-        title="blog"
+        title="Blog"
         description={description}
         className="border-t-0 pt-0"
       >
