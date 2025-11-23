@@ -1,0 +1,13 @@
+{
+  "id": "plateforme-telegram-bots",
+  "title": "Plateforme de Gestion de Bots Telegram",
+  "description": "Architecture multi-bots centralisée avec dashboard admin, support multilingue et IA conversationnelle",
+  "longDescription": "Plateforme complète développée en freelance pour gérer plusieurs bots Telegram multilingues depuis une interface d'administration centralisée. Le client avait besoin d'orchestrer différents bots pour l'affiliation marketing et l'engagement utilisateur avec une configuration flexible sans redéploiement.\n\nARCHITECTURE :\nDashboard unique Next.js 16 avec backend API unifié gérant N bots depuis une seule application. Webhooks dynamiques avec route /api/webhooks/telegram/[botId] routant par bot.name. Configuration JSONB flexible par bot permettant 3 types distincts : menu/affiliation, engagement, et conversationnel avec IA.\n\nSTACK TECHNIQUE :\nNext.js 16 + React 19 (Server Components, Server Actions), Supabase (PostgreSQL, Auth, Storage), Mistral AI pour conversations intelligentes, TypeScript + Zod, Fetch API native (pas de librairie Telegram tierce), shadcn/ui + Tailwind CSS 4, TipTap pour éditeur rich text.\n\nFONCTIONNALITÉS :\n- Support illimité de bots avec configuration JSONB (pas de migration schéma)\n- Support multilingue natif (FR/EN/AR)\n- 3 types de bots : menu/affiliation (système flow-based, navigation boutons inline), engagement (inscription auto, tracking participants, messages personnalisés), conversationnel IA (Mistral AI, historique contextuel)\n- Dashboard admin : vue temps réel, gestion utilisateurs centralisée, envoi groupé avec rate limiting, templates réutilisables, upload images, analytics\n\nRÉSULTATS :\nArchitecture scalable permettant l'ajout de bots sans modification code, plusieurs bots actifs en production, système d'envoi groupé gérant automatiquement les limites API Telegram (20 msg/s), conversations IA contextuelles. Solution complète permettant au client d'automatiser sa communication Telegram en autonomie.",
+  "tags": ["Next.js", "React 19", "Telegram Bot API", "Supabase", "TypeScript", "Mistral AI", "Automatisation", "Multilingue"],
+  "images": [],
+  "githubUrl": "",
+  "liveUrl": "",
+  "featured": true,
+  "date": "2025-11-01T00:00:00.000Z",
+  "status": "completed"
+}

@@ -1,0 +1,37 @@
+[
+  {
+    "id": "atc-immobilier",
+    "role": "Développeur Full-Stack",
+    "company": "ATC Immobilier",
+    "companyUrl": "",
+    "period": "jan 2025 - août 2027",
+    "startDate": "2025-01-01T00:00:00.000Z",
+    "endDate": "2027-08-31T00:00:00.000Z",
+    "description": "Conception et développement d'une solution CRM sur mesure pour l'agence immobilière. Gestion complète du projet : frontend (Next.js), backend (Node.js), base de données (Supabase), hébergement et déploiement. Implémentation de fonctionnalités d'automatisation et préparation de l'intégration IA pour la prospection automatisée.",
+    "technologies": ["Next.js", "Node.js", "Supabase", "TypeScript", "Tailwind CSS"],
+    "current": true
+  },
+  {
+    "id": "epitech-marseille",
+    "role": "Étudiant Master 1 - Data & IA",
+    "company": "EPITECH Marseille",
+    "companyUrl": "https://www.epitech.eu/ecole-informatique-marseille/",
+    "period": "2020 - 2027",
+    "startDate": "2020-09-01T00:00:00.000Z",
+    "endDate": "2027-08-31T00:00:00.000Z",
+    "description": "Formation d'expert en technologies de l'information avec spécialisation en Data Science et Intelligence Artificielle. Apprentissage du machine learning, deep learning, NLP et développement d'architectures logicielles complexes à travers une pédagogie par projet.",
+    "technologies": ["Python", "Machine Learning", "Deep Learning", "Data Science", "Architecture Logicielle"],
+    "current": true
+  },
+  {
+    "id": "freelance-ei",
+    "role": "Développeur Freelance",
+    "company": "Auto-Entrepreneur",
+    "companyUrl": "",
+    "period": "2024 - présent (en pause)",
+    "startDate": "2024-01-01T00:00:00.000Z",
+    "description": "Création d'une micro-entreprise pour proposer des services de développement web freelance. Réalisation d'une plateforme de centralisation et création de bots Telegram pour un influenceur dans l'affiliation. Projet actuellement en standby pour se concentrer sur l'alternance et les études.",
+    "technologies": ["Next.js", "Node.js", "Telegram Bot API", "Supabase"],
+    "current": false
+  }
+]

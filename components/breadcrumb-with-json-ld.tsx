@@ -1,0 +1,81 @@
+import { Link } from "@/i18n/routing";
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from "@/components/ui/breadcrumb";
+
+interface BreadcrumbItem {
+  label: string;
+  href?: string;
+}
+
+interface BreadcrumbWithJsonLdProps {
+  items: BreadcrumbItem[];
+}
+
+export function BreadcrumbWithJsonLd({ items }: BreadcrumbWithJsonLdProps) {
+  // Générer le JSON-LD pour le breadcrumb
+  const breadcrumbJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: items.map((item, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      name: item.label,
+      ...(item.href && {
+        item: `https://julestoussenel.com${item.href}`,
+      }),
+    })),
+  };
+
+  return (
+    <>
+      {/* JSON-LD pour SEO */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+      />
+
+      {/* Breadcrumb visuel - style minimaliste terminal */}
+      <Breadcrumb className="mb-6 sm:mb-8">
+        <BreadcrumbList className="text-xs">
+          {items.map((item, index) => {
+            const isLast = index === items.length - 1;
+
+            return (
+              <div key={index} className="inline-flex items-center gap-1.5">
+                <BreadcrumbItem>
+                  {isLast ? (
+                    <BreadcrumbPage className="text-foreground">
+                      {item.label}
+                    </BreadcrumbPage>
+                  ) : (
+                    <BreadcrumbLink asChild>
+                      <Link
+                        href={item.href!}
+                        className="text-muted-foreground hover:text-foreground transition-colors"
+                      >
+                        {item.label}
+                      </Link>
+                    </BreadcrumbLink>
+                  )}
+                </BreadcrumbItem>
+
+                {/* Séparateur style terminal : / au lieu de › */}
+                {!isLast && (
+                  <BreadcrumbSeparator className="text-muted-foreground/50">
+                    <span>/</span>
+                  </BreadcrumbSeparator>
+                )}
+              </div>
+            );
+          })}
+        </BreadcrumbList>
+      </Breadcrumb>
+    </>
+  );
+}

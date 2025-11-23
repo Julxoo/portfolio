@@ -1,0 +1,37 @@
+[
+  {
+    "id": "atc-immobilier",
+    "role": "Full-Stack Developer",
+    "company": "ATC Immobilier",
+    "companyUrl": "",
+    "period": "Jan 2025 - Aug 2027",
+    "startDate": "2025-01-01T00:00:00.000Z",
+    "endDate": "2027-08-31T00:00:00.000Z",
+    "description": "Design and development of a custom CRM solution for the real estate agency. Complete project management: frontend (Next.js), backend (Node.js), database (Supabase), hosting and deployment. Implementation of automation features and preparation for AI integration for automated prospecting.",
+    "technologies": ["Next.js", "Node.js", "Supabase", "TypeScript", "Tailwind CSS"],
+    "current": true
+  },
+  {
+    "id": "epitech-marseille",
+    "role": "Master 1 Student - Data & AI",
+    "company": "EPITECH Marseille",
+    "companyUrl": "https://www.epitech.eu/ecole-informatique-marseille/",
+    "period": "2020 - 2027",
+    "startDate": "2020-09-01T00:00:00.000Z",
+    "endDate": "2027-08-31T00:00:00.000Z",
+    "description": "Information Technology expert training with specialization in Data Science and Artificial Intelligence. Learning machine learning, deep learning, NLP and development of complex software architectures through project-based pedagogy.",
+    "technologies": ["Python", "Machine Learning", "Deep Learning", "Data Science", "Software Architecture"],
+    "current": true
+  },
+  {
+    "id": "freelance-ei",
+    "role": "Freelance Developer",
+    "company": "Self-Employed",
+    "companyUrl": "",
+    "period": "2024 - present (on hold)",
+    "startDate": "2024-01-01T00:00:00.000Z",
+    "description": "Creation of a micro-business to offer freelance web development services. Development of a centralization platform and creation of Telegram bots for an influencer in affiliation. Project currently on standby to focus on work-study program and studies.",
+    "technologies": ["Next.js", "Node.js", "Telegram Bot API", "Supabase"],
+    "current": false
+  }
+]

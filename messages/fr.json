@@ -1,0 +1,64 @@
+{
+  "Navigation": {
+    "home": "accueil",
+    "projects": "projets",
+    "experience": "expérience",
+    "blog": "blog",
+    "contact": "contact"
+  },
+  "HomePage": {
+    "name": "jules toussenel",
+    "title": "étudiant • développeur full-stack",
+    "badge": "1ère place • hackathon le match'up"
+  },
+  "ProjectsSection": {
+    "title": "projets sélectionnés",
+    "empty": "Projets à venir..."
+  },
+  "ProjectsPage": {
+    "title": "tous les projets",
+    "projectsCompleted": "projet réalisé",
+    "projectsCompletedPlural": "projets réalisés"
+  },
+  "ExperienceSection": {
+    "title": "expérience"
+  },
+  "BlogSection": {
+    "title": "derniers articles",
+    "empty": "Articles à venir..."
+  },
+  "ContactSection": {
+    "title": "contact",
+    "github": "github",
+    "linkedin": "linkedin"
+  },
+  "ProjectPage": {
+    "backToProjects": "← retour aux projets",
+    "github": "github →",
+    "liveDemo": "démo live →",
+    "notFound": "Projet non trouvé"
+  },
+  "BlogPage": {
+    "title": "articles",
+    "empty": "Articles à venir - le blog est en construction",
+    "emptyDescription": "Le blog est actuellement en construction. Revenez bientôt pour découvrir :",
+    "upcomingItem1": "Tutoriels et guides techniques",
+    "upcomingItem2": "Retours d'expérience sur des projets",
+    "upcomingItem3": "Outils et ressources utiles",
+    "upcomingItem4": "Réflexions sur le design et l'UX",
+    "articlesPublished": "article publié",
+    "articlesPublishedPlural": "articles publiés"
+  },
+  "BlogPostPage": {
+    "backToBlog": "← retour au blog",
+    "notFound": "Article non trouvé"
+  },
+  "Footer": {
+    "navigation": "navigation",
+    "stack": "stack",
+    "contact": "contact",
+    "builtWith": "développé avec",
+    "location": "aix-en-provence, france",
+    "email": "email"
+  }
+}

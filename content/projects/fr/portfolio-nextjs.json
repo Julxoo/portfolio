@@ -1,0 +1,13 @@
+{
+  "id": "portfolio-nextjs",
+  "title": "Portfolio Next.js",
+  "description": "Portfolio minimaliste et performant construit avec Next.js 16 et Tailwind CSS",
+  "longDescription": "Portfolio personnel minimaliste développé avec Next.js 16, mettant l'accent sur la performance et la maintenabilité. Architecture content-driven permettant des mises à jour de contenu sans modification de code.\n\nARCHITECTURE :\nNext.js 16 avec App Router et Server Components. Routes dynamiques pour projets et blog. Validation runtime avec Zod. Composant RichText custom pour auto-linking des technologies mentionnées.\n\nSTACK TECHNIQUE :\nNext.js 16 + React 19, Tailwind CSS v4, TypeScript, Zod, next-mdx-remote pour blog, shadcn/ui, Geist Mono.\n\nFONCTIONNALITÉS :\nDesign system avec palette monochrome (#222428), architecture content-driven (projets JSON + blog MDX), SEO optimisé (metadata, JSON-LD, sitemap dynamique), responsive mobile-first.\n\nRÉSULTATS :\nPerformance optimale avec Server Components, architecture scalable, SEO complet, design minimaliste cohérent.",
+  "tags": ["Next.js", "React 19", "Tailwind CSS", "TypeScript", "Zod", "SEO", "MDX"],
+  "images": [],
+  "githubUrl": "https://github.com/julestoussenel/portfolio",
+  "liveUrl": "https://julestoussenel.com",
+  "featured": true,
+  "date": "2025-01-15T00:00:00.000Z",
+  "status": "completed"
+}

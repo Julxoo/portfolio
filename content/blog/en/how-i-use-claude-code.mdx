@@ -1,0 +1,241 @@
+---
+title: "How I Use Claude Code to Accelerate My Full-Stack Development"
+description: "Real-world experience with my daily Claude Code workflow: plan mode, MCP servers, specialized agents, and measurable productivity gains."
+date: "2025-01-23T00:00:00.000Z"
+tags: ["Claude Code", "AI", "Productivity", "Development"]
+published: true
+readingTime: "5 min"
+---
+
+As a Master's student in Data & AI at Epitech Marseille and full-stack developer apprentice at ATC Immobilier, I juggle daily between feature implementation, bug fixes, refactoring, and architecture. For several months now, Claude Code has become my primary development tool. Here's how I concretely use it to accelerate my workflow.
+
+## My Daily Setup with Claude Code
+
+Claude Code isn't just a code generator. It's a conversational CLI assistant that transforms development into structured technical dialogue. Unlike traditional tools, I never ask it to code directly.
+
+My typical workflow:
+1. I launch `claude` in my terminal
+2. I provide the project context to the assistant
+3. We discuss the technical approach before any implementation
+4. We validate the architecture together
+5. Only then do we move to implementation
+
+This conversational approach radically changes how I develop. Instead of rushing into code, I take time to analyze, reflect on implications, and validate each technical decision.
+
+## Conversational Workflow: Think Before Coding
+
+Here's a typical example from my day. I need to implement a new feature on the ATC Immobilier CRM. Before touching any code:
+
+```bash
+claude
+```
+
+My first interaction is always a discussion:
+
+> "I need to implement a real-time notification system for property updates. Context: Next.js 15, Supabase for database, monorepo architecture. Before starting, I'd like to discuss the technical approach. What are the options?"
+
+Claude Code analyzes the project context, examines the existing architecture, and proposes several approaches with their pros and cons. We discuss, share opinions, evaluate each solution.
+
+This discussion phase represents 30-40% of my time with Claude Code. It's counter-intuitive, but it makes all the difference: we don't code until we've validated the optimal approach.
+
+## MCP Servers: Essential Extensions
+
+MCP (Model Context Protocol) servers considerably extend Claude Code's capabilities. I use three daily:
+
+### Context7: Instant Documentation
+
+When working with a new library or complex API, Context7 allows me to access official documentation directly in Claude Code:
+
+```bash
+claude mcp add --transport http context7 https://mcp.context7.com
+```
+
+Usage example:
+
+> "Via Context7, fetch the next-intl documentation for i18n implementation with Next.js 15. I want to understand how to handle dynamic routes with locale."
+
+Claude Code queries Context7, retrieves the most recent documentation, and proposes an implementation following current best practices.
+
+### Playwright: Automated Testing
+
+For end-to-end testing, Playwright integrated via MCP is formidable:
+
+```bash
+claude mcp add --transport stdio playwright -- npx -y @modelcontextprotocol/server-playwright
+```
+
+I can ask Claude Code to:
+- Navigate my application in development
+- Test a complete user flow
+- Capture screenshots for validation
+- Generate corresponding automated tests
+
+The time savings are considerable. Instead of manually writing each test, I describe the expected behavior and Claude Code generates appropriate Playwright tests.
+
+### Supabase: Direct Database Interaction
+
+Supabase integration allows me to query my database directly from Claude Code:
+
+```bash
+claude mcp add --transport http supabase https://mcp.supabase.com \
+  --header "Authorization: Bearer YOUR_SUPABASE_KEY"
+```
+
+Daily use cases:
+- Analyze database schema
+- Verify data integrity after migration
+- Debug complex SQL queries
+- Generate optimized queries
+
+## Plan Mode: Architecture Before Implementation
+
+Claude Code's Plan mode is crucial for complex features. Before any modification, I systematically use this mode to:
+
+1. Explore project structure
+2. Identify impacted files
+3. Anticipate side effects
+4. Validate architecture
+
+Concrete example during internationalization implementation on my portfolio. I activate Plan mode with `Shift+Tab`:
+
+> "I want to make my Next.js portfolio multilingual (FR/EN). Analyze the current structure, identify all files to modify, and propose an architecture with next-intl."
+
+In Plan mode, Claude Code:
+- Reads the entire project without modification
+- Analyzes dependencies between files
+- Identifies existing patterns
+- Proposes coherent architecture
+
+Once the architecture is validated together, we switch to implementation mode. This reflection/action separation avoids costly refactoring.
+
+## Specialized Agent: My Quality Guardian
+
+A recurring problem when using AI assistants: accumulating TypeScript and ESLint errors. I created a specialized agent to handle this systematically.
+
+To create the agent, I use the `/agents` command in Claude Code, which opens the creation interface. The agent is then stored in `.claude/agents/lint-fixer.md`:
+
+```markdown
+---
+name: lint-fixer
+description: Fix TypeScript and ESLint errors contextually
+tools: Read, Edit, Grep, Bash
+model: sonnet
+---
+
+You are an expert in fixing TypeScript and ESLint errors.
+
+When invoked:
+- Analyze each error and warning individually
+- Get back into the context of the concerned file
+- Examine related files to understand dependencies
+- NEVER use eslint-disable or @ts-ignore
+- Fix the root cause, not the symptom
+- Verify the fix doesn't introduce regressions
+```
+
+When I detect errors after a development session:
+
+```bash
+npm run typecheck
+```
+
+I immediately launch the agent:
+
+> "Use the lint-fixer agent. Here's the typecheck output. Analyze each error methodically."
+
+The agent examines each error, traces back to root causes, and fixes properly. No hacks, no workarounds. Only structural corrections.
+
+## Concrete Example: Complete i18n Implementation
+
+To illustrate my complete workflow, here's how I implemented internationalization on my portfolio:
+
+**Step 1: Technical Discussion (10 min)**
+
+> "I want to make my portfolio multilingual. Context: Next.js 16 with App Router, content in MDX and JSON, content-driven architecture. What are the options for i18n in 2025?"
+
+Claude Code analyzes the project, identifies that Next.js removed native i18n support for App Router, and recommends next-intl as the current standard.
+
+**Step 2: Plan Mode (15 min)**
+
+> "Activate Plan mode. With next-intl, propose a complete architecture for handling FR/EN. Identify all files to create/modify."
+
+Claude Code generates a detailed plan:
+- Routing configuration
+- Content folder structure
+- Data loader adaptation
+- Page and component modifications
+- Multilingual sitemap configuration
+
+We discuss the plan, adjust certain points, validate.
+
+**Step 3: Implementation (45 min)**
+
+Once the architecture is validated, we systematically implement each part. Claude Code generates files, adapts components, updates configurations.
+
+**Step 4: Quality Check (10 min)**
+
+```bash
+npm run build
+npm run typecheck
+```
+
+The lint-fixer agent corrects detected TypeScript errors.
+
+**Result: 1h30 for complete and clean i18n implementation**, where I would have easily spent 4-5 hours manually, potentially with hidden bugs.
+
+## Hooks and Automation
+
+I use hooks to automate certain validations. For example, a pre-commit hook that checks quality before each commit:
+
+```json
+{
+  "hooks": {
+    "PreToolUse": {
+      "matcher": "Bash(git commit:*)",
+      "command": "npm run typecheck && npm run lint"
+    }
+  }
+}
+```
+
+If typecheck fails, the hook blocks the commit and I use the lint-fixer agent to correct.
+
+## Best Practices After Several Months of Use
+
+**1. Never let it code without prior discussion**
+
+The biggest mistake would be treating Claude Code as a simple generator. The real gain comes from the reflection phase.
+
+**2. Systematically use Plan mode for complex features**
+
+Analyzing before acting avoids costly refactoring.
+
+**3. Create specialized agents for recurring tasks**
+
+Lint, tests, security, performance: each domain deserves its agent.
+
+**4. Leverage MCPs to extend capabilities**
+
+Context7, Playwright, Supabase are my three pillars. Identify yours based on your stack.
+
+**5. Configure hooks for quality**
+
+Automating checks allows early problem detection.
+
+**6. Keep context up to date**
+
+At each session, I bring Claude Code back into the project context. It takes 2 minutes and avoids misunderstandings.
+
+## Conclusion
+
+Claude Code has transformed how I develop. It's not a tool that codes for me, it's a technical partner with whom I think, discuss, and validate each decision.
+
+The impact on my productivity is hard to quantify, but one thing is certain: I would never develop without it again. Time savings are considerable, but above all, the quality of produced code is better.
+
+If you're a full-stack developer and haven't tried Claude Code yet, I recommend trying it. Start with a simple feature, take time to discuss with the assistant before coding, use Plan mode, and you'll quickly understand the difference.
+
+All my projects (ATC Immobilier CRM, Telegram bots platform, this portfolio) were developed with Claude Code. It has become an indispensable tool in my daily workflow.
+
+---
+
+To discover my projects developed with Claude Code, check out my [projects page](/en/projects).

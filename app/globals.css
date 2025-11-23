@@ -1,0 +1,55 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-border: var(--border);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --font-mono: var(--font-geist-mono);
+  --radius-sm: 0;
+  --radius-md: 0;
+  --radius-lg: 0;
+  --radius-xl: 0;
+}
+
+:root {
+  /* Thème sombre avec #222428 comme base */
+  --background: oklch(0.16 0.007 265); /* #222428 - légère teinte bleutée */
+  --foreground: oklch(0.95 0 0); /* texte très clair */
+  --card: oklch(0.20 0.007 265); /* légèrement plus clair */
+  --card-foreground: oklch(0.95 0 0);
+  --border: oklch(0.29 0.007 265); /* bordures subtiles */
+  --muted: oklch(0.22 0.007 265); /* éléments discrets */
+  --muted-foreground: oklch(0.62 0 0); /* texte secondaire */
+  --accent: oklch(0.92 0 0); /* accent clair */
+  --accent-foreground: oklch(0.16 0.007 265);
+}
+
+.dark {
+  /* Mode sombre encore plus foncé (optionnel) */
+  --background: oklch(0.12 0.007 265);
+  --foreground: oklch(0.95 0 0);
+  --card: oklch(0.16 0.007 265);
+  --card-foreground: oklch(0.95 0 0);
+  --border: oklch(0.25 0.007 265);
+  --muted: oklch(0.18 0.007 265);
+  --muted-foreground: oklch(0.60 0 0);
+  --accent: oklch(0.90 0 0);
+  --accent-foreground: oklch(0.12 0.007 265);
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground font-mono;
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "id": "plateforme-telegram-bots",
+  "title": "Telegram Bots Management Platform",
+  "description": "Centralized multi-bot architecture with admin dashboard, multilingual support and conversational AI",
+  "longDescription": "Complete platform developed freelance to manage multiple multilingual Telegram bots from a centralized admin interface. The client needed to orchestrate different bots for marketing affiliation and user engagement with flexible configuration without redeployment.\n\nARCHITECTURE:\nUnique Next.js 16 dashboard with unified API backend managing N bots from a single application. Dynamic webhooks with /api/webhooks/telegram/[botId] route routing by bot.name. Flexible JSONB configuration per bot supporting 3 distinct types: menu/affiliation, engagement, and conversational with AI.\n\nTECH STACK:\nNext.js 16 + React 19 (Server Components, Server Actions), Supabase (PostgreSQL, Auth, Storage), Mistral AI for intelligent conversations, TypeScript + Zod, native Fetch API (no third-party Telegram library), shadcn/ui + Tailwind CSS 4, TipTap for rich text editor.\n\nFEATURES:\n- Unlimited bot support with JSONB configuration (no schema migration)\n- Native multilingual support (FR/EN/AR)\n- 3 bot types: menu/affiliation (flow-based system, inline button navigation), engagement (auto registration, participant tracking, personalized messages), conversational AI (Mistral AI, contextual history)\n- Admin dashboard: real-time view, centralized user management, bulk sending with rate limiting, reusable templates, image upload, analytics\n\nRESULTS:\nScalable architecture allowing bot addition without code modification, multiple active bots in production, bulk sending system automatically handling Telegram API limits (20 msg/s), contextual AI conversations. Complete solution allowing the client to automate their Telegram communication autonomously.",
+  "tags": ["Next.js", "React 19", "Telegram Bot API", "Supabase", "TypeScript", "Mistral AI", "Automation", "Multilingual"],
+  "images": [],
+  "githubUrl": "",
+  "liveUrl": "",
+  "featured": true,
+  "date": "2025-11-01T00:00:00.000Z",
+  "status": "completed"
+}
