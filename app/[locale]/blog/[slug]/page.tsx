@@ -142,7 +142,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
           )}
         </header>
 
-        <div className="max-w-none">
+        <div className="prose prose-sm sm:prose max-w-none">
           {post.content}
         </div>
       </article>

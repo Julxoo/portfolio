@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import { Geist_Mono } from "next/font/google";
 import { routing } from "@/i18n/routing";
 import { JsonLd } from "@/components/json-ld";
+import { GoogleAnalytics } from "@/components/google-analytics";
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
@@ -144,6 +145,11 @@ export default async function LocaleLayout({
         <JsonLd />
       </head>
       <body className={`${geistMono.variable} antialiased`}>
+        {process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID && (
+          <GoogleAnalytics
+            measurementId={process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID}
+          />
+        )}
         <NextIntlClientProvider messages={messages}>
           {children}
         </NextIntlClientProvider>

@@ -41,7 +41,7 @@ export default async function Home({
         title={t("title")}
         badge={{
           text: t("badge"),
-          href: "https://www.linkedin.com/posts/epitech-marseille_performance-remarquable-lors-du-hackathon-activity-7384620093026062337-i2Y2?utm_source=share&utm_medium=member_desktop",
+          href: "https://www.epitech.eu/2025/11/21/un-etudiant-depitech-marseille-triomphe-au-hackathon-coding-battle-2025/",
         }}
         description={
           locale === "fr" ? (

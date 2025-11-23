@@ -30,13 +30,13 @@ export const MDXComponents = {
     />
   ),
   p: (props: React.HTMLAttributes<HTMLParagraphElement>) => (
-    <p className="mb-4 leading-relaxed text-muted-foreground" {...props} />
+    <p className="mb-4 leading-relaxed text-muted-foreground text-xs sm:text-sm" {...props} />
   ),
   ul: (props: React.HTMLAttributes<HTMLUListElement>) => (
-    <ul className="mb-4 ml-6 list-disc space-y-2 text-muted-foreground" {...props} />
+    <ul className="mb-4 ml-6 list-disc space-y-2 text-muted-foreground text-xs sm:text-sm" {...props} />
   ),
   ol: (props: React.HTMLAttributes<HTMLOListElement>) => (
-    <ol className="mb-4 ml-6 list-decimal space-y-2 text-muted-foreground" {...props} />
+    <ol className="mb-4 ml-6 list-decimal space-y-2 text-muted-foreground text-xs sm:text-sm" {...props} />
   ),
   li: (props: React.HTMLAttributes<HTMLLIElement>) => (
     <li className="leading-relaxed" {...props} />
@@ -102,7 +102,7 @@ export const MDXComponents = {
     <TableHead className="font-semibold text-foreground">{props.children}</TableHead>
   ),
   td: (props: React.HTMLAttributes<HTMLTableCellElement>) => (
-    <TableCell className="text-muted-foreground">{props.children}</TableCell>
+    <TableCell className="text-muted-foreground text-xs sm:text-sm">{props.children}</TableCell>
   ),
   hr: () => <Separator className="my-8" />,
   a: (props: React.AnchorHTMLAttributes<HTMLAnchorElement>) => (
