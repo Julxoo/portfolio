@@ -6,6 +6,7 @@ interface SectionProps {
   children: React.ReactNode;
   className?: string;
   id?: string;
+  "aria-label"?: string;
 }
 
 export function Section({
@@ -14,7 +15,11 @@ export function Section({
   children,
   className,
   id,
+  "aria-label": ariaLabel,
 }: SectionProps) {
+  // Generate heading ID for aria-labelledby
+  const headingId = id ? `${id}-heading` : undefined;
+
   return (
     <section
       id={id}
@@ -22,11 +27,16 @@ export function Section({
         "max-w-4xl mx-auto px-4 sm:px-6 py-12 sm:py-16 border-t border-border",
         className
       )}
+      aria-label={ariaLabel}
+      aria-labelledby={!ariaLabel && title ? headingId : undefined}
     >
       {(title || description) && (
-        <div className="mb-6 sm:mb-8">
+        <header className="mb-6 sm:mb-8">
           {title && (
-            <h2 className="text-xs sm:text-sm text-primary mb-2">
+            <h2
+              id={headingId}
+              className="text-xs sm:text-sm text-primary mb-2"
+            >
               {title}
             </h2>
           )}
@@ -35,7 +45,7 @@ export function Section({
               {description}
             </p>
           )}
-        </div>
+        </header>
       )}
       {children}
     </section>

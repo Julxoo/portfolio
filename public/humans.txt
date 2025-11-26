@@ -1,0 +1,32 @@
+/* TEAM */
+Developer: Jules Toussenel
+Contact: toussenelj@gmail.com
+GitHub: github.com/Julxoo
+LinkedIn: linkedin.com/in/julestoussenel
+Location: Aix-en-Provence, France
+
+/* SITE */
+Last update: 2024
+Standards: HTML5, CSS3, ES6+
+Components: React 19, Next.js 16
+Language: French / English
+Software: VS Code, Cursor
+
+/* THANKS */
+Built with love and lots of coffee ☕
+Powered by Next.js, Tailwind CSS, and Supabase
+
+/* ACHIEVEMENTS */
+🏆 1st Place - Hackathon Le Match'Up (Coding Battle 2025)
+🎓 Master Data & AI - EPITECH Marseille
+
+/* TECH STACK */
+Frontend: Next.js 16, React 19, TypeScript, Tailwind CSS
+Backend: Node.js, Supabase, PostgreSQL
+Tools: Claude Code, Cursor, Git
+Deployment: Vercel
+
+/* COLOPHON */
+This portfolio was designed and developed by Jules Toussenel
+with a focus on performance, accessibility, and SEO excellence.
+

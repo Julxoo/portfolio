@@ -7,6 +7,7 @@ import { Section } from "@/components/layout/section";
 import { Nav } from "@/components/layout/nav";
 import { Footer } from "@/components/layout/footer";
 import { BreadcrumbWithJsonLd } from "@/components/breadcrumb-with-json-ld";
+import { CollectionPageJsonLd } from "@/components/collection-page-json-ld";
 
 export async function generateMetadata({
   params,
@@ -15,12 +16,28 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   const isEn = locale === "en";
+  const baseUrl = "https://julestoussenel.com";
 
   return {
     title: isEn ? "Projects" : "Projets",
     description: isEn
-      ? "Discover my projects and achievements"
-      : "Découvrez mes projets et réalisations",
+      ? "Discover my projects and achievements in web development: Next.js, React, Node.js, Supabase applications and more."
+      : "Découvrez mes projets et réalisations en développement web : applications Next.js, React, Node.js, Supabase et plus encore.",
+    alternates: {
+      canonical: `${baseUrl}/${locale}/projects`,
+      languages: {
+        fr: `${baseUrl}/fr/projects`,
+        en: `${baseUrl}/en/projects`,
+      },
+    },
+    openGraph: {
+      title: isEn ? "Projects | Jules Toussenel" : "Projets | Jules Toussenel",
+      description: isEn
+        ? "Discover my projects and achievements in web development"
+        : "Découvrez mes projets et réalisations en développement web",
+      url: `${baseUrl}/${locale}/projects`,
+      type: "website",
+    },
   };
 }
 
@@ -35,6 +52,7 @@ export default async function ProjectsPage({
   const t = await getTranslations("ProjectsPage");
   const tNav = await getTranslations("Navigation");
   const projects = await getProjects(locale);
+  const baseUrl = "https://julestoussenel.com";
 
   const projectsCount = projects.length;
   const description =
@@ -48,26 +66,53 @@ export default async function ProjectsPage({
     { label: tNav("projects") },
   ];
 
+  // Collection items for JSON-LD
+  const collectionItems = projects.map((project) => ({
+    name: project.title,
+    description: project.description,
+    url: `${baseUrl}/${locale}/projects/${project.id}`,
+    datePublished: project.date,
+    image: `${baseUrl}/${locale}/projects/${project.id}/opengraph-image`,
+  }));
+
   return (
-    <div className="min-h-screen">
-      <Nav />
-      <main>
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 pt-16 sm:pt-24">
-          <BreadcrumbWithJsonLd items={breadcrumbItems} />
-        </div>
-        <Section
-          title={t("title")}
-          description={description}
-          className="border-t-0 pt-0"
-        >
-          <div className="space-y-6 sm:space-y-8">
-            {projects.map((project) => (
-              <ProjectCard key={project.id} project={project} />
-            ))}
+    <>
+      <CollectionPageJsonLd
+        name={t("title")}
+        description={
+          locale === "en"
+            ? "Collection of web development projects by Jules Toussenel"
+            : "Collection de projets de développement web par Jules Toussenel"
+        }
+        url={`/${locale}/projects`}
+        locale={locale}
+        items={collectionItems}
+        type="projects"
+      />
+
+      <div className="min-h-screen">
+        <Nav />
+        <main>
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 pt-16 sm:pt-24">
+            <BreadcrumbWithJsonLd items={breadcrumbItems} />
           </div>
-        </Section>
-      </main>
-      <Footer />
-    </div>
+          <Section
+            title={t("title")}
+            description={description}
+            className="border-t-0 pt-0"
+            aria-label={locale === "en" ? "All projects" : "Tous les projets"}
+          >
+            <div className="space-y-6 sm:space-y-8" role="list">
+              {projects.map((project) => (
+                <div key={project.id} role="listitem">
+                  <ProjectCard project={project} />
+                </div>
+              ))}
+            </div>
+          </Section>
+        </main>
+        <Footer />
+      </div>
+    </>
   );
 }
