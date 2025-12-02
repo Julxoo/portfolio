@@ -30,3 +30,6 @@ Deployment: Vercel
 This portfolio was designed and developed by Jules Toussenel
 with a focus on performance, accessibility, and SEO excellence.
 
+
+
+
