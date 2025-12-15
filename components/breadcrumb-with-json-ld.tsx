@@ -1,3 +1,4 @@
+import React from "react";
 import { Link } from "@/i18n/routing";
 import {
   Breadcrumb,
@@ -47,8 +48,8 @@ export function BreadcrumbWithJsonLd({ items }: BreadcrumbWithJsonLdProps) {
             const isLast = index === items.length - 1;
 
             return (
-              <div key={index} className="inline-flex items-center gap-1.5">
-                <BreadcrumbItem>
+              <React.Fragment key={index}>
+                <BreadcrumbItem className="inline-flex items-center gap-1.5">
                   {isLast ? (
                     <BreadcrumbPage className="text-foreground">
                       {item.label}
@@ -71,7 +72,7 @@ export function BreadcrumbWithJsonLd({ items }: BreadcrumbWithJsonLdProps) {
                     <span>/</span>
                   </BreadcrumbSeparator>
                 )}
-              </div>
+              </React.Fragment>
             );
           })}
         </BreadcrumbList>
