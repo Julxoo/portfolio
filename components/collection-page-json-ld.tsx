@@ -23,7 +23,7 @@ export function CollectionPageJsonLd({
   items,
   type,
 }: CollectionPageJsonLdProps) {
-  const baseUrl = "https://julestoussenel.com";
+  const baseUrl = "https://www.julestoussenel.com";
 
   const structuredData = {
     "@context": "https://schema.org",

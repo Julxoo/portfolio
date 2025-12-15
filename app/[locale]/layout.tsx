@@ -24,7 +24,7 @@ export async function generateMetadata({
   params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
   const { locale } = await params;
-  const baseUrl = "https://julestoussenel.com";
+  const baseUrl = "https://www.julestoussenel.com";
   const isEn = locale === "en";
 
   return {

@@ -4,7 +4,7 @@ import { getBlogPosts, getBlogSlugs } from "@/lib/data/blog";
 import { routing } from "@/i18n/routing";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = "https://julestoussenel.com";
+  const baseUrl = "https://www.julestoussenel.com";
   const allPages: MetadataRoute.Sitemap = [];
 
   // Pour chaque locale, générer les URLs

@@ -3,7 +3,7 @@ export const SITE_CONFIG = {
   title: "Jules Toussenel - Développeur Web",
   description:
     "Portfolio de Jules Toussenel, développeur web passionné. Découvrez mes projets, mon expérience et mes articles.",
-  url: "https://julestoussenel.com",
+  url: "https://www.julestoussenel.com",
   author: {
     name: "Jules Toussenel",
     email: "toussenelj@gmail.com",

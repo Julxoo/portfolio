@@ -25,7 +25,7 @@ export function ProjectJsonLd({
     author: {
       "@type": "Person",
       name: "Jules Toussenel",
-      url: "https://julestoussenel.com",
+      url: "https://www.julestoussenel.com",
       email: "toussenelj@gmail.com",
       jobTitle: "Développeur Full-Stack",
       sameAs: [
@@ -37,10 +37,10 @@ export function ProjectJsonLd({
       "@type": "Person",
       name: "Jules Toussenel",
     },
-    url: liveUrl || `https://julestoussenel.com/${locale}/projects/${slug}`,
+    url: liveUrl || `https://www.julestoussenel.com/${locale}/projects/${slug}`,
     mainEntityOfPage: {
       "@type": "WebPage",
-      "@id": `https://julestoussenel.com/${locale}/projects/${slug}`,
+      "@id": `https://www.julestoussenel.com/${locale}/projects/${slug}`,
     },
     keywords: tags.join(", "),
     inLanguage: locale === "en" ? "en-US" : "fr-FR",
@@ -49,7 +49,7 @@ export function ProjectJsonLd({
     }),
     image: {
       "@type": "ImageObject",
-      url: "https://julestoussenel.com/og-image.png",
+      url: "https://www.julestoussenel.com/og-image.png",
       width: 1200,
       height: 630,
     },

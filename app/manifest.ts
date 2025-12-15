@@ -118,7 +118,7 @@ export default function manifest(): MetadataRoute.Manifest {
     related_applications: [
       {
         platform: "web",
-        url: "https://julestoussenel.com",
+        url: "https://www.julestoussenel.com",
       },
     ],
     prefer_related_applications: false,

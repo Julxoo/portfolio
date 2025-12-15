@@ -43,7 +43,7 @@ export async function generateMetadata({
     };
   }
 
-  const baseUrl = "https://julestoussenel.com";
+  const baseUrl = "https://www.julestoussenel.com";
 
   return {
     title: project.title,

@@ -27,7 +27,7 @@ export function BreadcrumbWithJsonLd({ items }: BreadcrumbWithJsonLdProps) {
       position: index + 1,
       name: item.label,
       ...(item.href && {
-        item: `https://julestoussenel.com${item.href}`,
+        item: `https://www.julestoussenel.com${item.href}`,
       }),
     })),
   };

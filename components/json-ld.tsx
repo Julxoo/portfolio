@@ -4,7 +4,7 @@ interface JsonLdProps {
 
 export function JsonLd({ locale = "fr" }: JsonLdProps) {
   const isEn = locale === "en";
-  const baseUrl = "https://julestoussenel.com";
+  const baseUrl = "https://www.julestoussenel.com";
 
   // Person schema - enriched with awards and achievements
   const personSchema = {

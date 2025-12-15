@@ -1,7 +1,7 @@
 import { getBlogPosts } from "@/lib/data/blog";
 
 export async function GET() {
-  const baseUrl = "https://julestoussenel.com";
+  const baseUrl = "https://www.julestoussenel.com";
 
   // Get blog posts for both locales
   const [frPosts, enPosts] = await Promise.all([

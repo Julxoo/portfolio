@@ -27,7 +27,7 @@ export function BlogPostJsonLd({
     author: {
       "@type": "Person",
       name: "Jules Toussenel",
-      url: "https://julestoussenel.com",
+      url: "https://www.julestoussenel.com",
       email: "toussenelj@gmail.com",
       jobTitle: "Développeur Full-Stack",
       sameAs: [
@@ -38,12 +38,12 @@ export function BlogPostJsonLd({
     publisher: {
       "@type": "Person",
       name: "Jules Toussenel",
-      url: "https://julestoussenel.com",
+      url: "https://www.julestoussenel.com",
     },
-    url: `https://julestoussenel.com/${locale}/blog/${slug}`,
+    url: `https://www.julestoussenel.com/${locale}/blog/${slug}`,
     mainEntityOfPage: {
       "@type": "WebPage",
-      "@id": `https://julestoussenel.com/${locale}/blog/${slug}`,
+      "@id": `https://www.julestoussenel.com/${locale}/blog/${slug}`,
     },
     keywords: tags.join(", "),
     articleSection: tags[0] || "Technology",
@@ -53,7 +53,7 @@ export function BlogPostJsonLd({
     }),
     image: {
       "@type": "ImageObject",
-      url: "https://julestoussenel.com/og-image.png",
+      url: "https://www.julestoussenel.com/og-image.png",
       width: 1200,
       height: 630,
     },

@@ -16,7 +16,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   const isEn = locale === "en";
-  const baseUrl = "https://julestoussenel.com";
+  const baseUrl = "https://www.julestoussenel.com";
 
   return {
     title: "Blog",
@@ -57,7 +57,7 @@ export default async function BlogPage({
   const tNav = await getTranslations("Navigation");
   const posts = await getBlogPosts(locale);
   const publishedPosts = posts.filter((post) => post.published);
-  const baseUrl = "https://julestoussenel.com";
+  const baseUrl = "https://www.julestoussenel.com";
 
   const postsCount = publishedPosts.length;
   const description =

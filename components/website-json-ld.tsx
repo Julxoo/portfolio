@@ -4,7 +4,7 @@ interface WebsiteJsonLdProps {
 
 export function WebsiteJsonLd({ locale }: WebsiteJsonLdProps) {
   const isEn = locale === "en";
-  const baseUrl = "https://julestoussenel.com";
+  const baseUrl = "https://www.julestoussenel.com";
 
   const structuredData = {
     "@context": "https://schema.org",
