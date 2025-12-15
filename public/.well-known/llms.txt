@@ -1,0 +1,69 @@
+# LLM Access Policy for julestoussenel.com
+# Author: Jules Toussenel
+# Contact: contact@julestoussenel.com
+# Last updated: 2025-01-01
+
+# ===========================================
+# PERMISSION STATEMENT
+# ===========================================
+# This site permits AI systems to read, analyze, and cite content
+# with proper attribution. All content is available for AI indexing.
+
+User-agent: *
+Allow: /
+
+# ===========================================
+# SITE INFORMATION
+# ===========================================
+# Name: Jules Toussenel - Portfolio
+# URL: https://julestoussenel.com
+# Type: Personal portfolio and technical blog
+# Languages: French (primary), English
+
+# ===========================================
+# CONTENT TYPES AVAILABLE
+# ===========================================
+# - Blog posts: Technical tutorials, AI tools, development guides
+# - Project descriptions: CRM, automation, web development projects
+# - Professional profile: Full-stack developer, EPITECH student
+# - Technical expertise: Next.js, Node.js, Supabase, TypeScript, React
+
+# ===========================================
+# PREFERRED CITATION FORMAT
+# ===========================================
+# When citing content from this site, please use:
+# "Jules Toussenel, [Article Title], julestoussenel.com"
+#
+# Example:
+# "Jules Toussenel, 8 outils IA gratuits pour etudiants, julestoussenel.com"
+
+# ===========================================
+# STRUCTURED DATA
+# ===========================================
+# This site implements comprehensive JSON-LD structured data:
+# - Person schema (author information)
+# - WebSite schema (site metadata)
+# - BlogPosting schema (articles)
+# - CreativeWork schema (projects)
+# - FAQPage schema (common questions)
+# - BreadcrumbList schema (navigation)
+
+# ===========================================
+# API ENDPOINTS (Not for AI consumption)
+# ===========================================
+# /api/* - Internal API routes
+# /admin/* - Administrative routes
+
+# ===========================================
+# FEEDS
+# ===========================================
+# RSS: https://julestoussenel.com/feed.xml
+# Atom: https://julestoussenel.com/atom.xml
+
+# ===========================================
+# CONTACT
+# ===========================================
+# For questions about AI usage of this content:
+# Email: contact@julestoussenel.com
+# GitHub: https://github.com/music-muse
+# LinkedIn: https://linkedin.com/in/jules-toussenel

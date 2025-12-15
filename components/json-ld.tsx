@@ -198,6 +198,56 @@ export function JsonLd({ locale = "fr" }: JsonLdProps) {
     copyrightYear: 2024,
   };
 
+  // Organization schema - personal brand
+  const organizationSchema = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "@id": `${baseUrl}/#organization`,
+    name: "Jules Toussenel",
+    alternateName: "JT Dev",
+    url: baseUrl,
+    logo: {
+      "@type": "ImageObject",
+      url: `${baseUrl}/icons/icon-512x512.png`,
+      width: 512,
+      height: 512,
+    },
+    image: {
+      "@type": "ImageObject",
+      url: `${baseUrl}/og-image.png`,
+      width: 1200,
+      height: 630,
+    },
+    description: isEn
+      ? "Full-stack development services specializing in Next.js, Node.js and Supabase. Custom CRM solutions and process automation."
+      : "Services de développement full-stack spécialisés en Next.js, Node.js et Supabase. Solutions CRM sur mesure et automatisation des processus.",
+    sameAs: [
+      "https://github.com/Julxoo",
+      "https://www.linkedin.com/in/julestoussenel/",
+    ],
+    founder: {
+      "@id": `${baseUrl}/#person`,
+    },
+    foundingDate: "2024",
+    areaServed: {
+      "@type": "Country",
+      name: "France",
+    },
+    knowsAbout: [
+      "Web Development",
+      "Full-Stack Development",
+      "CRM Development",
+      "Process Automation",
+      "AI Integration",
+    ],
+    contactPoint: {
+      "@type": "ContactPoint",
+      contactType: isEn ? "customer service" : "service client",
+      email: "toussenelj@gmail.com",
+      availableLanguage: ["French", "English"],
+    },
+  };
+
   // ProfilePage schema for the homepage
   const profilePageSchema = {
     "@context": "https://schema.org",
@@ -230,6 +280,10 @@ export function JsonLd({ locale = "fr" }: JsonLdProps) {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
       />
       <script
         type="application/ld+json"

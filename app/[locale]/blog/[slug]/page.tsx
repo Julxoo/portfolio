@@ -2,7 +2,8 @@ import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { setRequestLocale } from "next-intl/server";
 import { getTranslations } from "next-intl/server";
-import { getBlogPost, getBlogSlugs } from "@/lib/data/blog";
+import { getBlogPost, getBlogSlugs, getRelatedBlogPosts } from "@/lib/data/blog";
+import { RelatedPosts } from "@/components/features/related-posts";
 import { routing } from "@/i18n/routing";
 import { Nav } from "@/components/layout/nav";
 import { Footer } from "@/components/layout/footer";
@@ -91,6 +92,9 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     notFound();
   }
 
+  // Fetch related posts based on tags
+  const relatedPosts = await getRelatedBlogPosts(slug, post.tags, locale, 3);
+
   // Construire les items du breadcrumb
   const breadcrumbItems = [
     { label: tNav("home"), href: "/" },
@@ -146,6 +150,12 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
           {post.content}
         </div>
       </article>
+
+      {relatedPosts.length > 0 && (
+        <aside className="max-w-4xl mx-auto px-4 sm:px-6 pb-16">
+          <RelatedPosts posts={relatedPosts} locale={locale} />
+        </aside>
+      )}
       </main>
       <Footer />
     </div>

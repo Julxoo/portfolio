@@ -51,36 +51,42 @@ export default function robots(): MetadataRoute.Robots {
         userAgent: "facebookexternalhit",
         allow: "/",
       },
-      // Block aggressive scrapers and AI training bots
+      // Allow AI bots for GEO (Generative Engine Optimization)
+      // These bots can cite and reference content in AI responses
       {
         userAgent: "GPTBot",
-        disallow: "/",
+        allow: "/",
+        disallow: ["/api/", "/admin/"],
       },
       {
         userAgent: "ChatGPT-User",
-        disallow: "/",
+        allow: "/",
       },
       {
         userAgent: "CCBot",
-        disallow: "/",
+        allow: "/",
       },
       {
         userAgent: "anthropic-ai",
-        disallow: "/",
+        allow: "/",
       },
       {
         userAgent: "Claude-Web",
-        disallow: "/",
+        allow: "/",
       },
       {
         userAgent: "Google-Extended",
-        disallow: "/",
+        allow: "/",
       },
       {
         userAgent: "PerplexityBot",
-        disallow: "/",
+        allow: "/",
       },
-      // Block known bad bots
+      {
+        userAgent: "Applebot-Extended",
+        allow: "/",
+      },
+      // Rate limit SEO tools
       {
         userAgent: "AhrefsBot",
         crawlDelay: 10,

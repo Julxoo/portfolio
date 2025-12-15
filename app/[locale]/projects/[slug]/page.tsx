@@ -2,7 +2,8 @@ import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { setRequestLocale } from "next-intl/server";
 import { getTranslations } from "next-intl/server";
-import { getProjectBySlug, getProjectSlugs } from "@/lib/data/projects";
+import { getProjectBySlug, getProjectSlugs, getRelatedProjects } from "@/lib/data/projects";
+import { RelatedProjects } from "@/components/features/related-projects";
 import { routing } from "@/i18n/routing";
 import { Nav } from "@/components/layout/nav";
 import { Footer } from "@/components/layout/footer";
@@ -91,6 +92,9 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
     notFound();
   }
 
+  // Fetch related projects based on tags
+  const relatedProjects = await getRelatedProjects(project.id, project.tags, locale, 2);
+
   // Construire les items du breadcrumb
   const breadcrumbItems = [
     { label: tNav("home"), href: "/" },
@@ -161,6 +165,12 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
           </RichText>
         </div>
       </article>
+
+      {relatedProjects.length > 0 && (
+        <aside className="max-w-4xl mx-auto px-4 sm:px-6 pb-16">
+          <RelatedProjects projects={relatedProjects} locale={locale} />
+        </aside>
+      )}
       </main>
       <Footer />
     </div>

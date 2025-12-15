@@ -227,6 +227,19 @@ export default async function LocaleLayout({
 
         {/* JSON-LD Structured Data */}
         <JsonLd locale={locale} />
+
+        {/* Service Worker Registration */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              if ('serviceWorker' in navigator) {
+                window.addEventListener('load', function() {
+                  navigator.serviceWorker.register('/sw.js');
+                });
+              }
+            `,
+          }}
+        />
       </head>
       <body className={`${geistMono.variable} antialiased`}>
         {/* Skip to main content for accessibility */}

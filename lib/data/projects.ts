@@ -61,3 +61,37 @@ export async function getProjectSlugs(locale: string): Promise<string[]> {
     return [];
   }
 }
+
+/**
+ * Get related projects based on shared tags
+ * Uses a scoring algorithm: more shared tags = higher relevance
+ */
+export async function getRelatedProjects(
+  currentId: string,
+  currentTags: string[],
+  locale: string,
+  limit: number = 2
+): Promise<Project[]> {
+  const allProjects = await getProjects(locale);
+
+  // Filter out current project and score by shared tags
+  const scored = allProjects
+    .filter((project) => project.id !== currentId)
+    .map((project) => ({
+      project,
+      score: project.tags.filter((tag) =>
+        currentTags.map((t) => t.toLowerCase()).includes(tag.toLowerCase())
+      ).length,
+    }));
+
+  // Sort by score (highest first), then by date (newest first)
+  return scored
+    .filter((item) => item.score > 0)
+    .sort(
+      (a, b) =>
+        b.score - a.score ||
+        new Date(b.project.date).getTime() - new Date(a.project.date).getTime()
+    )
+    .slice(0, limit)
+    .map((item) => item.project);
+}

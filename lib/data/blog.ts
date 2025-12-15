@@ -85,3 +85,37 @@ export async function getBlogSlugs(locale: string): Promise<string[]> {
     return [];
   }
 }
+
+/**
+ * Get related blog posts based on shared tags
+ * Uses a scoring algorithm: more shared tags = higher relevance
+ */
+export async function getRelatedBlogPosts(
+  currentSlug: string,
+  currentTags: string[],
+  locale: string,
+  limit: number = 3
+): Promise<BlogPost[]> {
+  const allPosts = await getPublishedBlogPosts(locale);
+
+  // Filter out current post and score by shared tags
+  const scored = allPosts
+    .filter((post) => post.slug !== currentSlug)
+    .map((post) => ({
+      post,
+      score: post.tags.filter((tag) =>
+        currentTags.map((t) => t.toLowerCase()).includes(tag.toLowerCase())
+      ).length,
+    }));
+
+  // Sort by score (highest first), then by date (newest first)
+  return scored
+    .filter((item) => item.score > 0)
+    .sort(
+      (a, b) =>
+        b.score - a.score ||
+        new Date(b.post.date).getTime() - new Date(a.post.date).getTime()
+    )
+    .slice(0, limit)
+    .map((item) => item.post);
+}
