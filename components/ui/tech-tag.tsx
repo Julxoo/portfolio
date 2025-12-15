@@ -1,5 +1,3 @@
-"use client";
-
 interface TechTagProps {
   tag: string;
   className?: string;
@@ -51,7 +49,6 @@ export function TechTag({ tag, className = "", variant = "default", clickable = 
       href={url}
       target="_blank"
       rel="noopener noreferrer"
-      onClick={(e) => e.stopPropagation()}
       className={`${baseClasses} ${variantClasses} transition-colors ${className}`}
     >
       {tag}

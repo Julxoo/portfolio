@@ -20,6 +20,7 @@ const nextConfig: NextConfig = {
   // Bundle optimization
   experimental: {
     optimizePackageImports: ["lucide-react"], // Tree-shake lucide-react icons
+    cssChunking: "strict", // Stricter CSS chunking for better code-splitting
   },
 
   // Compiler options

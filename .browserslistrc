@@ -1,0 +1,17 @@
+# Navigateurs modernes uniquement - élimine les polyfills inutiles
+# Support: ~95% des utilisateurs mondiaux
+
+# Production: navigateurs modernes avec support ES2022+
+[production]
+last 2 Chrome versions
+last 2 Firefox versions
+last 2 Safari versions
+last 2 Edge versions
+not dead
+not op_mini all
+
+# Development: navigateurs récents pour un build rapide
+[development]
+last 1 Chrome version
+last 1 Firefox version
+last 1 Safari version
