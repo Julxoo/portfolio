@@ -74,14 +74,16 @@ export const MDXComponents = {
     </CodeBlock>
   ),
   table: (props: React.TableHTMLAttributes<HTMLTableElement>) => (
-    <div className="my-6">
-      <Table>
-        <TableBody>{props.children}</TableBody>
-      </Table>
+    <div className="my-6 overflow-x-auto">
+      <Table>{props.children}</Table>
     </div>
   ),
-  thead: TableHeader,
-  tbody: TableBody,
+  thead: (props: React.HTMLAttributes<HTMLTableSectionElement>) => (
+    <TableHeader>{props.children}</TableHeader>
+  ),
+  tbody: (props: React.HTMLAttributes<HTMLTableSectionElement>) => (
+    <TableBody>{props.children}</TableBody>
+  ),
   tr: (props: React.HTMLAttributes<HTMLTableRowElement>) => {
     const isHeader = props.children &&
       React.Children.toArray(props.children).some((child: unknown) => (child as React.ReactElement)?.type === 'th');
