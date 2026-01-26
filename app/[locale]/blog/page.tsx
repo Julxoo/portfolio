@@ -8,6 +8,7 @@ import { Nav } from "@/components/layout/nav";
 import { Footer } from "@/components/layout/footer";
 import { BreadcrumbWithJsonLd } from "@/components/breadcrumb-with-json-ld";
 import { CollectionPageJsonLd } from "@/components/collection-page-json-ld";
+import { SITE_CONFIG } from "@/lib/constants";
 
 export async function generateMetadata({
   params,
@@ -16,7 +17,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   const isEn = locale === "en";
-  const baseUrl = "https://www.julestoussenel.com";
+  const baseUrl = SITE_CONFIG.url;
 
   return {
     title: "Blog",
@@ -57,7 +58,7 @@ export default async function BlogPage({
   const tNav = await getTranslations("Navigation");
   const posts = await getBlogPosts(locale);
   const publishedPosts = posts.filter((post) => post.published);
-  const baseUrl = "https://www.julestoussenel.com";
+  const baseUrl = SITE_CONFIG.url;
 
   const postsCount = publishedPosts.length;
   const description =
@@ -134,7 +135,7 @@ export default async function BlogPage({
               <div className="space-y-4" role="feed" aria-label="Blog posts">
                 {publishedPosts.map((post) => (
                   <article key={post.slug} role="article">
-                    <BlogCard post={post} />
+                    <BlogCard post={post} locale={locale} />
                   </article>
                 ))}
               </div>

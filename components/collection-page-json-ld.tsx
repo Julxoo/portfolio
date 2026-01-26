@@ -1,3 +1,5 @@
+import { SITE_CONFIG } from "@/lib/constants";
+
 interface CollectionItem {
   name: string;
   description: string;
@@ -23,7 +25,7 @@ export function CollectionPageJsonLd({
   items,
   type,
 }: CollectionPageJsonLdProps) {
-  const baseUrl = "https://www.julestoussenel.com";
+  const baseUrl = SITE_CONFIG.url;
 
   const structuredData = {
     "@context": "https://schema.org",

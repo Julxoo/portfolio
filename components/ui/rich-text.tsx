@@ -1,22 +1,10 @@
 import React from "react";
+import { TECH_LINKS } from "@/lib/constants";
 
 interface RichTextProps {
   children: string;
   className?: string;
 }
-
-const TECH_LINKS: Record<string, string> = {
-  "Next.js": "https://nextjs.org",
-  "Node.js": "https://nodejs.org",
-  "Supabase": "https://supabase.com",
-  "TypeScript": "https://www.typescriptlang.org",
-  "Tailwind CSS": "https://tailwindcss.com",
-  "React": "https://react.dev",
-  "Telegram Bot API": "https://core.telegram.org/bots/api",
-  "API Telegram Bot": "https://core.telegram.org/bots/api",
-  "EPITECH": "https://www.epitech.eu",
-  "EPITECH Marseille": "https://www.epitech.eu/ecole-informatique-marseille/",
-};
 
 export function RichText({ children, className = "" }: RichTextProps) {
   // Split text by potential links, maintaining the original text structure

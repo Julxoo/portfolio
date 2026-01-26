@@ -9,6 +9,7 @@ import { Nav } from "@/components/layout/nav";
 import { Footer } from "@/components/layout/footer";
 import { BlogPostJsonLd } from "@/components/blog-post-json-ld";
 import { BreadcrumbWithJsonLd } from "@/components/breadcrumb-with-json-ld";
+import { SITE_CONFIG } from "@/lib/constants";
 
 interface BlogPostPageProps {
   params: Promise<{
@@ -41,7 +42,7 @@ export async function generateMetadata({
     };
   }
 
-  const baseUrl = "https://www.julestoussenel.com";
+  const baseUrl = SITE_CONFIG.url;
 
   return {
     title: post.title,

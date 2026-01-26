@@ -1,7 +1,8 @@
 import { MetadataRoute } from "next";
+import { SITE_CONFIG } from "@/lib/constants";
 
 export default function robots(): MetadataRoute.Robots {
-  const baseUrl = "https://www.julestoussenel.com";
+  const baseUrl = SITE_CONFIG.url;
 
   return {
     rules: [

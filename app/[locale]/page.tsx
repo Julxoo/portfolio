@@ -239,7 +239,7 @@ export default async function Home({
               {blogPosts.length > 0 ? (
                 blogPosts
                   .slice(0, 3)
-                  .map((post) => <BlogCard key={post.slug} post={post} />)
+                  .map((post) => <BlogCard key={post.slug} post={post} locale={locale} />)
               ) : (
                 <p className="text-xs sm:text-sm text-muted-foreground">
                   {tBlog("empty")}

@@ -6,6 +6,7 @@ import { Geist_Mono } from "next/font/google";
 import { routing } from "@/i18n/routing";
 import { JsonLd } from "@/components/json-ld";
 import { GoogleAnalytics } from "@/components/google-analytics";
+import { SITE_CONFIG } from "@/lib/constants";
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
@@ -24,7 +25,7 @@ export async function generateMetadata({
   params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
   const { locale } = await params;
-  const baseUrl = "https://www.julestoussenel.com";
+  const baseUrl = SITE_CONFIG.url;
   const isEn = locale === "en";
 
   return {

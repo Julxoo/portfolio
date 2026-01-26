@@ -11,6 +11,7 @@ import { RichText } from "@/components/ui/rich-text";
 import { TechTag } from "@/components/ui/tech-tag";
 import { ProjectJsonLd } from "@/components/project-json-ld";
 import { BreadcrumbWithJsonLd } from "@/components/breadcrumb-with-json-ld";
+import { SITE_CONFIG } from "@/lib/constants";
 
 interface ProjectPageProps {
   params: Promise<{
@@ -43,7 +44,7 @@ export async function generateMetadata({
     };
   }
 
-  const baseUrl = "https://www.julestoussenel.com";
+  const baseUrl = SITE_CONFIG.url;
 
   return {
     title: project.title,

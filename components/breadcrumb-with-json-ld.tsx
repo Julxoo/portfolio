@@ -8,18 +8,18 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
+import { SITE_CONFIG } from "@/lib/constants";
 
-interface BreadcrumbItem {
+interface BreadcrumbItemData {
   label: string;
   href?: string;
 }
 
 interface BreadcrumbWithJsonLdProps {
-  items: BreadcrumbItem[];
+  items: BreadcrumbItemData[];
 }
 
 export function BreadcrumbWithJsonLd({ items }: BreadcrumbWithJsonLdProps) {
-  // Générer le JSON-LD pour le breadcrumb
   const breadcrumbJsonLd = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
@@ -28,7 +28,7 @@ export function BreadcrumbWithJsonLd({ items }: BreadcrumbWithJsonLdProps) {
       position: index + 1,
       name: item.label,
       ...(item.href && {
-        item: `https://www.julestoussenel.com${item.href}`,
+        item: `${SITE_CONFIG.url}${item.href}`,
       }),
     })),
   };

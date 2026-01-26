@@ -8,6 +8,7 @@ import { Nav } from "@/components/layout/nav";
 import { Footer } from "@/components/layout/footer";
 import { BreadcrumbWithJsonLd } from "@/components/breadcrumb-with-json-ld";
 import { CollectionPageJsonLd } from "@/components/collection-page-json-ld";
+import { SITE_CONFIG } from "@/lib/constants";
 
 export async function generateMetadata({
   params,
@@ -16,7 +17,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   const isEn = locale === "en";
-  const baseUrl = "https://www.julestoussenel.com";
+  const baseUrl = SITE_CONFIG.url;
 
   return {
     title: isEn ? "Projects" : "Projets",
@@ -52,7 +53,7 @@ export default async function ProjectsPage({
   const t = await getTranslations("ProjectsPage");
   const tNav = await getTranslations("Navigation");
   const projects = await getProjects(locale);
-  const baseUrl = "https://www.julestoussenel.com";
+  const baseUrl = SITE_CONFIG.url;
 
   const projectsCount = projects.length;
   const description =

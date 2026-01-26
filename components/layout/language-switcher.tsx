@@ -8,10 +8,6 @@ import { useState, useRef, useEffect } from "react";
 const LOCALE_LABELS: Record<string, string> = {
   fr: "Français",
   en: "English",
-  es: "Español",
-  de: "Deutsch",
-  it: "Italiano",
-  pt: "Português",
 };
 
 export function LanguageSwitcher() {

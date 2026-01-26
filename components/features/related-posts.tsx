@@ -20,7 +20,7 @@ export function RelatedPosts({ posts, locale }: RelatedPostsProps) {
     >
       <div className="space-y-4">
         {posts.map((post) => (
-          <BlogCard key={post.slug} post={post} />
+          <BlogCard key={post.slug} post={post} locale={locale} />
         ))}
       </div>
     </Section>
