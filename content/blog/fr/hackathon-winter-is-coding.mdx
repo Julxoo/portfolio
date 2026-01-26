@@ -1,0 +1,117 @@
+---
+title: "Hackathon Winter Is Coding — Retour d'expérience sur un mois d'optimisation à grande échelle"
+description: "Du 15 décembre 2025 au 15 janvier 2026, j'ai participé aux phases qualificatives du hackathon Winter Is Coding. Un mois d'optimisation combinatoire intensive pour résoudre un problème de déploiement d'antennes 5G. Retour sur cette expérience et les apprentissages clés."
+date: "2026-01-26T00:00:00.000Z"
+tags: ["Hackathon", "Optimization", "Algorithms", "Mathematics"]
+published: true
+readingTime: "6 min"
+---
+
+Du 15 décembre 2025 au 15 janvier 2026, près de 850 étudiants issus d'EPITECH et d'autres écoles se sont affrontés lors des phases qualificatives du hackathon **Winter Is Coding**.
+
+Un mois de compétition intense autour d'un sujet à la fois technique, exigeant et profondément ancré dans des problématiques industrielles réelles.
+
+L'objectif était clair : concevoir une solution capable d'optimiser le déploiement d'antennes 5G dans une ville, en couvrant l'ensemble des bâtiments tout en minimisant le coût total d'installation, malgré des contraintes fortes de portée, de capacité et de populations variables selon les périodes de la journée.
+
+Un problème qui, derrière son apparente simplicité, cache en réalité une **problématique d'optimisation combinatoire à grande échelle**, proche du [Facility Location Problem](https://en.wikipedia.org/wiki/Facility_location_problem) que l'on retrouve dans les secteurs des télécommunications, de la logistique ou de la planification industrielle.
+
+---
+
+## Un problème bien plus complexe qu'il n'y paraît
+
+Chaque bâtiment possédait une population différente selon trois périodes : heures pleines, heures creuses et nuit. Les antennes, quant à elles, disposaient de portées, de capacités et de coûts distincts, avec des contraintes supplémentaires liées à leur positionnement.
+
+Il ne s'agissait donc pas simplement de "placer des antennes", mais bien de résoudre un problème mêlant :
+
+- **Placement optimal** d'infrastructures (similaire au [Set Cover Problem](https://en.wikipedia.org/wiki/Set_cover_problem))
+- **Allocation de ressources** sous contrainte
+- **Gestion de pics de charge**
+- **Arbitrage permanent** entre coût, couverture et capacité
+
+Très rapidement, une évidence s'est imposée : une approche naïve ou purement heuristique atteignait ses limites dès les premiers jeux de données complexes.
+
+---
+
+## Entrer dans le monde de l'optimisation
+
+Ce hackathon a été pour moi l'occasion de plonger profondément dans un domaine qui me passionne depuis longtemps : les **mathématiques appliquées à l'optimisation**.
+
+Au fil des semaines, j'ai découvert et utilisé plusieurs solveurs industriels de référence :
+
+| Solveur | Description |
+|---------|-------------|
+| [Gurobi](https://www.gurobi.com/) | Solveur commercial de référence pour l'optimisation mathématique |
+| [IBM CPLEX](https://www.ibm.com/products/ilog-cplex-optimization-studio) | Suite d'optimisation industrielle d'IBM |
+| [HiGHS](https://highs.dev/) | Solveur open source haute performance |
+| [CP-SAT](https://developers.google.com/optimization/cp/cp_solver) | Solveur de contraintes de Google OR-Tools |
+
+Mais au-delà des outils, c'est surtout la logique qui m'a marqué : la manière dont un problème réel peut être transformé en un **modèle mathématique exploitable**.
+
+### Approches algorithmiques explorées
+
+J'ai progressivement exploré différentes familles d'algorithmes :
+
+**Métaheuristiques :**
+- [Large Neighbourhood Search (LNS)](https://en.wikipedia.org/wiki/Large_neighborhood_search) — Destruction et reconstruction itérative de solutions
+- Adaptive Large Neighbourhood Search (ALNS) — Version adaptative ajustant dynamiquement les opérateurs
+- [Simulated Annealing](https://en.wikipedia.org/wiki/Simulated_annealing) — Inspiration thermodynamique pour échapper aux optima locaux
+- [Algorithmes génétiques](https://en.wikipedia.org/wiki/Genetic_algorithm) — Évolution de populations de solutions
+
+**Optimisation exacte :**
+- [Mixed-Integer Programming (MIP)](https://en.wikipedia.org/wiki/Integer_programming) — Programmation en nombres entiers
+- Mixed Integer Linear Programming (MILP) — Variante linéaire du MIP
+
+Chaque méthode apportait ses forces, ses limites, et surtout une manière différente de raisonner le problème.
+
+---
+
+## Ce que ce hackathon m'a réellement appris
+
+Au-delà du code, cette expérience m'a surtout appris une chose essentielle :
+
+> La performance ne vient pas uniquement de l'algorithme, mais de la manière dont le problème est formulé.
+
+Aujourd'hui, nous disposons presque tous des mêmes outils. Les solveurs sont accessibles, les bibliothèques open source nombreuses, et les modèles de langage largement démocratisés.
+
+**Les ressources techniques tendent donc à s'uniformiser.**
+
+La différence ne se fait plus uniquement sur la puissance de calcul ou sur l'outil utilisé, mais sur :
+
+- La **compréhension fine** du problème
+- La capacité à le **reformuler correctement**
+- Les **hypothèses** que l'on choisit de poser
+- La manière d'**interagir avec ces outils** pour les guider dans la bonne direction
+
+Savoir découper un problème complexe, isoler les bons leviers, structurer une recherche ou orienter un solveur devient souvent bien plus déterminant que la sophistication apparente de l'algorithme lui-même.
+
+---
+
+## L'optimisation, un domaine omniprésent mais invisible
+
+Ce qui rend ce domaine particulièrement fascinant, c'est son **omniprésence**.
+
+Derrière des modèles mathématiques parfois abstraits se cachent pourtant des systèmes utilisés chaque jour, souvent sans que l'on s'en rende compte :
+
+- Planification des réseaux télécoms
+- Optimisation des tournées de livraison ([Vehicle Routing Problem](https://en.wikipedia.org/wiki/Vehicle_routing_problem))
+- Allocation de ressources cloud
+- Gestion énergétique ([Unit Commitment Problem](https://en.wikipedia.org/wiki/Unit_commitment_problem_in_electrical_power_production))
+- Transport aérien et ferroviaire
+- [Ordonnancement industriel](https://en.wikipedia.org/wiki/Job-shop_scheduling)
+- Pricing dynamique
+
+Autant de systèmes où **quelques pourcents de gain** peuvent représenter des économies considérables à l'échelle industrielle.
+
+---
+
+## Une expérience fondatrice
+
+Terminer **1er sur près de 850 participants** lors des phases qualificatives a évidemment été une grande satisfaction personnelle, mais surtout la confirmation d'un intérêt profond pour les problématiques mêlant mathématiques, data, modélisation et systèmes complexes.
+
+Ce hackathon m'a permis de consolider une manière de penser, d'aborder les problèmes différemment et de mieux comprendre ce qui fait réellement la performance dans des environnements techniques exigeants.
+
+C'est précisément ce type de sujets — à la frontière entre théorie et impact réel — que je souhaite continuer à explorer et approfondir.
+
+---
+
+Pour découvrir mes autres projets, consultez ma [page projets](/fr/projects).

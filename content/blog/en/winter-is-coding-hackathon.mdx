@@ -1,0 +1,117 @@
+---
+title: "Winter Is Coding Hackathon — Lessons from a Month of Large-Scale Optimization"
+description: "From December 15, 2025 to January 15, 2026, I competed in the Winter Is Coding hackathon qualifiers. A month of intensive combinatorial optimization to solve a 5G antenna deployment problem. Here's what I learned."
+date: "2026-01-26T00:00:00.000Z"
+tags: ["Hackathon", "Optimization", "Algorithms", "Mathematics"]
+published: true
+readingTime: "6 min"
+---
+
+From December 15, 2025 to January 15, 2026, nearly 850 students from EPITECH and other schools competed in the qualifying rounds of the **Winter Is Coding** hackathon.
+
+A month of intense competition centered around a subject that was both technical, demanding, and deeply rooted in real industrial challenges.
+
+The goal was clear: design a solution capable of optimizing 5G antenna deployment across a city, covering all buildings while minimizing total installation costs, despite strong constraints on range, capacity, and variable populations throughout the day.
+
+A problem that, behind its apparent simplicity, actually hides a **large-scale combinatorial optimization challenge**, similar to the [Facility Location Problem](https://en.wikipedia.org/wiki/Facility_location_problem) found in telecommunications, logistics, and industrial planning sectors.
+
+---
+
+## A Problem Far More Complex Than It Appears
+
+Each building had different population levels across three periods: peak hours, off-peak hours, and night. Antennas, meanwhile, had distinct ranges, capacities, and costs, with additional positioning constraints.
+
+This wasn't simply about "placing antennas," but rather solving a problem combining:
+
+- **Optimal infrastructure placement** (similar to the [Set Cover Problem](https://en.wikipedia.org/wiki/Set_cover_problem))
+- **Resource allocation** under constraints
+- **Peak load management**
+- **Constant trade-offs** between cost, coverage, and capacity
+
+Very quickly, one thing became evident: a naive or purely heuristic approach hit its limits on the first complex datasets.
+
+---
+
+## Diving into the World of Optimization
+
+This hackathon gave me the opportunity to dive deep into a field I've been passionate about for a long time: **applied mathematics for optimization**.
+
+Over the weeks, I discovered and used several industry-standard solvers:
+
+| Solver | Description |
+|--------|-------------|
+| [Gurobi](https://www.gurobi.com/) | Industry-leading commercial solver for mathematical optimization |
+| [IBM CPLEX](https://www.ibm.com/products/ilog-cplex-optimization-studio) | IBM's industrial optimization suite |
+| [HiGHS](https://highs.dev/) | High-performance open source solver |
+| [CP-SAT](https://developers.google.com/optimization/cp/cp_solver) | Google OR-Tools constraint solver |
+
+But beyond the tools, what struck me most was the underlying logic: how a real-world problem can be transformed into an **exploitable mathematical model**.
+
+### Algorithmic Approaches Explored
+
+I progressively explored different algorithm families:
+
+**Metaheuristics:**
+- [Large Neighbourhood Search (LNS)](https://en.wikipedia.org/wiki/Large_neighborhood_search) — Iterative destruction and reconstruction of solutions
+- Adaptive Large Neighbourhood Search (ALNS) — Adaptive version that dynamically adjusts operators
+- [Simulated Annealing](https://en.wikipedia.org/wiki/Simulated_annealing) — Thermodynamic inspiration to escape local optima
+- [Genetic Algorithms](https://en.wikipedia.org/wiki/Genetic_algorithm) — Evolution of solution populations
+
+**Exact Optimization:**
+- [Mixed-Integer Programming (MIP)](https://en.wikipedia.org/wiki/Integer_programming) — Integer programming
+- Mixed Integer Linear Programming (MILP) — Linear variant of MIP
+
+Each method brought its strengths, limitations, and most importantly, a different way of reasoning about the problem.
+
+---
+
+## What This Hackathon Really Taught Me
+
+Beyond the code, this experience taught me one essential thing:
+
+> Performance doesn't come solely from the algorithm, but from how the problem is formulated.
+
+Today, we almost all have access to the same tools. Solvers are accessible, open source libraries are numerous, and language models are widely democratized.
+
+**Technical resources are therefore becoming standardized.**
+
+The difference is no longer just about computing power or the tool used, but about:
+
+- **Deep understanding** of the problem
+- The ability to **reformulate it correctly**
+- The **assumptions** we choose to make
+- How we **interact with these tools** to guide them in the right direction
+
+Knowing how to break down a complex problem, isolate the right levers, structure a search, or guide a solver often becomes far more decisive than the apparent sophistication of the algorithm itself.
+
+---
+
+## Optimization: An Omnipresent Yet Invisible Field
+
+What makes this field particularly fascinating is its **ubiquity**.
+
+Behind sometimes abstract mathematical models lie systems used every day, often without us even realizing it:
+
+- Telecom network planning
+- Delivery route optimization ([Vehicle Routing Problem](https://en.wikipedia.org/wiki/Vehicle_routing_problem))
+- Cloud resource allocation
+- Energy management ([Unit Commitment Problem](https://en.wikipedia.org/wiki/Unit_commitment_problem_in_electrical_power_production))
+- Air and rail transportation
+- [Industrial scheduling](https://en.wikipedia.org/wiki/Job-shop_scheduling)
+- Dynamic pricing
+
+All systems where **a few percentage points of improvement** can represent considerable savings at industrial scale.
+
+---
+
+## A Foundational Experience
+
+Finishing **1st out of nearly 850 participants** in the qualifying rounds was obviously a great personal satisfaction, but above all a confirmation of a deep interest in problems combining mathematics, data, modeling, and complex systems.
+
+This hackathon allowed me to consolidate a way of thinking, approach problems differently, and better understand what really drives performance in demanding technical environments.
+
+It's precisely this type of subject — at the frontier between theory and real-world impact — that I want to continue exploring and deepening.
+
+---
+
+To discover my other projects, check out my [projects page](/en/projects).
