@@ -7,8 +7,8 @@
     "period": "Jan 2025 - Aug 2027",
     "startDate": "2025-01-01T00:00:00.000Z",
     "endDate": "2027-08-31T00:00:00.000Z",
-    "description": "Design and development of a custom CRM solution for the real estate agency. Complete project management: frontend (Next.js), backend (Node.js), database (Supabase), hosting and deployment. Implementation of automation features and preparation for AI integration for automated prospecting.",
-    "technologies": ["Next.js", "Node.js", "Supabase", "TypeScript", "Tailwind CSS"],
+    "description": "Design and development of a custom CRM solution for the real estate agency. Complete project management: frontend (Next.js 16, shadcn/ui), backend (Fastify 5 on Bun, Drizzle ORM), database (PostgreSQL, Supabase Auth/Storage), hosting and deployment. Full V2 refactoring with Feature-Sliced Design architecture. Implementation of automation features and AI integration for prospecting.",
+    "technologies": ["Next.js", "Fastify", "Bun", "Drizzle ORM", "Supabase", "TypeScript", "Tailwind CSS"],
     "current": true
   },
   {

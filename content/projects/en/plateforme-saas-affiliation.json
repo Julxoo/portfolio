@@ -1,0 +1,13 @@
+{
+  "id": "plateforme-saas-affiliation",
+  "title": "Multi-Tenant SaaS Platform — Affiliate Marketing",
+  "description": "SaaS platform for deploying and managing custom affiliate landing pages across multiple domains, with admin dashboard and built-in analytics.",
+  "longDescription": "Multi-tenant SaaS platform developed for a client, enabling deployment of custom affiliate sites on independent domains from a centralized dashboard.\n\nARCHITECTURE:\nSingle Next.js 16 application serving multiple domains via a proxy system (replacing Next.js middleware). Automatic domain detection, header injection, conditional admin/public routing. Feature-Sliced Design architecture on the frontend. PostgreSQL database via Supabase with Row Level Security. Server-side RPC functions for analytics aggregation.\n\nTECH STACK:\nFrontend: Next.js 16 + React 19, shadcn/ui (Radix + Tailwind CSS 4), Zustand, TanStack Query v5, React Hook Form + Zod 4, Three.js (3D animations), react-fast-marquee, dnd-kit (drag & drop), nuqs\nBackend: Supabase (PostgreSQL + Auth + Storage), server RPC functions, Next.js Server Actions\nAnalytics: Cookieless system with timezone-aware aggregations (date-fns-tz), period comparison, tracking by device/button/card\n\nFEATURES:\nMulti-tenancy: Each client gets their own domain with customizable theme (oklch colors), configurable hero, SEO metadata, legal content, logo/favicon. Flexible JSONB configuration without schema migrations.\n\nAdmin dashboard: CRUD management for sites and partner library. Site-partner associations with drag & drop ordering, custom badges, configurable internal cards, per-button redirect URLs.\n\nCookieless analytics: GDPR-friendly tracking without cookies. Server-side aggregation via Supabase RPC. Statistics by period (day, week, month, year) with automatic comparison. Device breakdown, click rate, per-partner performance.\n\nPremium animations: CSS morphing blobs with GPU acceleration, pre-calculated floating particles (zero-jank), animated gradients. Responsive optimization (reduced sizes on mobile).\n\nInternationalization: Multilingual support (FR/EN) per site, automatic locale detection.\n\nRESULTS:\nProduction platform serving multiple domains simultaneously. New site deployment in minutes via the dashboard. Real-time analytics with no external dependency.",
+  "tags": ["Next.js", "React 19", "Supabase", "TypeScript", "Tailwind CSS", "shadcn/ui", "Three.js", "Analytics", "Multi-Tenant", "SaaS"],
+  "images": [],
+  "githubUrl": "",
+  "liveUrl": "",
+  "featured": true,
+  "date": "2025-06-01T00:00:00.000Z",
+  "status": "completed"
+}
