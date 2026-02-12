@@ -43,10 +43,16 @@ export default async function Home({
           <HeroSection
             name={t("name")}
             title={t("title")}
-            badge={{
-              text: t("badge"),
-              href: "https://www.epitech.eu/2025/11/21/un-etudiant-depitech-marseille-triomphe-au-hackathon-coding-battle-2025/",
-            }}
+            badges={[
+              {
+                text: t("badge2"),
+                href: "https://www.linkedin.com/posts/julestoussenel_1%C3%A8re-place-sur-pr%C3%A8s-de-850-%C3%A9tudiants-lors-activity-7421538750113079296-hzAg",
+              },
+              {
+                text: t("badge"),
+                href: "https://www.epitech.eu/2025/11/21/un-etudiant-depitech-marseille-triomphe-au-hackathon-coding-battle-2025/",
+              },
+            ]}
             description={
               locale === "fr" ? (
                 <>
