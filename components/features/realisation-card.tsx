@@ -12,6 +12,7 @@ function getScreenshotUrl(siteUrl: string): string {
 
 export function RealisationCard({ realisation }: RealisationCardProps) {
   const imageUrl = realisation.image || getScreenshotUrl(realisation.url);
+  const isExternal = imageUrl.startsWith("http");
 
   return (
     <a
@@ -27,7 +28,7 @@ export function RealisationCard({ realisation }: RealisationCardProps) {
           fill
           className="object-cover object-top transition-transform duration-300 group-hover:scale-105"
           sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, 33vw"
-          unoptimized
+          {...(isExternal ? { unoptimized: true } : {})}
         />
       </div>
       <div className="mt-2 space-y-1">

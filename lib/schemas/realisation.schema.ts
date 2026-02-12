@@ -6,7 +6,7 @@ export const realisationSchema = z.object({
   description: z.string().min(1, "La description est requise"),
   url: z.string().url("URL invalide"),
   tags: z.array(z.string()).min(1, "Au moins un tag est requis"),
-  image: z.string().url("URL image invalide").optional(),
+  image: z.string().min(1, "Chemin image invalide").optional(),
 });
 
 export type RealisationData = z.infer<typeof realisationSchema>;
