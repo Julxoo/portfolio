@@ -7,9 +7,12 @@ import { Section } from "@/components/layout/section";
 import { ProjectCard } from "@/components/features/project-card";
 import { ExperienceItem } from "@/components/features/experience-item";
 import { BlogCard } from "@/components/features/blog-card";
+import { RealisationCard } from "@/components/features/realisation-card";
 import { getFeaturedProjects } from "@/lib/data/projects";
 import { getExperiences } from "@/lib/data/experiences";
+import { getLatestRealisations } from "@/lib/data/realisations";
 import { getPublishedBlogPosts } from "@/lib/data/blog";
+import { Link } from "@/i18n/routing";
 import { FAQJsonLd } from "@/components/faq-json-ld";
 
 export default async function Home({
@@ -24,12 +27,15 @@ export default async function Home({
   const tProjects = await getTranslations("ProjectsSection");
   const tExperience = await getTranslations("ExperienceSection");
   const tBlog = await getTranslations("BlogSection");
+  const tRealisations = await getTranslations("RealisationsSection");
 
-  const [featuredProjects, experiences, blogPosts] = await Promise.all([
-    getFeaturedProjects(locale),
-    getExperiences(locale),
-    getPublishedBlogPosts(locale),
-  ]);
+  const [featuredProjects, experiences, realisations, blogPosts] =
+    await Promise.all([
+      getFeaturedProjects(locale),
+      getExperiences(locale),
+      getLatestRealisations(locale, 4),
+      getPublishedBlogPosts(locale),
+    ]);
 
   return (
     <>
@@ -230,6 +236,41 @@ export default async function Home({
                 <ExperienceItem key={experience.id} experience={experience} />
               ))}
             </div>
+          </Section>
+
+          <Section
+            title={tRealisations("title")}
+            id="realisations"
+            aria-label={
+              locale === "en"
+                ? "Showcase websites"
+                : "Sites vitrines"
+            }
+          >
+            {realisations.length > 0 ? (
+              <>
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+                  {realisations.map((realisation) => (
+                    <RealisationCard
+                      key={realisation.id}
+                      realisation={realisation}
+                    />
+                  ))}
+                </div>
+                <div className="mt-6">
+                  <Link
+                    href="/realisations"
+                    className="text-xs text-muted-foreground hover:text-primary transition-colors"
+                  >
+                    {tRealisations("viewAll")}
+                  </Link>
+                </div>
+              </>
+            ) : (
+              <p className="text-xs sm:text-sm text-muted-foreground">
+                {tRealisations("empty")}
+              </p>
+            )}
           </Section>
 
           <Section

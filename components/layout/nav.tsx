@@ -20,6 +20,12 @@ export async function Nav() {
               {t("projects")}
             </Link>
             <Link
+              href="/realisations"
+              className="hover:text-primary transition-colors"
+            >
+              {t("realisations")}
+            </Link>
+            <Link
               href="/blog"
               className="hover:text-primary transition-colors"
             >

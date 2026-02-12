@@ -4,13 +4,24 @@
     "projects": "Projects",
     "experience": "Experience",
     "blog": "Blog",
-    "contact": "Contact"
+    "contact": "Contact",
+    "realisations": "Websites"
   },
   "HomePage": {
     "name": "Jules Toussenel",
     "title": "Student • Full-Stack Developer",
     "badge": "1st Place • Hackathon Le Match'Up",
     "badge2": "1st Place • Hackathon Winter Is Coding"
+  },
+  "RealisationsSection": {
+    "title": "Showcase Websites",
+    "viewAll": "View all websites →",
+    "empty": "Coming soon..."
+  },
+  "RealisationsPage": {
+    "title": "Websites",
+    "sitesDelivered": "website delivered",
+    "sitesDeliveredPlural": "websites delivered"
   },
   "ProjectsSection": {
     "title": "Selected Projects",

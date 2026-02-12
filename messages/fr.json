@@ -4,13 +4,24 @@
     "projects": "Projets",
     "experience": "Expérience",
     "blog": "Blog",
-    "contact": "Contact"
+    "contact": "Contact",
+    "realisations": "Réalisations"
   },
   "HomePage": {
     "name": "Jules Toussenel",
     "title": "Étudiant • Développeur Full-Stack",
     "badge": "1ère place • Hackathon Le Match'Up",
     "badge2": "1ère place • Hackathon Winter Is Coding"
+  },
+  "RealisationsSection": {
+    "title": "Sites Vitrines",
+    "viewAll": "Voir toutes les réalisations →",
+    "empty": "Réalisations à venir..."
+  },
+  "RealisationsPage": {
+    "title": "Réalisations",
+    "sitesDelivered": "site livré",
+    "sitesDeliveredPlural": "sites livrés"
   },
   "ProjectsSection": {
     "title": "Projets Sélectionnés",

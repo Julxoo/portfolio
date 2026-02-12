@@ -15,6 +15,12 @@ const nextConfig: NextConfig = {
     deviceSizes: [640, 750, 828, 1080, 1200, 1920], // Common breakpoints
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384], // Icon sizes
     minimumCacheTTL: 60 * 60 * 24 * 365, // Cache images for 1 year
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "image.thum.io",
+      },
+    ],
   },
 
   // Bundle optimization
@@ -72,7 +78,7 @@ const nextConfig: NextConfig = {
               "default-src 'self'",
               "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com",
               "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
-              "img-src 'self' data: blob: https://www.google-analytics.com https://www.googletagmanager.com",
+              "img-src 'self' data: blob: https://www.google-analytics.com https://www.googletagmanager.com https://image.thum.io",
               "font-src 'self' https://fonts.gstatic.com",
               "connect-src 'self' https://www.google-analytics.com https://www.googletagmanager.com https://region1.google-analytics.com",
               "frame-ancestors 'none'",
