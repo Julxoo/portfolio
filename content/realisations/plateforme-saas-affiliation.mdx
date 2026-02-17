@@ -1,0 +1,49 @@
+---
+title: Plateforme SaaS multi-tenant
+slug: plateforme-saas-affiliation
+description: Plateforme SaaS permettant de deployer des landing pages d'affiliation personnalisees sur domaines multiples, avec dashboard d'administration et analytics integres.
+date: 2025-06-01
+status: termine
+tags:
+  - Next.js
+  - React 19
+  - Supabase
+  - TypeScript
+  - Three.js
+  - Analytics
+category: SaaS
+---
+
+Plateforme SaaS multi-tenant developpee pour un client, permettant de deployer des sites d'affiliation personnalises sur des domaines independants depuis un dashboard centralise.
+
+## Contexte
+
+Le client avait besoin de deployer rapidement des landing pages d'affiliation pour differentes niches, chacune sur son propre domaine avec un theme personnalise. La gestion manuelle de chaque site etait devenue ingerable. Il fallait une plateforme unique pour tout piloter : creation de sites, gestion des partenaires, suivi des performances.
+
+## Architecture
+
+Application Next.js 16 unique servant plusieurs domaines via un systeme de proxy (remplacement du middleware Next.js). Detection automatique du domaine, injection de headers, routage conditionnel admin/public. Architecture Feature-Sliced Design cote frontend. Base de donnees PostgreSQL via Supabase avec Row Level Security. Fonctions RPC serveur pour les agregations analytiques.
+
+## Stack technique
+
+**Frontend** : Next.js 16 + React 19, shadcn/ui (Radix + Tailwind CSS 4), Zustand, TanStack Query v5, React Hook Form + Zod, Three.js (animations 3D), react-fast-marquee, dnd-kit (drag & drop), nuqs
+
+**Backend** : Supabase (PostgreSQL + Auth + Storage), fonctions RPC serveur, Server Actions Next.js
+
+**Analytics** : systeme cookieless avec agregations timezone-aware (date-fns-tz), comparaison de periodes, tracking par device/bouton/carte
+
+## Fonctionnalites cles
+
+**Multi-tenancy** : chaque client dispose de son propre domaine avec theme personnalisable (couleurs oklch), hero configurable, SEO metadata, contenu legal, logo/favicon. Configuration JSONB flexible sans migration de schema.
+
+**Dashboard admin** : gestion CRUD des sites et de la bibliotheque de partenaires. Associations site-partenaire avec drag & drop pour l'ordonnancement, badges personnalises, cartes internes configurables, URLs de redirection par bouton.
+
+**Analytics cookieless** : tracking RGPD-friendly sans cookies. Agregation serveur via RPC Supabase. Statistiques par periode (jour, semaine, mois, annee) avec comparaison automatique. Repartition par device, taux de clic, performances par partenaire.
+
+**Animations premium** : blobs morphing CSS avec acceleration GPU, particules flottantes pre-calculees (zero-jank), gradients animes. Optimisation responsive (tailles reduites sur mobile).
+
+**Internationalisation** : support multilingue (FR/EN) par site, detection automatique de la locale.
+
+## Resultats
+
+Plateforme en production servant plusieurs domaines simultanement. Deploiement de nouveaux sites en minutes via le dashboard. Analytics temps reel sans dependance externe.

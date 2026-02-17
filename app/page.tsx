@@ -1,65 +1,134 @@
-import Image from "next/image";
+import type { Metadata } from "next";
+import Link from "next/link";
+import { Reveal, Rule, CtaLink } from "@/components/ui";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { createBreadcrumbSchema, createWebPageSchema } from "@/lib/schemas";
+import { getLatestPosts } from "@/lib/blog";
+import { BlogPostList } from "@/components/blog/post-list";
+
+export const metadata: Metadata = {
+  title: {
+    absolute:
+      "Jules Toussenel · Développeur Web Freelance à Aix-en-Provence",
+  },
+  description:
+    "Développeur web freelance à Aix-en-Provence. Applications web sur-mesure, CRM métier, SaaS et automatisation augmentés par l'IA.",
+  alternates: {
+    canonical: "/",
+  },
+};
+
+const homePageSchema = createWebPageSchema({
+  url: "/",
+  name: "Jules Toussenel · Développeur Web Freelance à Aix-en-Provence",
+  description:
+    "Développeur web freelance à Aix-en-Provence. Applications web sur-mesure, CRM métier, SaaS et automatisation augmentés par l'IA.",
+});
+
+const homeBreadcrumbSchema = createBreadcrumbSchema([
+  { name: "Accueil", path: "/" },
+]);
 
 export default function Home() {
+  const latestPosts = getLatestPosts(3);
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <>
+      <JsonLd data={homePageSchema} />
+      <JsonLd data={homeBreadcrumbSchema} />
+      <main className="mx-auto max-w-7xl px-6 md:px-12">
+      {/* ── Hero ── */}
+      <section className="flex min-h-[100svh] flex-col pb-12 pt-40 md:pt-48" aria-labelledby="hero-heading">
+        <div className="flex flex-1 items-center">
+          <div>
+            <Reveal>
+              <h1
+                id="hero-heading"
+                className="font-normal"
+                style={{ fontSize: "clamp(3rem, 5.5vw, 5rem)" }}
+              >
+                Jules
+                <br />
+                Toussenel
+              </h1>
+            </Reveal>
+
+            <Reveal delay={150}>
+              <div className="mt-8 w-16 md:w-24">
+                <Rule />
+              </div>
+            </Reveal>
+
+            <Reveal delay={300}>
+              <p className="mt-8 font-sans text-[13px] uppercase tracking-[0.15em] text-taupe">
+                AI-Augmented Software Engineer
+              </p>
+              <p className="mt-1.5 font-sans text-[13px] uppercase tracking-[0.15em] text-taupe/60">
+                Aix-en-Provence
+              </p>
+            </Reveal>
+          </div>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+
+        <Reveal delay={450}>
+          <div className="mb-8">
+            <Link
+              href="/services"
+              className="group inline-flex items-center gap-3 border border-rule-light px-6 py-3.5 font-sans text-[12px] uppercase tracking-[0.1em] text-dark-chocolate transition-all duration-400 hover:border-camel hover:text-camel"
+              style={{ transitionTimingFunction: "var(--ease-hover)" }}
+            >
+              D&eacute;couvrir mes services
+              <span className="text-camel transition-transform duration-300 group-hover:translate-x-1">&rarr;</span>
+            </Link>
+          </div>
+        </Reveal>
+
+        <Reveal delay={600}>
+          <nav className="flex flex-col gap-3 md:flex-row md:gap-10">
+            <CtaLink href="/realisations">R&eacute;alisations</CtaLink>
+            <CtaLink href="/a-propos">Me d&eacute;couvrir</CtaLink>
+            <CtaLink href="/contact">Contact</CtaLink>
+          </nav>
+        </Reveal>
+      </section>
+
+      {/* ── Derniers articles ── */}
+      {latestPosts.length > 0 && (
+        <section className="pb-32" aria-labelledby="blog-heading">
+          <Reveal>
+            <div className="w-16 md:w-24">
+              <Rule />
+            </div>
+          </Reveal>
+
+          <Reveal delay={100}>
+            <p className="mb-6 mt-12 font-sans text-[13px] uppercase tracking-[0.15em] text-taupe">
+              Blog
+            </p>
+          </Reveal>
+
+          <Reveal delay={150}>
+            <h2
+              id="blog-heading"
+              className="mb-10 max-w-2xl font-normal"
+              style={{ fontSize: "clamp(1.5rem, 2.5vw, 2rem)" }}
+            >
+              Derniers articles
+            </h2>
+          </Reveal>
+
+          <Reveal delay={200}>
+            <BlogPostList posts={latestPosts} />
+          </Reveal>
+
+          <Reveal delay={250}>
+            <div className="mt-8">
+              <CtaLink href="/blog">Tous les articles</CtaLink>
+            </div>
+          </Reveal>
+        </section>
+      )}
+    </main>
+    </>
   );
 }

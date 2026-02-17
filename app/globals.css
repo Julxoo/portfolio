@@ -1,26 +1,135 @@
 @import "tailwindcss";
 
+/* ── Easing Curves ─────────────────────────────────────── */
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --ease-luxury: cubic-bezier(0.25, 0.1, 0.25, 1.0);
+  --ease-enter: cubic-bezier(0.0, 0.0, 0.2, 1.0);
+  --ease-hover: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --ease-exit: cubic-bezier(0.4, 0.0, 1.0, 1.0);
 }
 
+/* ── Fonts (inline — resolved via next/font on <body>) ── */
+
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
+  --font-sans: var(--font-inter);
+  --font-serif: var(--font-cormorant);
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* ── Colors (CSS custom properties + Tailwind utilities) ─ */
+
+@theme {
+  --color-espresso: #1A1714;
+  --color-dark-chocolate: #2C2420;
+  --color-parchment: #F0E6D9;
+  --color-warm-cream: #E8DCCF;
+  --color-antique-ivory: #E8E0D4;
+  --color-charcoal: #2B2B2B;
+  --color-hunter-green: #2D4A3E;
+  --color-camel: #C4A882;
+  --color-taupe: #8C7E6E;
+  --color-matte-gold: #B8A088;
+  --color-muted-burgundy: #6B3A3A;
+  --color-rule-dark: #3A3430;
+  --color-rule-light: #D6CFC5;
+  --color-hover-surface: #332C26;
+}
+
+/* ── Base Layer ────────────────────────────────────────── */
+
+@layer base {
+  body {
+    background-color: var(--color-parchment);
+    color: var(--color-dark-chocolate);
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-cormorant);
+    line-height: 1.1;
+  }
+
+  ::selection {
+    background-color: var(--color-camel);
+    color: var(--color-parchment);
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* ── Code blocks (rehype-pretty-code) ──────────────── */
+
+[data-rehype-pretty-code-figure] pre {
+  padding: 1.25rem 1.5rem;
+  border: 1px solid var(--color-rule-light);
+  border-radius: 0;
+  background-color: var(--color-antique-ivory) !important;
+  overflow-x: auto;
+  font-size: 0.8125rem;
+  line-height: 1.7;
+}
+
+[data-rehype-pretty-code-figure] code {
+  font-family: var(--font-mono);
+  display: grid;
+}
+
+[data-rehype-pretty-code-figure] [data-line] {
+  padding: 0 0.25rem;
+}
+
+[data-rehype-pretty-code-figure] [data-highlighted-line] {
+  background-color: color-mix(in srgb, var(--color-camel) 8%, transparent);
+}
+
+[data-rehype-pretty-code-title] {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-taupe);
+  padding: 0.5rem 1.5rem;
+  border: 1px solid var(--color-rule-light);
+  border-bottom: 0;
+  background-color: var(--color-warm-cream);
+}
+
+/* Inline code */
+:not(pre) > code {
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  padding: 0.15rem 0.35rem;
+  background-color: var(--color-antique-ivory);
+  border: 1px solid var(--color-rule-light);
+}
+
+/* ── Focus visible (brand-consistent outline) ────────── */
+
+*:focus-visible {
+  outline: 2px solid var(--color-camel);
+  outline-offset: 2px;
+}
+
+/* ── Reduced motion ──────────────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ── MDX table scroll indicator (mobile) ────────────── */
+
+.mdx-table-wrap {
+  -webkit-overflow-scrolling: touch;
+}
+
+.mdx-table-wrap table {
+  min-width: 480px;
 }

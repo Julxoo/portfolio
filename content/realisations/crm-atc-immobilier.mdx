@@ -1,0 +1,54 @@
+---
+title: CRM sur mesure . ATC Immobilier
+slug: crm-atc-immobilier
+description: CRM immobilier commercial sur-mesure remplacant Salesforce, concu et developpe en autonomie complete. 5 utilisateurs quotidiens, plusieurs milliers de biens geres.
+date: 2025-01-15
+status: en-cours
+tags:
+  - Next.js
+  - Fastify
+  - Bun
+  - Drizzle ORM
+  - Supabase
+  - Mapbox
+  - OpenAI
+  - CRM
+category: Application metier
+client: ATC Immobilier
+---
+
+CRM immobilier commercial sur-mesure developpe pour ATC Immobilier (Aix-en-Provence) en remplacement de Salesforce. Concu et developpe en autonomie complete : architecture, frontend, backend, base de donnees, integrations tierces, deploiement et maintenance.
+
+## Contexte
+
+ATC Immobilier gerait son activite commerciale via Salesforce, une solution generique et couteuse qui ne repondait pas aux specificites de l'immobilier commercial. L'equipe avait besoin d'un outil sur-mesure, adapte a leurs processus metier : gestion d'emplacements, matching offres/demandes, generation automatique de documents, enrichissement de donnees.
+
+J'ai concu et developpe le CRM en autonomie complete, de l'architecture a la mise en production. L'outil est utilise quotidiennement par 5 collaborateurs pour gerer plusieurs milliers de biens, comptes et contacts.
+
+## Architecture
+
+Monorepo frontend/backend avec architecture Feature-Sliced Design (FSD). Frontend Next.js 16 heberge sur Vercel, backend Fastify 5 sur Bun avec Drizzle ORM. Base de donnees PostgreSQL avec Supabase (Auth + Storage). Jobs asynchrones via BullMQ + Redis. Architecture entierement refactoree en V2 pour ameliorer scalabilite et maintenabilite.
+
+## Stack technique
+
+**Frontend** : Next.js 16 + React 19, shadcn/ui (Radix + Tailwind CSS 4), Zustand + TanStack Query v5, React Hook Form + Zod 4, Mapbox GL + Mapbox Draw, TipTap, XY Flow, Recharts, nuqs
+
+**Backend** : Fastify 5 sur Bun, Drizzle ORM (+ Drizzle Kit), Zod 4, Supabase (Auth + Storage), PostgreSQL, BullMQ + Redis, Pino (logs structures), Sharp (images), Googleapis, ExcelJS, Archiver
+
+**Tests et qualite** : Vitest, Biome (lint/format)
+
+**APIs integrees** : Pappers (SIREN/SIRET), Kaspr (enrichissement contacts), Mapbox (geocodage + recherche), MySendingBox (courrier postal), Gmail API, Google APIs (Slides, Drive, Calendar), Ubiflow (export annonces), OpenAI (personnalisation IA)
+
+## Fonctionnalites cles
+
+**Modules core** : gestion emplacements (CRUD multi-photos, geolocalisation Mapbox, calculs surface ponderes), comptes (enrichissement auto SIREN/SIRET via Pappers), contacts (enrichissement auto via Kaspr), enseignes (reconnaissance marques par distance de Levenshtein), offres/demandes avec matching intelligent, lots, transactions, prospects, calendrier/activites, notes, todos, notifications.
+
+**Carte interactive** : Mapbox GL avec outils de dessin, visualisation des biens, clustering, filtrage geographique.
+
+**Automatisations** : enrichissement automatique entreprises (Pappers) et contacts (Kaspr), normalisation adresses (Mapbox), generation de fiches commerciales (Google Slides), envoi d'emails avec templates personnalisables (Gmail API), envoi de courrier postal (MySendingBox), matching intelligent demandes/offres (multi-criteres, multi-zones geographiques avec rayon configurable), export automatique vers Le Bon Coin (flux XML Ubiflow), personnalisation de textes par IA (OpenAI).
+
+**Infrastructure** : journal d'audit complet tracant toutes les actions utilisateurs, recherche globale, monitoring production avec logs structures et health checks, integration Google Drive pour le stockage de documents.
+
+## Resultats
+
+Solution en production remplacant Salesforce. Gestion de plusieurs milliers de biens, comptes et contacts. Automatisation complete des processus critiques : enrichissement donnees, generation documents, emails, courrier postal, export annonces. 5 utilisateurs quotidiens.

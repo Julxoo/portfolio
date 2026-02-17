@@ -1,0 +1,20 @@
+# Jules Toussenel
+
+> Développeur web freelance à Aix-en-Provence. Applications web sur-mesure, CRM métier, SaaS et automatisation augmentés par l'IA.
+
+## Pages principales
+- [Accueil](https://julestoussenel.com): Portfolio et présentation de Jules Toussenel, AI-Augmented Software Engineer
+- [Services](https://julestoussenel.com/services): Identité visuelle, site vitrine, bot d'affiliation Telegram — prix et détails
+- [Identité visuelle](https://julestoussenel.com/services/identite-visuelle): Création d'identité visuelle complète — 150 €, livraison 48h
+- [Site vitrine](https://julestoussenel.com/services/site-vitrine): Création de site vitrine sur-mesure — à partir de 500 €
+- [Bot d'affiliation](https://julestoussenel.com/services/bot-affiliation): Bot Telegram d'affiliation sur-mesure — à partir de 350 €
+- [Blog](https://julestoussenel.com/blog): Articles techniques sur le developpement web, Next.js, TypeScript, IA et freelancing
+- [Réalisations](https://julestoussenel.com/realisations): Portfolio de projets livrés
+- [À propos](https://julestoussenel.com/a-propos): Parcours, compétences et approche
+- [Contact](https://julestoussenel.com/contact): Demander un devis gratuit, réponse sous 24h
+
+## Informations clés
+- Localisation : Aix-en-Provence, France
+- Spécialités : Next.js, React, TypeScript, Node.js, automatisation IA
+- Clientèle : indépendants, artisans, PME, startups
+- Langues : français, anglais
