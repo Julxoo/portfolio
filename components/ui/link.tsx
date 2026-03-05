@@ -55,14 +55,14 @@ export function CtaLink({ href, children, className = "" }: CtaLinkProps) {
 
   if (href.startsWith("/") || href.startsWith("#")) {
     return (
-      <Link href={href} className={classes} style={style}>
+      <Link href={href} className={classes} style={style} data-track="cta">
         {content}
       </Link>
     );
   }
 
   return (
-    <a href={href} className={classes} style={style}>
+    <a href={href} className={classes} style={style} data-track="cta">
       {content}
     </a>
   );

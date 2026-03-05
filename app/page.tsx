@@ -74,6 +74,8 @@ export default function Home() {
           <div className="mb-8">
             <Link
               href="/services"
+              data-track="cta"
+              data-track-label="Hero CTA"
               className="group inline-flex items-center gap-3 border border-rule-light px-6 py-3.5 font-sans text-[12px] uppercase tracking-[0.1em] text-dark-chocolate transition-all duration-400 hover:border-camel hover:text-camel"
               style={{ transitionTimingFunction: "var(--ease-hover)" }}
             >

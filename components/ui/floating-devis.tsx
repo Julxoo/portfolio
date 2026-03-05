@@ -155,6 +155,8 @@ export function FloatingDevis({ messageTemplate }: FloatingDevisProps) {
               if (!canSubmit) e.preventDefault();
             }}
             aria-disabled={!canSubmit}
+            data-track="cta"
+            data-track-label="Devis SMS Submit"
             className={`mt-6 flex w-full items-center justify-center gap-2.5 border px-5 py-3 font-sans text-[12px] uppercase tracking-[0.1em] transition-all duration-300 ${
               canSubmit
                 ? "border-dark-chocolate bg-dark-chocolate text-parchment hover:bg-espresso"
@@ -173,6 +175,8 @@ export function FloatingDevis({ messageTemplate }: FloatingDevisProps) {
         ref={triggerRef}
         onClick={() => setOpen(!open)}
         aria-label="Demander un devis"
+        data-track="cta"
+        data-track-label="Floating Devis Open"
         className="fixed bottom-8 right-8 z-40 flex items-center gap-2.5 border border-rule-light bg-parchment/90 px-5 py-3 font-sans text-[12px] uppercase tracking-[0.1em] text-dark-chocolate shadow-sm backdrop-blur-sm transition-all duration-500 hover:border-camel hover:text-camel"
         style={{
           transitionTimingFunction: "var(--ease-luxury)",

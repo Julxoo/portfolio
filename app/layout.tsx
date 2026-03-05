@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import Script from "next/script";
 import { Cormorant_Garamond, Geist_Mono, Inter } from "next/font/google";
 import { Navbar, Footer, SmoothScroll } from "@/components/ui";
 import { JsonLd } from "@/components/seo/JsonLd";
@@ -103,6 +104,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="fr">
+      <Script
+        defer
+        src="https://analytics.julestoussenel.com/t.js"
+        data-site="7e752673"
+        strategy="afterInteractive"
+      />
       <body
         className={`${inter.variable} ${cormorant.variable} ${geistMono.variable} antialiased`}
       >
