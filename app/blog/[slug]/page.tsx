@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { Reveal, Rule, CtaLink } from "@/components/ui";
+import { Reveal, Rule, CtaLink, ScrollProgress } from "@/components/ui";
 import { JsonLd } from "@/components/seo/JsonLd";
 import {
   createBreadcrumbSchema,
@@ -54,6 +54,8 @@ export async function generateMetadata({
   };
 }
 
+export const dynamicParams = false;
+
 export function generateStaticParams() {
   return getPublishedPosts().map((post) => ({ slug: post.slug }));
 }
@@ -67,6 +69,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
   return (
     <>
+      <ScrollProgress />
       <JsonLd
         data={createBreadcrumbSchema([
           { name: "Accueil", path: "/" },
@@ -88,7 +91,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
       />
       {post.faq.length > 0 && <JsonLd data={createFaqSchema(post.faq)} />}
 
-      <main className="mx-auto max-w-3xl px-6 md:px-12">
+      <div className="mx-auto max-w-3xl px-6 md:px-12">
         {/* Header */}
         <header className="pt-32 md:pt-48">
           <Reveal>
@@ -112,7 +115,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
               {post.updated && (
                 <>
                   <span aria-hidden="true">.</span>
-                  <span>mis a jour le <time dateTime={post.updated}>{formatDate(post.updated)}</time></span>
+                  <span>mis à jour le <time dateTime={post.updated}>{formatDate(post.updated)}</time></span>
                 </>
               )}
               <span aria-hidden="true">.</span>
@@ -145,7 +148,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
               className="mb-8 mt-10 font-normal"
               style={{ fontSize: "clamp(1.5rem, 2.5vw, 2rem)" }}
             >
-              Questions frequentes
+              Questions fréquentes
             </h2>
             <dl className="border-t border-rule-light">
               {post.faq.map((item, i) => (
@@ -164,10 +167,10 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
         {/* Related posts */}
         {related.length > 0 && (
-          <section className="pb-16" aria-label="Articles lies">
+          <section className="pb-16" aria-label="Articles liés">
             <Rule />
             <p className="mb-6 mt-10 font-sans text-[13px] uppercase tracking-[0.15em] text-taupe">
-              Articles lies
+              Articles liés
             </p>
             <ul className="border-t border-rule-light">
               {related.map((rel) => (
@@ -202,7 +205,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
             <CtaLink href="/contact">Me contacter</CtaLink>
           </div>
         </section>
-      </main>
+      </div>
     </>
   );
 }

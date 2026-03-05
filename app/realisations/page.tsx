@@ -6,9 +6,9 @@ import { createBreadcrumbSchema, createWebPageSchema } from "@/lib/schemas";
 import { getAllRealisations, formatDate } from "@/lib/realisations";
 
 export const metadata: Metadata = {
-  title: "Realisations",
+  title: "Réalisations",
   description:
-    "Portfolio de Jules Toussenel : CRM sur mesure, plateformes SaaS, bots Telegram et solutions analytics. Projets livres et en cours.",
+    "Portfolio de Jules Toussenel : CRM sur mesure, plateformes SaaS, bots Telegram et solutions analytics. Projets livrés et en cours.",
   alternates: { canonical: "/realisations" },
 };
 
@@ -20,19 +20,19 @@ export default function RealisationsPage() {
       <JsonLd
         data={createBreadcrumbSchema([
           { name: "Accueil", path: "/" },
-          { name: "Realisations", path: "/realisations" },
+          { name: "Réalisations", path: "/realisations" },
         ])}
       />
       <JsonLd
         data={createWebPageSchema({
           type: "CollectionPage",
           url: "/realisations",
-          name: "Realisations",
+          name: "Réalisations",
           description:
-            "Portfolio de projets web realises par Jules Toussenel.",
+            "Portfolio de projets web réalisés par Jules Toussenel.",
         })}
       />
-      <main className="mx-auto max-w-7xl px-6 md:px-12">
+      <div className="mx-auto max-w-7xl px-6 md:px-12">
         <section className="pb-32 pt-32 md:pt-48" aria-labelledby="realisations-heading">
           <Reveal>
             <p className="mb-6 font-sans text-[13px] uppercase tracking-[0.15em] text-taupe">
@@ -117,7 +117,7 @@ export default function RealisationsPage() {
             </div>
           </Reveal>
         </section>
-      </main>
+      </div>
     </>
   );
 }

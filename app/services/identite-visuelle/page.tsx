@@ -73,7 +73,7 @@ export default function IdentiteVisuellePage() {
           priceLabel: "Prix fixe, tout compris",
         })}
       />
-      <main className="mx-auto max-w-7xl px-6 md:px-12">
+      <div className="mx-auto max-w-7xl px-6 md:px-12">
         <FloatingDevis
           messageTemplate={
             "Bonjour Jules !\n\nJe suis {prenom} {nom} et j\u2019aimerais faire cr\u00e9er l\u2019identit\u00e9 visuelle de mon activit\u00e9.\n\nMon activit\u00e9 : {activite}\n\nEst-ce possible d\u2019en discuter ?\n\nMerci !"
@@ -320,7 +320,7 @@ export default function IdentiteVisuellePage() {
             </div>
           </Reveal>
         </section>
-      </main>
+      </div>
     </>
   );
 }

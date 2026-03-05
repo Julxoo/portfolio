@@ -5,7 +5,7 @@ export default function manifest(): MetadataRoute.Manifest {
     name: "Jules Toussenel",
     short_name: "Jules T.",
     description:
-      "AI-Augmented Software Engineer a Aix-en-Provence. Applications web sur-mesure, CRM metier, SaaS et automatisation.",
+      "AI-Augmented Software Engineer à Aix-en-Provence. Applications web sur-mesure, CRM métier, SaaS et automatisation.",
     start_url: "/",
     display: "standalone",
     theme_color: "#F0E6D9",

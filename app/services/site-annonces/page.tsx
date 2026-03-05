@@ -8,93 +8,153 @@ import { getPostsByCategory } from "@/lib/blog";
 import { BlogPostList } from "@/components/blog/post-list";
 
 export const metadata: Metadata = {
-  title: "Création de site vitrine sur mesure",
+  title: "Site d'annonces sur mesure avec back-office",
   description:
-    "Site vitrine sur mesure, optimisé SEO, hébergement inclus. À partir de 500 €, livraison 1 à 3 semaines. Devis gratuit sous 24h.",
-  alternates: { canonical: "/services/site-vitrine" },
+    "Site d'annonces avec back-office intégré. Gérez vos véhicules, biens immobiliers ou produits en autonomie. À partir de 1 500 €, livraison 2 à 4 semaines.",
+  alternates: { canonical: "/services/site-annonces" },
 };
 
 const includes: React.ReactNode[] = [
   "Design sur-mesure, aucun template",
-  "Site mono-page, rapide et efficace",
+  "1 type d'annonce configuré (véhicules, biens, offres…)",
+  "Back-office admin complet : ajout, modification, suppression",
+  "Gestion des statuts : disponible, réservé, vendu",
+  "Upload photos avec galerie intégrée",
+  "Page listing avec filtres (catégorie, prix, statut)",
+  "Page détail par annonce, optimisée SEO",
   "Responsive : mobile, tablette, desktop",
-  "Animations et transitions modernes",
-  "Optimisation SEO compl\u00e8te : balises, sitemap, donn\u00e9es structur\u00e9es",
-  <><Link href="/realisations/tracker-analytics" className="text-dark-chocolate underline decoration-rule-light underline-offset-4 transition-colors duration-300 hover:text-camel hover:decoration-camel">Tracker Analytics</Link> : acc&egrave;s complet, tableau de bord, rapports</>,
+  "Optimisation SEO complète : balises, sitemap, données structurées",
+  <>
+    <Link
+      href="/realisations/tracker-analytics"
+      className="text-dark-chocolate underline decoration-rule-light underline-offset-4 transition-colors duration-300 hover:text-camel hover:decoration-camel"
+    >
+      Tracker Analytics
+    </Link>{" "}
+    : accès complet, tableau de bord, rapports
+  </>,
   "Optimisation performance (Core Web Vitals)",
-  "CTA directs : t\u00e9l\u00e9phone, email, r\u00e9seaux sociaux",
-  "Favicon et Open Graph sur-mesure",
-  "Mentions l\u00e9gales et politique de confidentialit\u00e9",
-  "R\u00e9daction de contenu incluse",
-  "H\u00e9bergement inclus",
-  "1 tour de r\u00e9vision apr\u00e8s livraison (contenu et design)",
+  "Hébergement inclus",
+  "1 tour de révision après livraison (contenu et design)",
 ];
 
 const options = [
   {
-    title: "Identit\u00e9 visuelle compl\u00e8te",
+    title: "Type d'annonce supplémentaire",
     description:
-      "Palette, typographie, composants, animations. Votre syst\u00e8me visuel complet, livr\u00e9 sous forme de page design system en ligne. Inclut 1 tour de r\u00e9vision.",
-    price: "100",
-    note: "au lieu de 150\u202f\u20ac \u00b7 \u00e9conomisez 50\u202f\u20ac",
-    href: "/services/identite-visuelle",
+      "Ajoutez un second catalogue : véhicules + pièces détachées, biens à vendre + locations, offres d'emploi + stages. Même back-office, même qualité.",
+    price: "300",
+    note: "par type",
   },
   {
-    title: "Pages suppl\u00e9mentaires",
+    title: "Filtres avancés",
     description:
-      "Ajoutez autant de pages que n\u00e9cessaire : \u00e0 propos, services d\u00e9taill\u00e9s, galerie, t\u00e9moignages, FAQ. M\u00eame design, m\u00eame qualit\u00e9.",
-    price: "sur devis",
-    note: "selon vos besoins",
+      "Recherche par localisation, fourchette de prix, caractéristiques techniques, année, surface. Vos visiteurs trouvent ce qu'ils cherchent en deux clics.",
+    price: "200",
+  },
+  {
+    title: "Multi-utilisateurs",
+    description:
+      "Plusieurs comptes avec des rôles et permissions distincts : admin, éditeur, commercial. Chacun acc\u00e8de uniquement \u00e0 ce qui le concerne, vous gardez le contr\u00f4le total.",
+    price: "500",
+    note: "selon le nombre de r\u00f4les",
+  },
+  {
+    title: "Identité visuelle complète",
+    description:
+      "Palette, typographie, composants, animations. Votre système visuel complet, livré sous forme de page design system en ligne. Inclut 1 tour de révision.",
+    price: "offert",
+    note: "inclus avec votre site d\u2019annonces",
+    href: "/services/identite-visuelle",
   },
   {
     title: "Fiche Google My Business",
     description:
-      "Cr\u00e9ation et optimisation de votre fiche : photos, description, cat\u00e9gories, horaires. Visibilit\u00e9 locale imm\u00e9diate.",
+      "Création et optimisation de votre fiche : photos, description, catégories, horaires. Visibilité locale immédiate.",
     price: "80",
   },
   {
-    title: "Traduction du site",
+    title: "Synchronisation plateforme externe",
     description:
-      "Version compl\u00e8te de votre site dans une langue suppl\u00e9mentaire. M\u00eame design, m\u00eame qualit\u00e9, navigation bilingue int\u00e9gr\u00e9e.",
-    price: "100",
-    note: "par langue",
+      "Connexion avec SeLoger, La Centrale, LeBonCoin ou toute autre plateforme. Vos annonces se mettent à jour automatiquement.",
+    price: "sur devis",
+    note: "selon la plateforme",
   },
 ];
 
 const steps = [
   {
     number: "01",
-    title: "\u00c9change",
+    title: "Échange",
     description:
-      "On parle de votre activit\u00e9, vos clients, vos objectifs. Je vous envoie un devis clair sous 24h.",
+      "On parle de votre activité, de vos annonces, de vos besoins. Je vous envoie un devis clair sous 24h.",
   },
   {
     number: "02",
-    title: "Contenu",
+    title: "Structure",
     description:
-      "Vous me transmettez vos textes, photos et r\u00e9f\u00e9rences. Je r\u00e9dige ou ajuste le contenu si besoin.",
+      "On définit ensemble les champs de vos annonces : photos, prix, caractéristiques, statuts. Je configure le back-office.",
   },
   {
     number: "03",
     title: "Conception",
     description:
-      "Je cr\u00e9e le design et d\u00e9veloppe votre site. Vous voyez l\u2019avanc\u00e9e et validez avant de continuer.",
+      "Je crée le design et développe votre site. Vous voyez l\u2019avancée et validez avant de continuer.",
   },
   {
     number: "04",
-    title: "Livraison",
+    title: "Formation",
     description:
-      <>Mise en ligne, nom de domaine configur&eacute;, <Link href="/realisations/tracker-analytics" className="text-dark-chocolate underline decoration-rule-light underline-offset-4 transition-colors duration-300 hover:text-camel hover:decoration-camel">Tracker Analytics</Link> activ&eacute;, SEO en place. Votre site est pr&ecirc;t.</>,
+      "Je vous montre comment utiliser le back-office. Ajout d\u2019annonce, modification, suppression : vous êtes autonome.",
   },
   {
     number: "05",
-    title: "R\u00e9vision",
+    title: "Livraison",
+    description: (
+      <>
+        Mise en ligne, nom de domaine configuré,{" "}
+        <Link
+          href="/realisations/tracker-analytics"
+          className="text-dark-chocolate underline decoration-rule-light underline-offset-4 transition-colors duration-300 hover:text-camel hover:decoration-camel"
+        >
+          Tracker Analytics
+        </Link>{" "}
+        activé, SEO en place. Votre site est prêt.
+      </>
+    ),
+  },
+  {
+    number: "06",
+    title: "Révision",
     description:
-      "Vous testez, vous utilisez. Un tour de r\u00e9vision complet est inclus pour ajuster contenu et design.",
+      "Vous testez, vous publiez vos premières annonces. Un tour de révision complet est inclus pour ajuster contenu et design.",
   },
 ];
 
-export default function SiteVitrinePage() {
+const useCases = [
+  {
+    title: "Concessions auto et moto",
+    description: "Stock de véhicules, fiches techniques, prix, kilométrage, photos. Mise à jour quotidienne.",
+  },
+  {
+    title: "Agences immobilières",
+    description: "Biens à vendre ou louer, surfaces, DPE, localisation, visites. Gestion des mandats.",
+  },
+  {
+    title: "Locations saisonnières",
+    description: "Gîtes, chambres d\u2019hôtes, disponibilités, tarifs par saison, réservation.",
+  },
+  {
+    title: "Recrutement",
+    description: "Offres d\u2019emploi, profils recherchés, localisation, type de contrat, candidature en ligne.",
+  },
+  {
+    title: "Commerce et occasion",
+    description: "Catalogue produits, matériel BTP, bateaux, antiquités. Stock en temps réel.",
+  },
+];
+
+export default function SiteAnnoncesPage() {
   const relatedPosts = getPostsByCategory("Développement web", 3);
 
   return (
@@ -103,30 +163,31 @@ export default function SiteVitrinePage() {
         data={createBreadcrumbSchema([
           { name: "Accueil", path: "/" },
           { name: "Services", path: "/services" },
-          { name: "Site vitrine", path: "/services/site-vitrine" },
+          { name: "Site d'annonces", path: "/services/site-annonces" },
         ])}
       />
       <JsonLd
         data={createServiceSchema({
-          name: "Création de site vitrine sur mesure",
+          name: "Site d'annonces sur mesure avec back-office",
           description:
-            "Site vitrine sur mesure, optimisé SEO, hébergement inclus. Livraison 1 à 3 semaines.",
-          slug: "site-vitrine",
-          price: "500",
+            "Site d'annonces avec back-office intégré. Gérez vos véhicules, biens immobiliers ou produits en autonomie.",
+          slug: "site-annonces",
+          price: "1500",
           priceLabel: "À partir de",
         })}
       />
       <div className="mx-auto max-w-7xl px-6 md:px-12">
         <FloatingDevis
           messageTemplate={
-            "Bonjour Jules !\n\nJe suis {prenom} {nom} et j\u2019aimerais cr\u00e9er un site vitrine pour mon activit\u00e9.\n\nMon activit\u00e9 : {activite}\n\nQuand seriez-vous disponible pour en parler ?\n\nMerci !"
+            "Bonjour Jules !\n\nJe suis {prenom} {nom} et j\u2019aimerais créer un site d\u2019annonces pour mon activité.\n\nMon activité : {activite}\nType d\u2019annonces : (véhicules, biens immobiliers, produits…)\n\nQuand seriez-vous disponible pour en parler ?\n\nMerci !"
           }
         />
+
         {/* ── Hero ── */}
         <section className="pt-32 md:pt-48">
           <Reveal>
             <p className="mb-6 font-sans text-[13px] uppercase tracking-[0.15em] text-taupe">
-              Site vitrine
+              Site d&rsquo;annonces
             </p>
           </Reveal>
 
@@ -135,16 +196,16 @@ export default function SiteVitrinePage() {
               className="max-w-4xl font-normal"
               style={{ fontSize: "clamp(2rem, 4vw, 3.5rem)" }}
             >
-              Un site qui travaille pour vous.
+              Publiez vos annonces. Sans nous rappeler.
             </h1>
           </Reveal>
 
           <Reveal delay={200}>
             <p className="mt-8 max-w-2xl font-sans text-lg leading-[1.7] text-dark-chocolate/70">
-              Votre vitrine en ligne, con&ccedil;ue sur-mesure, optimis&eacute;e
-              pour convertir. Design soign&eacute;, r&eacute;f&eacute;rencement
-              int&eacute;gr&eacute;, analytics inclus. Pr&ecirc;t &agrave;
-              recevoir vos premiers clients.
+              Votre propre plateforme d&rsquo;annonces, avec un back-office
+              sur-mesure. Vous g&eacute;rez vos v&eacute;hicules, biens ou
+              produits en toute autonomie. Design soign&eacute;, SEO
+              int&eacute;gr&eacute;, performance optimale.
             </p>
           </Reveal>
 
@@ -158,7 +219,7 @@ export default function SiteVitrinePage() {
                   className="font-normal"
                   style={{ fontSize: "clamp(2.5rem, 5vw, 3.5rem)" }}
                 >
-                  500&thinsp;&euro;
+                  1&thinsp;500&thinsp;&euro;
                 </p>
               </div>
               <div>
@@ -169,13 +230,13 @@ export default function SiteVitrinePage() {
                   className="font-normal"
                   style={{ fontSize: "clamp(2.5rem, 5vw, 3.5rem)" }}
                 >
-                  1 &agrave; 3 sem.
+                  2 &agrave; 4 sem.
                 </p>
               </div>
             </div>
           </Reveal>
 
-          {/* ── Offre groupée identité visuelle ── */}
+          {/* ── Identité visuelle offerte ── */}
           <Reveal delay={400}>
             <Link
               href="/services/identite-visuelle"
@@ -184,10 +245,10 @@ export default function SiteVitrinePage() {
             >
               <div className="flex items-baseline justify-between gap-4">
                 <p className="font-sans text-[13px] uppercase tracking-[0.15em] text-taupe">
-                  Offre group&eacute;e
+                  Inclus
                 </p>
                 <p className="font-sans text-xs text-camel">
-                  &minus;50&thinsp;&euro;
+                  offert
                 </p>
               </div>
               <p
@@ -200,8 +261,8 @@ export default function SiteVitrinePage() {
                 + Identit&eacute; visuelle compl&egrave;te
               </p>
               <p className="mt-2 font-sans text-sm text-dark-chocolate/60">
-                100&thinsp;&euro; au lieu de 150&thinsp;&euro;.
                 Palette, typographie, composants, animations.
+                Offert avec chaque site d&rsquo;annonces.
               </p>
               <p className="mt-3 font-sans text-xs text-camel transition-colors duration-300 group-hover:text-matte-gold">
                 D&eacute;couvrir ce service &rarr;
@@ -216,10 +277,51 @@ export default function SiteVitrinePage() {
           </Reveal>
         </section>
 
-        {/* ── Tout est inclus ── */}
-        <section className="pb-16 pt-16">
+        {/* ── Pour qui ── */}
+        <section className="py-16">
           <Reveal>
             <h2 className="mb-8 font-sans text-[13px] font-normal uppercase tracking-[0.15em] leading-normal text-taupe">
+              Pour qui
+            </h2>
+          </Reveal>
+
+          <Reveal delay={100}>
+            <p className="mb-10 max-w-2xl font-sans text-sm leading-[1.7] text-dark-chocolate/60">
+              Tout professionnel qui publie r&eacute;guli&egrave;rement des
+              annonces et veut arr&ecirc;ter de d&eacute;pendre uniquement des
+              plateformes tierces.
+            </p>
+          </Reveal>
+
+          <ul className="border-t border-rule-light">
+            {useCases.map((useCase, i) => (
+              <Reveal key={i} delay={150 + i * 60}>
+                <li className="border-b border-rule-light py-6 md:flex md:items-baseline md:gap-8">
+                  <h3
+                    className="shrink-0 font-normal md:w-64"
+                    style={{ fontSize: "clamp(1.1rem, 1.5vw, 1.25rem)" }}
+                  >
+                    {useCase.title}
+                  </h3>
+                  <p className="mt-2 font-sans text-sm leading-[1.6] text-dark-chocolate/60 md:mt-0">
+                    {useCase.description}
+                  </p>
+                </li>
+              </Reveal>
+            ))}
+          </ul>
+        </section>
+
+        {/* ── Tout est inclus ── */}
+        <section className="py-16">
+          <Reveal>
+            <div className="w-16 md:w-24">
+              <Rule />
+            </div>
+          </Reveal>
+
+          <Reveal delay={100}>
+            <h2 className="mb-8 mt-12 font-sans text-[13px] font-normal uppercase tracking-[0.15em] leading-normal text-taupe">
               Tout est inclus
             </h2>
           </Reveal>
@@ -236,8 +338,9 @@ export default function SiteVitrinePage() {
 
           <Reveal delay={400}>
             <p className="mt-8 max-w-2xl font-sans text-xs text-taupe">
-              Co&ucirc;t du nom de domaine &agrave; charge du client
-              (renouvelable chaque ann&eacute;e).
+              Co&ucirc;t du nom de domaine et de l&rsquo;h&eacute;bergement
+              base de donn&eacute;es &agrave; charge du client (renouvelable
+              chaque ann&eacute;e).
             </p>
           </Reveal>
         </section>
@@ -286,7 +389,13 @@ export default function SiteVitrinePage() {
                   <div className="mt-3 shrink-0 text-right md:mt-0">
                     <p className="font-serif text-lg text-dark-chocolate">
                       {option.price === "sur devis" ? (
-                        <span className="font-sans text-sm uppercase tracking-[0.05em]">sur devis</span>
+                        <span className="font-sans text-sm uppercase tracking-[0.05em]">
+                          sur devis
+                        </span>
+                      ) : option.price === "offert" ? (
+                        <span className="font-sans text-sm uppercase tracking-[0.05em] text-camel">
+                          offert
+                        </span>
                       ) : (
                         <>+&thinsp;{option.price}&thinsp;&euro;</>
                       )}
@@ -324,7 +433,7 @@ export default function SiteVitrinePage() {
             </h2>
           </Reveal>
 
-          <div className="grid gap-10 md:grid-cols-3 lg:grid-cols-5 md:gap-12">
+          <div className="grid gap-10 md:grid-cols-3 lg:grid-cols-6 md:gap-12">
             {steps.map((step, i) => (
               <Reveal key={step.number} delay={150 + i * 80}>
                 <div>
@@ -344,7 +453,7 @@ export default function SiteVitrinePage() {
           </div>
         </section>
 
-        {/* ── Articles associes ── */}
+        {/* ── Articles associés ── */}
         {relatedPosts.length > 0 && (
           <section className="py-16">
             <Reveal>
@@ -382,7 +491,8 @@ export default function SiteVitrinePage() {
 
           <Reveal delay={150}>
             <p className="mt-4 font-sans text-sm text-dark-chocolate/60">
-              R&eacute;ponse sous 24h. Un site en ligne en 1 &agrave; 3 semaines.
+              R&eacute;ponse sous 24h. Un site en ligne en 2 &agrave; 4
+              semaines.
             </p>
           </Reveal>
 

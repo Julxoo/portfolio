@@ -1,7 +1,7 @@
 ---
 title: Plateforme SaaS multi-tenant
 slug: plateforme-saas-affiliation
-description: Plateforme SaaS permettant de deployer des landing pages d'affiliation personnalisees sur domaines multiples, avec dashboard d'administration et analytics integres.
+description: Plateforme SaaS permettant de déployer des landing pages d'affiliation personnalisées sur domaines multiples, avec dashboard d'administration et analytics intégrés.
 date: 2025-06-01
 status: termine
 tags:
@@ -14,15 +14,15 @@ tags:
 category: SaaS
 ---
 
-Plateforme SaaS multi-tenant developpee pour un client, permettant de deployer des sites d'affiliation personnalises sur des domaines independants depuis un dashboard centralise.
+Plateforme SaaS multi-tenant développée pour un client, permettant de déployer des sites d'affiliation personnalisés sur des domaines indépendants depuis un dashboard centralisé.
 
 ## Contexte
 
-Le client avait besoin de deployer rapidement des landing pages d'affiliation pour differentes niches, chacune sur son propre domaine avec un theme personnalise. La gestion manuelle de chaque site etait devenue ingerable. Il fallait une plateforme unique pour tout piloter : creation de sites, gestion des partenaires, suivi des performances.
+Le client avait besoin de déployer rapidement des landing pages d'affiliation pour différentes niches, chacune sur son propre domaine avec un thème personnalisé. La gestion manuelle de chaque site était devenue ingérable. Il fallait une plateforme unique pour tout piloter : création de sites, gestion des partenaires, suivi des performances.
 
 ## Architecture
 
-Application Next.js 16 unique servant plusieurs domaines via un systeme de proxy (remplacement du middleware Next.js). Detection automatique du domaine, injection de headers, routage conditionnel admin/public. Architecture Feature-Sliced Design cote frontend. Base de donnees PostgreSQL via Supabase avec Row Level Security. Fonctions RPC serveur pour les agregations analytiques.
+Application Next.js 16 unique servant plusieurs domaines via un système de proxy (remplacement du middleware Next.js). Détection automatique du domaine, injection de headers, routage conditionnel admin/public. Architecture Feature-Sliced Design côté frontend. Base de données PostgreSQL via Supabase avec Row Level Security. Fonctions RPC serveur pour les agrégations analytiques.
 
 ## Stack technique
 
@@ -30,20 +30,20 @@ Application Next.js 16 unique servant plusieurs domaines via un systeme de proxy
 
 **Backend** : Supabase (PostgreSQL + Auth + Storage), fonctions RPC serveur, Server Actions Next.js
 
-**Analytics** : systeme cookieless avec agregations timezone-aware (date-fns-tz), comparaison de periodes, tracking par device/bouton/carte
+**Analytics** : système cookieless avec agrégations timezone-aware (date-fns-tz), comparaison de périodes, tracking par device/bouton/carte
 
-## Fonctionnalites cles
+## Fonctionnalités clés
 
-**Multi-tenancy** : chaque client dispose de son propre domaine avec theme personnalisable (couleurs oklch), hero configurable, SEO metadata, contenu legal, logo/favicon. Configuration JSONB flexible sans migration de schema.
+**Multi-tenancy** : chaque client dispose de son propre domaine avec thème personnalisable (couleurs oklch), hero configurable, SEO metadata, contenu légal, logo/favicon. Configuration JSONB flexible sans migration de schéma.
 
-**Dashboard admin** : gestion CRUD des sites et de la bibliotheque de partenaires. Associations site-partenaire avec drag & drop pour l'ordonnancement, badges personnalises, cartes internes configurables, URLs de redirection par bouton.
+**Dashboard admin** : gestion CRUD des sites et de la bibliothèque de partenaires. Associations site-partenaire avec drag & drop pour l'ordonnancement, badges personnalisés, cartes internes configurables, URLs de redirection par bouton.
 
-**Analytics cookieless** : tracking RGPD-friendly sans cookies. Agregation serveur via RPC Supabase. Statistiques par periode (jour, semaine, mois, annee) avec comparaison automatique. Repartition par device, taux de clic, performances par partenaire.
+**Analytics cookieless** : tracking RGPD-friendly sans cookies. Agrégation serveur via RPC Supabase. Statistiques par période (jour, semaine, mois, année) avec comparaison automatique. Répartition par device, taux de clic, performances par partenaire.
 
-**Animations premium** : blobs morphing CSS avec acceleration GPU, particules flottantes pre-calculees (zero-jank), gradients animes. Optimisation responsive (tailles reduites sur mobile).
+**Animations premium** : blobs morphing CSS avec accélération GPU, particules flottantes pré-calculées (zero-jank), gradients animés. Optimisation responsive (tailles réduites sur mobile).
 
-**Internationalisation** : support multilingue (FR/EN) par site, detection automatique de la locale.
+**Internationalisation** : support multilingue (FR/EN) par site, détection automatique de la locale.
 
-## Resultats
+## Résultats
 
-Plateforme en production servant plusieurs domaines simultanement. Deploiement de nouveaux sites en minutes via le dashboard. Analytics temps reel sans dependance externe.
+Plateforme en production servant plusieurs domaines simultanément. Déploiement de nouveaux sites en minutes via le dashboard. Analytics temps réel sans dépendance externe.

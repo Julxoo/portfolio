@@ -37,6 +37,7 @@ export default defineConfig({
           tags: s.array(s.string()),
           category: s.string(),
           client: s.string().optional(),
+          url: s.string().url().optional(),
           metadata: s.metadata(),
           toc: s.toc(),
           content: s.mdx(),

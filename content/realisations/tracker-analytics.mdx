@@ -1,7 +1,7 @@
 ---
 title: Tracker Analytics
 slug: tracker-analytics
-description: Plateforme d'analytics web sans cookies avec tracking anonyme, dashboard temps reel et gestion multi-sites. Alternative privacy-first a Google Analytics.
+description: Plateforme d'analytics web sans cookies avec tracking anonyme, dashboard temps réel et gestion multi-sites. Alternative privacy-first à Google Analytics.
 date: 2026-01-15
 status: termine
 tags:
@@ -15,15 +15,15 @@ tags:
 category: Analytics
 ---
 
-Plateforme d'analytics web privacy-first developpee pour des clients business. Suivi du trafic sans cookies ni banniere de consentement, grace a un systeme d'identification anonyme par hash quotidien rotatif.
+Plateforme d'analytics web privacy-first développée pour des clients business. Suivi du trafic sans cookies ni bannière de consentement, grâce à un système d'identification anonyme par hash quotidien rotatif.
 
 ## Contexte
 
-Les clients souhaitaient une alternative a Google Analytics qui respecte la vie privee de leurs visiteurs. Pas de cookies, pas de consentement requis, pas de donnees personnelles stockees. Une solution legere, conforme RGPD par design, avec un dashboard complet pour piloter leur activite.
+Les clients souhaitaient une alternative à Google Analytics qui respecte la vie privée de leurs visiteurs. Pas de cookies, pas de consentement requis, pas de données personnelles stockées. Une solution légère, conforme RGPD par design, avec un dashboard complet pour piloter leur activité.
 
 ## Architecture
 
-Application Next.js 16 full-stack deployee sur Vercel. Base de donnees PostgreSQL avec Drizzle ORM (7 tables). Script de tracking leger (~3.4 KB) injecte cote client via balise script. API REST avec endpoint de collecte CORS cross-origin, authentification par sessions httpOnly et protection CSRF.
+Application Next.js 16 full-stack déployée sur Vercel. Base de données PostgreSQL avec Drizzle ORM (7 tables). Script de tracking léger (~3.4 KB) injecté côté client via balise script. API REST avec endpoint de collecte CORS cross-origin, authentification par sessions httpOnly et protection CSRF.
 
 ## Stack technique
 
@@ -31,22 +31,22 @@ Application Next.js 16 full-stack deployee sur Vercel. Base de donnees PostgreSQ
 
 **Backend** : Drizzle ORM + PostgreSQL (postgres-js), Resend (emails transactionnels), ua-parser-js (parsing User-Agent)
 
-**Securite** : scrypt (N=32768, r=8, p=2), sessions 8h httpOnly, CSRF middleware, rate limiting (30 req/10s par IP), CSP headers
+**Sécurité** : scrypt (N=32768, r=8, p=2), sessions 8h httpOnly, CSRF middleware, rate limiting (30 req/10s par IP), CSP headers
 
 **PWA** : Service Worker, install prompt, pull-to-refresh
 
-## Fonctionnalites cles
+## Fonctionnalités clés
 
-**Tracking automatique** : pageviews (chargement + navigation SPA), clics sortants, clics telephone (tel:), clics email (mailto:), soumissions formulaires, clics CTA (data-track), evenements custom (API JSON, max 1 KB). Systeme heartbeat 30s pour mesure precise de la duree de session.
+**Tracking automatique** : pageviews (chargement + navigation SPA), clics sortants, clics téléphone (tel:), clics email (mailto:), soumissions formulaires, clics CTA (data-track), événements custom (API JSON, max 1 KB). Système heartbeat 30s pour mesure précise de la durée de session.
 
-**Dashboard temps reel** : statistiques visiteurs/pageviews avec comparaison par periode (7j/30j/12m/custom), top pages, sources de trafic, repartition devices (desktop/mobile/tablette + navigateur + OS), donnees geographiques (pays), suivi des conversions, graphique journalier Recharts, duree moyenne de session, filtre par page.
+**Dashboard temps réel** : statistiques visiteurs/pageviews avec comparaison par période (7j/30j/12m/custom), top pages, sources de trafic, répartition devices (desktop/mobile/tablette + navigateur + OS), données géographiques (pays), suivi des conversions, graphique journalier Recharts, durée moyenne de session, filtre par page.
 
-**Panel admin** : gestion multi-sites (CRUD, snippets d'integration copiables), gestion clients (creation, edition, assignation sites, reset mot de passe), journal d'audit pagine (20 entrees/page).
+**Panel admin** : gestion multi-sites (CRUD, snippets d'intégration copiables), gestion clients (création, édition, assignation sites, reset mot de passe), journal d'audit paginé (20 entrées/page).
 
-**Privacy by design** : zero cookie, visitor ID anonyme (hash SHA-256 quotidien de date + IP + User-Agent + salt, rotation journaliere), validation d'origine, aucun stockage d'IP en base.
+**Privacy by design** : zero cookie, visitor ID anonyme (hash SHA-256 quotidien de date + IP + User-Agent + salt, rotation journalière), validation d'origine, aucun stockage d'IP en base.
 
-**Rapports automatises** : emails hebdomadaires et mensuels via Resend avec resume des statistiques par site. Documentation integree avec guides d'integration (WordPress, Webflow, Shopify, Next.js).
+**Rapports automatisés** : emails hebdomadaires et mensuels via Resend avec résumé des statistiques par site. Documentation intégrée avec guides d'intégration (WordPress, Webflow, Shopify, Next.js).
 
-## Resultats
+## Résultats
 
-Solution en production servant plusieurs sites clients. Tracking conforme RGPD sans consentement requis. Script ultra-leger n'impactant pas les performances des sites trackes. Dashboard complet remplacant Google Analytics pour des clients souhaitant une alternative privacy-first. Architecture serverless scalable sur Vercel.
+Solution en production servant plusieurs sites clients. Tracking conforme RGPD sans consentement requis. Script ultra-léger n'impactant pas les performances des sites trackés. Dashboard complet remplaçant Google Analytics pour des clients souhaitant une alternative privacy-first. Architecture serverless scalable sur Vercel.

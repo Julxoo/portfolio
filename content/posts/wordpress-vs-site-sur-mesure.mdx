@@ -1,0 +1,205 @@
+---
+title: "WordPress vs site sur-mesure : que choisir pour votre entreprise"
+seoTitle: WordPress vs site sur-mesure. Comparatif honnête pour PME et artisans
+slug: wordpress-vs-site-sur-mesure
+description: WordPress ou site sur-mesure ? Comparatif avec benchmarks réels, coûts de maintenance, sécurité et performances. Guide transparent pour PME et artisans.
+keyword: wordpress ou site sur mesure
+date: 2026-03-01
+published: true
+category: Développement web
+tags:
+  - wordpress
+  - site sur-mesure
+  - performance
+  - sécurité
+  - next.js
+faq:
+  - question: Est-ce que WordPress est gratuit ?
+    answer: Le logiciel est gratuit. Mais un site WordPress fonctionnel coûte entre 300 et 2 400 EUR par an en hébergement, maintenance et plugins premium. C'est comme une voiture "gratuite" dont l'assurance, l'essence et l'entretien coûtent 1 000 EUR par an.
+  - question: Un site sur-mesure coûte-t-il plus cher qu'un WordPress ?
+    answer: Pas forcément. Un site vitrine sur-mesure avec Next.js démarre à 500 EUR avec un freelance compétitif. Un site WordPress équivalent coûte 800 à 3 000 EUR chez un freelance. Sur 3 ans, le sur-mesure revient 5 à 10 fois moins cher grâce à l'absence de maintenance.
+  - question: WordPress est-il bon pour le SEO ?
+    answer: WordPress peut être bon pour le SEO avec les bons plugins (Yoast, RankMath). Mais ses performances médiocres sur mobile (score Lighthouse moyen de 40 à 60) le pénalisent. Un site statique obtient 98 à 100 nativement, sans plugin. Google privilégie la vitesse.
+  - question: Un site WordPress est-il sécurisé ?
+    answer: Le coeur de WordPress est relativement sûr. Le problème vient des plugins. 11 334 failles de sécurité ont été découvertes dans l'écosystème WordPress en 2025, dont 91% dans les plugins. Un site statique n'a ni base de données ni plugins, donc aucune surface d'attaque.
+  - question: Quels sont les inconvénients d'un site sur-mesure ?
+    answer: Vous ne pouvez pas modifier le contenu vous-même aussi facilement qu'avec WordPress. Pour changer un texte ou une photo, il faut passer par votre développeur ou apprendre les bases de Git. C'est le compromis principal pour un site plus rapide, plus sûr et moins cher à maintenir.
+  - question: Peut-on migrer de WordPress vers un site sur-mesure ?
+    answer: Oui. Le contenu (textes, images) est récupérable. Le design est recréé sur la nouvelle technologie. Comptez le même prix qu'un site neuf, car la migration n'est pas un copier-coller. Le résultat est souvent spectaculaire en termes de vitesse et de SEO.
+  - question: Quel CMS choisir pour un artisan ou un petit commerce ?
+    answer: Pour un site vitrine de 1 à 5 pages qui change rarement, un site statique sur-mesure est idéal. Pour un blog avec publication quotidienne ou un e-commerce avec catalogue produit, WordPress reste pertinent. Le choix dépend de la fréquence de mise à jour, pas de la taille de l'entreprise.
+---
+
+43% du web tourne sur WordPress. C'est le CMS le plus populaire au monde, et ça fait 20 ans que ça dure. Alors pourquoi un développeur choisirait-il de ne PAS utiliser WordPress ?
+
+Je suis [développeur web freelance à Aix-en-Provence](/a-propos) et je ne fais pas de WordPress. Pas par snobisme. Par conviction technique, appuyée sur des chiffres. Pour un site vitrine de PME ou d'artisan, un site sur-mesure est plus rapide, plus sûr, moins cher à maintenir et meilleur en SEO.
+
+Mais je vais être honnête. WordPress a ses forces. Ce comparatif est basé sur des benchmarks réels, des données sourcées et mon expérience terrain. Pas sur des opinions.
+
+## WordPress en 2026 : 43% du web, mais est-ce encore le bon choix ?
+
+WordPress alimente environ 43% des sites dans le monde, mais sa part de marché recule lentement depuis 2022 (source : [W3Techs](https://w3techs.com/technologies/details/cm-wordpress)).
+
+En 2022, WordPress représentait 65% du marché des CMS. En 2026 : environ 60%. La baisse est lente mais continue. Des alternatives comme Shopify (e-commerce), Webflow (design) et les frameworks statiques (Next.js, Astro) grignotent du terrain chaque année.
+
+Ce recul s'explique simplement. WordPress a été conçu en 2003 comme un outil de blog. Vingt ans plus tard, on lui demande de faire tourner des boutiques en ligne, des portfolios, des applications. Il fait tout, mais rien de façon optimale pour les petits sites vitrines.
+
+La question n'est pas "WordPress est-il mauvais ?". C'est "WordPress est-il le meilleur choix pour VOTRE besoin ?". Pour un artisan qui veut 3 pages et être visible sur Google, la réponse est souvent non.
+
+## Performance : les chiffres que personne ne vous montre
+
+Un site lent perd des visiteurs. Google pénalise les sites lents dans ses résultats. Et 53% des visiteurs mobiles abandonnent une page qui met plus de 3 secondes à charger (source : [Google](https://www.thinkwithgoogle.com/consumer-insights/consumer-trends/mobile-site-load-time-statistics/)).
+
+### Benchmarks réels
+
+| Métrique | WordPress (typique) | WordPress (optimisé) | Site statique Next.js | Mes sites |
+|---|---|---|---|---|
+| Performance mobile (Lighthouse) | 40-60 | 70-90 | 86-100 | **98-100** |
+| Performance desktop (Lighthouse) | 70-90 | 97 | 100 | **100** |
+| TTFB (Time to First Byte) | 587ms median | 106ms (cache) | 50-200ms | **moins de 100ms** |
+| Temps de chargement | 2-4 secondes | 1-2 secondes | 0,5-1,5 seconde | **moins de 1 seconde** |
+
+Sources : [DebugHawk](https://debughawk.com/blog/wordpress-performance-report-2025) (5,7 millions de pages analysées), [Digital Polygon](https://www.digitalpolygon.com/blog/wordpress-vs-nextjs-performance), [Neodigit](https://neodigit.fr/en/blog/nextjs-vs-wordpress)
+
+Le TTFB médian de WordPress est de 587ms. Au 95e percentile, ça monte à 1 966ms. Seulement 65,2% des sites WordPress passent le seuil recommandé par Google (800ms max). Un site statique est en dessous de 200ms par défaut.
+
+### Pourquoi WordPress est plus lent
+
+Chaque fois qu'un visiteur charge une page WordPress, le serveur exécute du PHP, interroge une base de données MySQL, assemble la page, puis l'envoie. La page médiane exécute 55 requêtes SQL et 483ms de traitement PHP (source : [DebugHawk](https://debughawk.com/blog/wordpress-performance-report-2025)).
+
+Un site statique ? La page HTML est déjà construite. Le serveur l'envoie telle quelle. Zéro base de données, zéro traitement serveur. C'est pour ça que le temps de chargement est 2 à 4 fois inférieur.
+
+### L'impact concret sur votre business
+
+En France, plus de 60% du trafic web vient du mobile (source : [Médiamétrie](https://www.mediametrie.fr/en/2024-year-internet)). Pour les recherches locales, c'est encore plus. Un site WordPress qui met 3 secondes à charger sur un téléphone perd plus de la moitié de ces visiteurs avant même qu'ils voient votre contenu.
+
+Sur le [dernier site que j'ai livré pour un restaurant](/blog/combien-coute-site-vitrine), le score Lighthouse mobile est de 98. Les visiteurs restent en moyenne 30 minutes. 49 clics sur le bouton de réservation par semaine. La performance n'est pas un détail technique. C'est du chiffre d'affaires.
+
+## Sécurité : 11 334 failles en 2025
+
+Un site statique n'a ni base de données, ni panneau d'administration, ni plugins. La surface d'attaque est zéro. WordPress, c'est une autre histoire.
+
+### Les chiffres Patchstack 2025
+
+| Stat | Valeur |
+|---|---|
+| Failles découvertes en 2025 | 11 334 |
+| Augmentation vs 2024 | +42% |
+| Failles haute sévérité | +113% en un an |
+| Failles venant des plugins | 91% |
+| Exploitées en moins de 24h | 45% |
+| Délai médian d'exploitation massive | 5 heures |
+| Attaques par minute sur WordPress | 90 000 |
+| Sites avec au moins 1 plugin vulnérable | 1 sur 5 |
+
+Source : [Patchstack State of WordPress Security 2026](https://patchstack.com/whitepaper/state-of-wordpress-security-in-2026/), [Wordfence](https://www.wordfence.com/blog/2021/01/the-wordfence-2020-wordpress-threat-report/)
+
+11 334 failles en une seule année. 91% viennent des plugins. Et 45% de ces failles sont exploitées par des hackers en moins de 24 heures après leur découverte. Le délai médian avant exploitation massive : 5 heures.
+
+Ça ne veut pas dire que votre site WordPress sera piraté demain. Mais ça veut dire que la sécurité WordPress demande une vigilance constante : mises à jour hebdomadaires des plugins, monitoring, sauvegardes automatiques. C'est du travail. Et ça coûte de l'argent si vous le déléguez.
+
+### Un site statique : zéro surface d'attaque
+
+Pas de base de données SQL à pirater. Pas de formulaire d'administration à forcer. Pas de plugin avec une faille zero-day. Le site est un ensemble de fichiers HTML servis directement. Il n'y a rien à exploiter.
+
+C'est un des arguments les plus forts du sur-mesure statique pour les petites entreprises. Vous n'avez pas les moyens d'embaucher un expert sécurité. Autant partir sur une technologie qui n'en a pas besoin.
+
+## Combien coûte vraiment un site WordPress vs un site sur-mesure
+
+Le vrai coût d'un site, ce n'est pas le prix de création. C'est le coût total sur 3 ans. C'est là que la différence devient énorme.
+
+### Comparatif sur 3 ans
+
+| Poste | WordPress (freelance) | Site sur-mesure (moi) |
+|---|---|---|
+| Création | 1 500-3 000 EUR | 500 EUR+ |
+| Hébergement an 1 | 60-120 EUR | 0 EUR (Vercel) |
+| Hébergement an 2 | 60-120 EUR | 0 EUR |
+| Hébergement an 3 | 60-120 EUR | 0 EUR |
+| Maintenance an 1 | 300-800 EUR | 0 EUR |
+| Maintenance an 2 | 300-800 EUR | 0 EUR |
+| Maintenance an 3 | 300-800 EUR | 0 EUR |
+| Plugins premium / an | 100-300 EUR | 0 EUR |
+| Domaine (3 ans) | 18-36 EUR | 18-36 EUR |
+| **Total sur 3 ans** | **2 700-5 400 EUR** | **~545 EUR** |
+
+Le site sur-mesure coûte 5 à 10 fois moins cher sur 3 ans. Ce n'est pas un tour de magie. Un site statique n'a pas besoin d'hébergement payant (Vercel et Netlify sont gratuits pour les sites vitrines), pas de plugins à renouveler, pas de maintenance serveur.
+
+La majorité du coût WordPress n'est pas dans la création. C'est dans les frais récurrents que personne ne vous annonce au départ.
+
+## Maintenance : zéro plugin, zéro mise à jour, zéro stress
+
+La maintenance est le coût caché de WordPress. Un site WordPress sans maintenance, c'est un site vulnérable.
+
+### Ce que la maintenance WordPress implique
+
+- **Mises à jour du coeur** : 4 à 5 par an. Certaines cassent des plugins.
+- **Mises à jour des plugins** : hebdomadaires. Un site typique a 15 à 30 plugins. Chacun peut introduire un bug ou une faille.
+- **Mises à jour des thèmes** : régulières. Parfois incompatibles avec les plugins.
+- **Sauvegardes** : quotidiennes. Si le site tombe, il faut pouvoir le restaurer.
+- **Monitoring sécurité** : surveillance des tentatives d'intrusion, scan des fichiers modifiés.
+
+Coût : 50 à 200 EUR par mois si vous déléguez, ou plusieurs heures par mois si vous le faites vous-même. Pour un artisan qui a un métier à exercer, c'est du temps et de l'argent perdus.
+
+### Ce que la maintenance d'un site statique implique
+
+Rien. Ou presque. Le nom de domaine à renouveler une fois par an (6-12 EUR). C'est tout. Pas de plugin à mettre à jour. Pas de serveur à surveiller. Pas de base de données à sauvegarder.
+
+Si vous voulez modifier un texte ou une photo, vous me contactez et c'est fait sous 48h. C'est moins autonome qu'un WordPress, mais c'est aussi moins de risques et de contraintes. J'ai détaillé le [processus complet de collaboration avec un freelance](/blog/travailler-avec-developpeur-freelance) si vous voulez savoir comment ça se passe concrètement.
+
+## SEO : quel impact réel sur votre visibilité Google
+
+Le SEO technique est un facteur de classement Google. Un site rapide, bien structuré et sécurisé a un avantage objectif.
+
+### Ce que WordPress fait bien
+
+Avec un plugin comme Yoast ou RankMath, WordPress gère les balises title, les meta descriptions, le sitemap XML et les données structurées. C'est suffisant pour un SEO de base correct.
+
+### Ce que WordPress fait moins bien
+
+La vitesse. Google utilise les Core Web Vitals comme critère de classement depuis 2021. Un site WordPress typique avec ses 15-30 plugins, son thème lourd et ses requêtes SQL a un handicap structurel sur mobile.
+
+Le [référencement local](/blog/referencement-local-aix-en-provence) dépend fortement de la performance mobile. Plus de 60% des recherches locales se font sur téléphone (source : [BrightLocal](https://www.brightlocal.com/research/local-consumer-review-survey/)). Un site qui met 3 secondes à charger sur mobile part avec un désavantage.
+
+### Ce qu'un site statique sur-mesure fait nativement
+
+- Sitemap XML généré automatiquement
+- Schema.org JSON-LD intégré (LocalBusiness, BreadcrumbList, FAQ)
+- Balises meta optimisées par page
+- Core Web Vitals quasi parfaits par défaut
+- Temps de chargement sous 1 seconde sur mobile
+- Pas de JavaScript inutile qui bloque le rendu
+
+Sur mes sites, le score SEO technique Lighthouse est de 100. Pas grâce à un plugin. Grâce à l'architecture.
+
+## Quand WordPress reste le meilleur choix
+
+Je ne suis pas dogmatique. WordPress est le bon choix dans certains cas précis.
+
+**E-commerce** : si vous vendez des produits en ligne avec gestion de stock, paiement, expédition, WordPress + WooCommerce est une solution éprouvée. Un site statique sur-mesure pour de l'e-commerce coûte bien plus cher à développer.
+
+**Blog à publication fréquente** : si vous publiez 3 articles par semaine avec plusieurs rédacteurs, l'interface d'administration WordPress est imbattable en simplicité. Modifier du contenu quotidiennement sur un site statique demande des compétences techniques.
+
+**Besoin d'autonomie totale** : si vous voulez pouvoir changer chaque texte, chaque image, chaque page sans passer par un développeur, WordPress est fait pour ça. Le compromis : vous héritez de la maintenance et des mises à jour.
+
+**Budget extrêmement limité + compétences web** : si vous avez 0 EUR de budget mais savez installer WordPress et personnaliser un thème, c'est une option viable. Mais le temps investi a une valeur.
+
+Pour un site vitrine de 1 à 5 pages qui change 2 fois par an ? WordPress est surdimensionné. C'est comme utiliser un semi-remorque pour aller chercher du pain.
+
+## Pour un artisan ou une PME : la recommandation
+
+Si vous êtes artisan, restaurateur ou indépendant à Aix-en-Provence (ou ailleurs), voici la logique simple.
+
+**Votre site change rarement ?** Site sur-mesure. Moins cher, plus rapide, plus sûr. Vous gagnez sur tous les critères sauf l'autonomie de modification.
+
+**Votre site change souvent et vous voulez le gérer seul ?** WordPress avec un bon freelance pour l'installation et un contrat de maintenance. Prévoyez 400-800 EUR par an de frais récurrents.
+
+**Vous hésitez ?** Commencez par un site statique sur-mesure. C'est moins risqué financièrement (500 EUR vs 1 500-3 000 EUR). Si dans un an vous réalisez que vous avez besoin d'un CMS, la migration vers WordPress est toujours possible.
+
+À Aix-en-Provence, avec 15 commerces pour 1 000 habitants et 7,7 millions de touristes par an (source : [CCI AMP](https://www.myprovence.pro/la-source/les-donnees-en-synthese/la-clientele-touristique-dans-la-metropole-aix-marseille-provence)), la concurrence en ligne est réelle. Chaque milliseconde de chargement compte. Chaque position sur Google compte. Un site qui obtient 98 en Lighthouse mobile vous donne un avantage concret sur les concurrents qui tournent à 50.
+
+---
+
+Vous voulez un site performant sans la complexité de WordPress ? Je crée des [sites vitrines sur-mesure à partir de 500 EUR](/services/site-vitrine), hébergement inclus, maintenance zéro. Devis sous 24h.
+
+[Discutons de votre projet](/contact)

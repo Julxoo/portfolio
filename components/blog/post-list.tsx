@@ -1,9 +1,9 @@
 import Link from "next/link";
-import type { Post } from "@/lib/blog";
+import type { PostSummary } from "@/lib/blog";
 import { formatDate } from "@/lib/blog";
 
 interface BlogPostListProps {
-  posts: Post[];
+  posts: PostSummary[];
 }
 
 export function BlogPostList({ posts }: BlogPostListProps) {

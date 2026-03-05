@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { Reveal, Rule, CtaLink } from "@/components/ui";
+import { Reveal, Rule, CtaLink, ScrollProgress } from "@/components/ui";
 import { JsonLd } from "@/components/seo/JsonLd";
 import {
   createBreadcrumbSchema,
@@ -40,6 +40,8 @@ export async function generateMetadata({
   };
 }
 
+export const dynamicParams = false;
+
 export function generateStaticParams() {
   return getAllRealisations().map((r) => ({ slug: r.slug }));
 }
@@ -53,10 +55,11 @@ export default async function RealisationPage({
 
   return (
     <>
+      <ScrollProgress />
       <JsonLd
         data={createBreadcrumbSchema([
           { name: "Accueil", path: "/" },
-          { name: "Realisations", path: "/realisations" },
+          { name: "Réalisations", path: "/realisations" },
           { name: project.title, path: `/realisations/${project.slug}` },
         ])}
       />
@@ -70,7 +73,7 @@ export default async function RealisationPage({
         })}
       />
 
-      <main className="mx-auto max-w-3xl px-6 md:px-12">
+      <div className="mx-auto max-w-3xl px-6 md:px-12">
         {/* Header */}
         <header className="pt-32 md:pt-48">
           <Reveal>
@@ -119,7 +122,21 @@ export default async function RealisationPage({
             </div>
           </Reveal>
 
-          <Reveal delay={300}>
+          {project.url && (
+            <Reveal delay={300}>
+              <a
+                href={project.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-6 inline-flex items-center gap-2 font-sans text-sm text-camel transition-colors duration-300 hover:text-dark-chocolate"
+              >
+                Voir le site en production
+                <span aria-hidden="true" className="text-xs">&#8599;</span>
+              </a>
+            </Reveal>
+          )}
+
+          <Reveal delay={350}>
             <div className="mt-10 w-16 md:w-24">
               <Rule />
             </div>
@@ -138,11 +155,11 @@ export default async function RealisationPage({
         <section className="pb-32">
           <Rule />
           <div className="mt-8 flex flex-wrap gap-x-10 gap-y-4">
-            <CtaLink href="/realisations">Toutes les realisations</CtaLink>
+            <CtaLink href="/realisations">Toutes les réalisations</CtaLink>
             <CtaLink href="/contact">Me contacter</CtaLink>
           </div>
         </section>
-      </main>
+      </div>
     </>
   );
 }

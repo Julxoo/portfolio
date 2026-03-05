@@ -1,5 +1,9 @@
 import Image from "next/image";
 
+/** 8x8 parchment-colored placeholder (matches site background) */
+const BLUR_PLACEHOLDER =
+  "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAB3RJTUUH6QMEAAEAATkMogAAAAxJREFUGFdjYKAeAAAAeAAB7tJRhAAAAABJRU5ErkJggg==" as const;
+
 interface MdxImageProps {
   src: string;
   alt: string;
@@ -21,7 +25,8 @@ export function MdxImage({
         width={width}
         height={height}
         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 800px"
-        placeholder="empty"
+        placeholder="blur"
+        blurDataURL={BLUR_PLACEHOLDER}
         className="w-full border border-rule-light"
       />
       {alt && (

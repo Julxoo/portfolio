@@ -95,7 +95,7 @@ export default function BotAffiliationPage() {
           priceLabel: "À partir de",
         })}
       />
-      <main className="mx-auto max-w-7xl px-6 md:px-12">
+      <div className="mx-auto max-w-7xl px-6 md:px-12">
         <FloatingDevis
           messageTemplate={
             "Bonjour Jules !\n\nJe suis {prenom} {nom} et je cherche \u00e0 cr\u00e9er un bot T\u00e9l\u00e9gram pour mon activit\u00e9 d\u2019affiliation.\n\nMon activit\u00e9 : {activite}\n\nJ\u2019aimerais en discuter avec vous pour voir ce qui est possible.\n\nMerci !"
@@ -327,7 +327,7 @@ export default function BotAffiliationPage() {
             </div>
           </Reveal>
         </section>
-      </main>
+      </div>
     </>
   );
 }

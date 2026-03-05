@@ -28,7 +28,7 @@ export default function ContactPage() {
             "Contactez Jules Toussenel pour votre projet web.",
         })}
       />
-      <main className="mx-auto flex min-h-[100svh] max-w-7xl flex-col justify-center px-6 md:px-12">
+      <div className="mx-auto flex min-h-[100svh] max-w-7xl flex-col justify-center px-6 md:px-12">
         <Reveal>
           <p className="mb-6 font-sans text-[13px] uppercase tracking-[0.15em] text-taupe">
             Contact
@@ -104,7 +104,7 @@ export default function ContactPage() {
             </span>
           </div>
         </Reveal>
-      </main>
+      </div>
     </>
   );
 }

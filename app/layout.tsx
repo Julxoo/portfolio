@@ -1,6 +1,6 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Cormorant_Garamond, Geist_Mono, Inter } from "next/font/google";
-import { Navbar } from "@/components/ui";
+import { Navbar, Footer, SmoothScroll } from "@/components/ui";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { siteSchema } from "@/lib/schemas";
 import "./globals.css";
@@ -25,6 +25,13 @@ const geistMono = Geist_Mono({
   display: "swap",
   preload: false,
 });
+
+export const viewport: Viewport = {
+  themeColor: "#F0E6D9",
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+};
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://julestoussenel.com"),
@@ -72,6 +79,7 @@ export const metadata: Metadata = {
     googleBot: {
       index: true,
       follow: true,
+      "max-video-preview": -1,
       "max-image-preview": "large",
       "max-snippet": -1,
     },
@@ -83,10 +91,8 @@ export const metadata: Metadata = {
     },
   },
   verification: {
-    // TODO: add Google Search Console verification code
-    // google: "YOUR_GOOGLE_VERIFICATION_CODE",
-    // TODO: add Yandex Webmaster verification code
-    // yandex: "YOUR_YANDEX_VERIFICATION_CODE",
+    // TODO: remplacer par le code de verification Google Search Console
+    google: "REMPLACER_PAR_CODE_GSC",
   },
 };
 
@@ -100,15 +106,18 @@ export default function RootLayout({
       <body
         className={`${inter.variable} ${cormorant.variable} ${geistMono.variable} antialiased`}
       >
-        <a
-          href="#main-content"
-          className="sr-only focus:not-sr-only fixed left-4 top-4 z-[100] bg-parchment px-4 py-2 font-sans text-sm text-espresso shadow-md focus:outline-2 focus:outline-offset-2 focus:outline-camel"
-        >
-          Aller au contenu principal
-        </a>
-        <JsonLd data={siteSchema} />
-        <Navbar />
-        <main id="main-content">{children}</main>
+        <SmoothScroll>
+          <a
+            href="#main-content"
+            className="sr-only focus:not-sr-only fixed left-4 top-4 z-[100] bg-parchment px-4 py-2 font-sans text-sm text-espresso shadow-md focus:outline-2 focus:outline-offset-2 focus:outline-camel"
+          >
+            Aller au contenu principal
+          </a>
+          <JsonLd data={siteSchema} />
+          <Navbar />
+          <main id="main-content">{children}</main>
+          <Footer />
+        </SmoothScroll>
       </body>
     </html>
   );

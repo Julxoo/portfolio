@@ -3,3 +3,7 @@ export { NavLink, CtaLink } from "./link";
 export { Rule } from "./rule";
 export { Navbar } from "./navbar";
 export { CollapsibleList } from "./collapsible-list";
+export { Footer } from "./footer";
+export { TextReveal } from "./text-reveal";
+export { SmoothScroll } from "./smooth-scroll";
+export { ScrollProgress } from "./scroll-progress";

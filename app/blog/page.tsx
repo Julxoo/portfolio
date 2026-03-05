@@ -3,17 +3,34 @@ import { Reveal, Rule } from "@/components/ui";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { createBreadcrumbSchema, createWebPageSchema } from "@/lib/schemas";
 import { getPublishedPosts } from "@/lib/blog";
-import { BlogPostList } from "@/components/blog/post-list";
+import type { PostSummary } from "@/lib/blog";
+import { BlogSearchView } from "@/components/blog/blog-search-view";
 
 export const metadata: Metadata = {
   title: "Blog",
   description:
-    "Articles sur le developpement web, Next.js, TypeScript, IA et freelancing. Retours d'experience et guides techniques.",
+    "Articles sur le développement web, Next.js, TypeScript, IA et freelancing. Retours d'expérience et guides techniques.",
   alternates: { canonical: "/blog" },
 };
 
 export default function BlogPage() {
   const posts = getPublishedPosts();
+
+  const summaries: PostSummary[] = posts.map(
+    ({ title, description, keyword, category, tags, date, slug, permalink, metadata }) => ({
+      title,
+      description,
+      keyword,
+      category,
+      tags,
+      date,
+      slug,
+      permalink,
+      metadata,
+    })
+  );
+
+  const categories = [...new Set(posts.map((p) => p.category))];
 
   return (
     <>
@@ -29,10 +46,10 @@ export default function BlogPage() {
           url: "/blog",
           name: "Blog",
           description:
-            "Articles sur le developpement web, Next.js, TypeScript, IA et freelancing.",
+            "Articles sur le développement web, Next.js, TypeScript, IA et freelancing.",
         })}
       />
-      <main className="mx-auto max-w-7xl px-6 md:px-12">
+      <div className="mx-auto max-w-7xl px-6 md:px-12">
         <section className="pb-32 pt-32 md:pt-48" aria-labelledby="blog-page-heading">
           <Reveal>
             <p className="mb-6 font-sans text-[13px] uppercase tracking-[0.15em] text-taupe">
@@ -46,7 +63,7 @@ export default function BlogPage() {
               className="max-w-3xl font-normal"
               style={{ fontSize: "clamp(2rem, 4vw, 3.5rem)" }}
             >
-              Notes, retours d&apos;experience et reflexions techniques.
+              Notes, retours d&apos;expérience et réflexions techniques.
             </h1>
           </Reveal>
 
@@ -56,21 +73,13 @@ export default function BlogPage() {
             </div>
           </Reveal>
 
-          {posts.length > 0 ? (
-            <Reveal delay={250}>
-              <div className="mt-12">
-                <BlogPostList posts={posts} />
-              </div>
-            </Reveal>
-          ) : (
-            <Reveal delay={250}>
-              <p className="mt-12 font-sans text-lg text-dark-chocolate/60">
-                Aucun article pour le moment. Revenez bientot.
-              </p>
-            </Reveal>
-          )}
+          <Reveal delay={250}>
+            <div className="mt-12">
+              <BlogSearchView posts={summaries} categories={categories} />
+            </div>
+          </Reveal>
         </section>
-      </main>
+      </div>
     </>
   );
 }

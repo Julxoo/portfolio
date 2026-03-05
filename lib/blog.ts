@@ -3,6 +3,20 @@ import type { Post } from "#site/content";
 
 export type { Post };
 
+/** Lightweight post shape for client components (no content/toc/excerpt). */
+export type PostSummary = Pick<
+  Post,
+  | "title"
+  | "description"
+  | "keyword"
+  | "category"
+  | "tags"
+  | "date"
+  | "slug"
+  | "permalink"
+  | "metadata"
+>;
+
 /** Published posts sorted by date (newest first). */
 export function getPublishedPosts(): Post[] {
   return posts

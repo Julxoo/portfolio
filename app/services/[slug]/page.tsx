@@ -52,7 +52,7 @@ export default async function ServicePage({ params }: ServicePageProps) {
     .replace(/^\w/, (c) => c.toUpperCase());
 
   return (
-    <main className="mx-auto max-w-7xl px-6 md:px-12">
+    <div className="mx-auto max-w-7xl px-6 md:px-12">
       {/* ── Header + prix ── */}
       <section className="pt-32 md:pt-48">
         <Reveal>
@@ -222,6 +222,6 @@ export default async function ServicePage({ params }: ServicePageProps) {
           </div>
         </Reveal>
       </section>
-    </main>
+    </div>
   );
 }

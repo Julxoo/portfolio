@@ -1,5 +1,7 @@
 import { getPublishedPosts } from "@/lib/blog";
 
+export const revalidate = 3600;
+
 const BASE_URL = "https://julestoussenel.com";
 
 export function GET() {
@@ -26,7 +28,7 @@ export function GET() {
   <channel>
     <title>Jules Toussenel</title>
     <link>${BASE_URL}</link>
-    <description>Articles sur le developpement web, Next.js, TypeScript, IA et freelancing.</description>
+    <description>Articles sur le développement web, Next.js, TypeScript, IA et freelancing.</description>
     <language>fr-FR</language>
     <lastBuildDate>${new Date().toUTCString()}</lastBuildDate>
     <atom:link href="${BASE_URL}/feed.xml" rel="self" type="application/rss+xml" />

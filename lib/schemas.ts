@@ -259,6 +259,26 @@ export function createProjectSchema({
   };
 }
 
+/* ── ItemList (services, etc.) ─────────────────────────── */
+
+interface ItemListItem {
+  name: string;
+  url: string;
+}
+
+export function createItemListSchema(items: ItemListItem[]) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    itemListElement: items.map((item, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      name: item.name,
+      url: item.url,
+    })),
+  };
+}
+
 /* ── FAQ ───────────────────────────────────────────────── */
 
 interface FaqItem {

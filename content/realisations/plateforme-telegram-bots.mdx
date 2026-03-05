@@ -1,7 +1,7 @@
 ---
 title: Plateforme de gestion de bots Telegram
 slug: plateforme-telegram-bots
-description: Architecture multi-bots centralisee avec dashboard admin, support multilingue (FR/EN/AR) et IA conversationnelle Mistral AI.
+description: Architecture multi-bots centralisée avec dashboard admin, support multilingue (FR/EN/AR) et IA conversationnelle Mistral AI.
 date: 2025-11-01
 status: termine
 tags:
@@ -14,35 +14,35 @@ tags:
 category: Automatisation
 ---
 
-Plateforme complete developpee en freelance pour gerer plusieurs bots Telegram multilingues depuis une interface d'administration centralisee. Le client avait besoin d'orchestrer differents bots pour l'affiliation marketing et l'engagement utilisateur avec une configuration flexible sans redeploiement.
+Plateforme complète développée en freelance pour gérer plusieurs bots Telegram multilingues depuis une interface d'administration centralisée. Le client avait besoin d'orchestrer différents bots pour l'affiliation marketing et l'engagement utilisateur avec une configuration flexible sans redéploiement.
 
 ## Contexte
 
-Le client operait manuellement plusieurs bots Telegram pour son activite d'affiliation. Chaque bot avait un role different (menu, engagement, conversation) et ciblait des audiences dans plusieurs langues. Il fallait une solution unique pour tout piloter, sans toucher au code a chaque modification.
+Le client opérait manuellement plusieurs bots Telegram pour son activité d'affiliation. Chaque bot avait un rôle différent (menu, engagement, conversation) et ciblait des audiences dans plusieurs langues. Il fallait une solution unique pour tout piloter, sans toucher au code à chaque modification.
 
 ## Architecture
 
-Dashboard unique Next.js 16 avec backend API unifie gerant N bots depuis une seule application. Webhooks dynamiques avec route `/api/webhooks/telegram/[botId]` routant par `bot.name`. Configuration JSONB flexible par bot permettant 3 types distincts : menu/affiliation, engagement, et conversationnel avec IA.
+Dashboard unique Next.js 16 avec backend API unifié gérant N bots depuis une seule application. Webhooks dynamiques avec route `/api/webhooks/telegram/[botId]` routant par `bot.name`. Configuration JSONB flexible par bot permettant 3 types distincts : menu/affiliation, engagement, et conversationnel avec IA.
 
 ## Stack technique
 
-**Frontend** : Next.js 16 + React 19 (Server Components, Server Actions), shadcn/ui + Tailwind CSS 4, TipTap (editeur rich text)
+**Frontend** : Next.js 16 + React 19 (Server Components, Server Actions), shadcn/ui + Tailwind CSS 4, TipTap (éditeur rich text)
 
 **Backend** : Supabase (PostgreSQL, Auth, Storage), Mistral AI pour conversations intelligentes, TypeScript + Zod, Fetch API native (pas de librairie Telegram tierce)
 
-## Fonctionnalites cles
+## Fonctionnalités clés
 
-**Multi-bots illimites** : support d'un nombre illimite de bots avec configuration JSONB. Pas de migration de schema, ajout de bots sans modification du code.
+**Multi-bots illimités** : support d'un nombre illimité de bots avec configuration JSONB. Pas de migration de schéma, ajout de bots sans modification du code.
 
 **3 types de bots** :
-- Menu/affiliation : systeme flow-based, navigation par boutons inline, parcours utilisateurs personnalises
-- Engagement : inscription automatique, tracking participants, messages personnalises
-- Conversationnel IA : Mistral AI avec historique contextuel, reponses naturelles
+- Menu/affiliation : système flow-based, navigation par boutons inline, parcours utilisateurs personnalisés
+- Engagement : inscription automatique, tracking participants, messages personnalisés
+- Conversationnel IA : Mistral AI avec historique contextuel, réponses naturelles
 
-**Support multilingue natif** : francais, anglais, arabe. Chaque bot peut operer dans une ou plusieurs langues.
+**Support multilingue natif** : français, anglais, arabe. Chaque bot peut opérer dans une ou plusieurs langues.
 
-**Dashboard admin** : vue temps reel, gestion utilisateurs centralisee, envoi groupe avec rate limiting (respect des limites API Telegram : 20 msg/s), templates reutilisables, upload images, analytics.
+**Dashboard admin** : vue temps réel, gestion utilisateurs centralisée, envoi groupé avec rate limiting (respect des limites API Telegram : 20 msg/s), templates réutilisables, upload images, analytics.
 
-## Resultats
+## Résultats
 
-Architecture scalable permettant l'ajout de bots sans modification code. Plusieurs bots actifs en production. Systeme d'envoi groupe gerant automatiquement les limites API Telegram. Conversations IA contextuelles via Mistral. Solution complete permettant au client d'automatiser sa communication Telegram en autonomie.
+Architecture scalable permettant l'ajout de bots sans modification code. Plusieurs bots actifs en production. Système d'envoi groupé gérant automatiquement les limites API Telegram. Conversations IA contextuelles via Mistral. Solution complète permettant au client d'automatiser sa communication Telegram en autonomie.

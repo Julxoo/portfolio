@@ -67,7 +67,7 @@ export default function AProposPage() {
             "D\u00e9veloppeur web freelance bas\u00e9 \u00e0 Aix-en-Provence.",
         })}
       />
-      <main className="mx-auto max-w-7xl px-6 md:px-12">
+      <div className="mx-auto max-w-7xl px-6 md:px-12">
         {/* ── Hero ── */}
         <section className="pt-32 md:pt-48" aria-labelledby="apropos-heading">
           <Reveal>
@@ -344,7 +344,7 @@ export default function AProposPage() {
             </div>
           </Reveal>
         </section>
-      </main>
+      </div>
     </>
   );
 }

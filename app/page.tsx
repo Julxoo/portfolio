@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Reveal, Rule, CtaLink } from "@/components/ui";
+import { Reveal, Rule, CtaLink, TextReveal } from "@/components/ui";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { createBreadcrumbSchema, createWebPageSchema } from "@/lib/schemas";
 import { getLatestPosts } from "@/lib/blog";
@@ -36,12 +36,12 @@ export default function Home() {
     <>
       <JsonLd data={homePageSchema} />
       <JsonLd data={homeBreadcrumbSchema} />
-      <main className="mx-auto max-w-7xl px-6 md:px-12">
+      <div className="mx-auto max-w-7xl px-6 md:px-12">
       {/* ── Hero ── */}
       <section className="flex min-h-[100svh] flex-col pb-12 pt-40 md:pt-48" aria-labelledby="hero-heading">
         <div className="flex flex-1 items-center">
           <div>
-            <Reveal>
+            <TextReveal>
               <h1
                 id="hero-heading"
                 className="font-normal"
@@ -51,9 +51,9 @@ export default function Home() {
                 <br />
                 Toussenel
               </h1>
-            </Reveal>
+            </TextReveal>
 
-            <Reveal delay={150}>
+            <Reveal delay={150} direction="wipe">
               <div className="mt-8 w-16 md:w-24">
                 <Rule />
               </div>
@@ -70,7 +70,7 @@ export default function Home() {
           </div>
         </div>
 
-        <Reveal delay={450}>
+        <Reveal delay={450} direction="left">
           <div className="mb-8">
             <Link
               href="/services"
@@ -95,7 +95,7 @@ export default function Home() {
       {/* ── Derniers articles ── */}
       {latestPosts.length > 0 && (
         <section className="pb-32" aria-labelledby="blog-heading">
-          <Reveal>
+          <Reveal direction="wipe">
             <div className="w-16 md:w-24">
               <Rule />
             </div>
@@ -121,14 +121,14 @@ export default function Home() {
             <BlogPostList posts={latestPosts} />
           </Reveal>
 
-          <Reveal delay={250}>
+          <Reveal delay={250} direction="left">
             <div className="mt-8">
               <CtaLink href="/blog">Tous les articles</CtaLink>
             </div>
           </Reveal>
         </section>
       )}
-    </main>
+    </div>
     </>
   );
 }

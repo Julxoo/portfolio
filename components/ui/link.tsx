@@ -20,7 +20,7 @@ export function NavLink({ href, children, current }: NavLinkProps) {
     >
       {children}
       <span
-        className="absolute -bottom-1 left-0 h-px w-full origin-left scale-x-0 bg-camel transition-transform duration-300 group-hover:scale-x-100"
+        className={`absolute -bottom-1 left-0 h-px w-full origin-left bg-camel transition-transform duration-300 ${current ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"}`}
         style={{ transitionTimingFunction: "var(--ease-hover)" }}
       />
     </Link>

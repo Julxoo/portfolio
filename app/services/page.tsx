@@ -2,18 +2,23 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Reveal, CtaLink } from "@/components/ui";
 import { JsonLd } from "@/components/seo/JsonLd";
-import { createBreadcrumbSchema, createWebPageSchema } from "@/lib/schemas";
+import {
+  createBreadcrumbSchema,
+  createItemListSchema,
+  createWebPageSchema,
+} from "@/lib/schemas";
 
 export const metadata: Metadata = {
   title: "Services",
   description:
-    "Découvrez mes services : création de sites vitrine, identité visuelle et bots Telegram sur mesure. Prix transparents, livraison rapide.",
+    "Découvrez mes services : sites vitrine, sites d'annonces avec back-office, identité visuelle et bots Telegram. Prix transparents, livraison rapide.",
   alternates: { canonical: "/services" },
 };
 
 const services = [
   { slug: "identite-visuelle", title: "Identit\u00e9 visuelle", price: "150", label: "prix fixe" },
   { slug: "site-vitrine", title: "Site vitrine", price: "500", label: "\u00e0 partir de" },
+  { slug: "site-annonces", title: "Site d\u2019annonces", price: "1\u2009500", label: "\u00e0 partir de" },
   { slug: "bot-affiliation", title: "Bot d\u2019affiliation", price: "350", label: "\u00e0 partir de" },
 ];
 
@@ -31,10 +36,18 @@ export default function ServicesPage() {
           url: "/services",
           name: "Services",
           description:
-            "Découvrez mes services : création de sites vitrine, identité visuelle et bots Telegram sur mesure. Prix transparents, livraison rapide.",
+            "Découvrez mes services : sites vitrine, sites d'annonces avec back-office, identité visuelle et bots Telegram. Prix transparents, livraison rapide.",
         })}
       />
-      <main className="mx-auto max-w-7xl px-6 md:px-12">
+      <JsonLd
+        data={createItemListSchema(
+          services.map((s) => ({
+            name: s.title,
+            url: `https://julestoussenel.com/services/${s.slug}`,
+          }))
+        )}
+      />
+      <div className="mx-auto max-w-7xl px-6 md:px-12">
         <section className="pb-32 pt-32 md:pt-48" aria-labelledby="services-heading">
           <Reveal>
             <p className="mb-6 font-sans text-[13px] uppercase tracking-[0.15em] text-taupe">
@@ -86,7 +99,7 @@ export default function ServicesPage() {
             </div>
           </Reveal>
         </section>
-      </main>
+      </div>
     </>
   );
 }

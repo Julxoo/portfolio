@@ -1,5 +1,5 @@
 import { ImageResponse } from "next/og";
-import { getPostBySlug } from "@/lib/blog";
+import { getRealisationBySlug } from "@/lib/realisations";
 
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
@@ -10,11 +10,11 @@ export async function generateImageMetadata({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const post = getPostBySlug(slug);
+  const project = getRealisationBySlug(slug);
   return [
     {
       id: 0,
-      alt: post?.title ?? "Article · Jules Toussenel",
+      alt: project?.title ?? "Réalisation · Jules Toussenel",
       size,
       contentType,
     },
@@ -27,13 +27,13 @@ export default async function OgImage({
   params: Promise<{ slug: string }>;
 }): Promise<ImageResponse> {
   const { slug } = await params;
-  const post = getPostBySlug(slug);
+  const project = getRealisationBySlug(slug);
 
-  const title = post?.title ?? "Article";
-  const category = post?.category ?? "Blog";
-  const readingTime = post?.metadata?.readingTime ?? 5;
-  const date = post
-    ? new Date(post.date).toLocaleDateString("fr-FR", {
+  const title = project?.title ?? "Réalisation";
+  const category = project?.category ?? "Projet";
+  const tags = project?.tags?.slice(0, 4) ?? [];
+  const date = project
+    ? new Date(project.date).toLocaleDateString("fr-FR", {
         day: "numeric",
         month: "long",
         year: "numeric",
@@ -105,6 +105,25 @@ export default async function OgImage({
           >
             {title}
           </div>
+
+          {/* Tags */}
+          {tags.length > 0 && (
+            <div
+              style={{
+                display: "flex",
+                gap: 12,
+                marginTop: 24,
+                fontSize: 13,
+                fontFamily: "Inter",
+                fontWeight: 400,
+                color: "#8C7E6E",
+              }}
+            >
+              {tags.map((tag) => (
+                <span key={tag}>{tag}</span>
+              ))}
+            </div>
+          )}
         </div>
 
         {/* Bottom section */}
@@ -115,23 +134,19 @@ export default async function OgImage({
             alignItems: "flex-end",
           }}
         >
-          {/* Date and reading time */}
+          {/* Date */}
           <div
             style={{
-              display: "flex",
-              gap: 24,
               fontSize: 16,
               fontFamily: "Inter",
               fontWeight: 400,
               color: "#8C7E6E",
             }}
           >
-            <span>{date}</span>
-            <span>·</span>
-            <span>{readingTime} min de lecture</span>
+            {date}
           </div>
 
-          {/* Author */}
+          {/* URL */}
           <div
             style={{
               fontSize: 16,
