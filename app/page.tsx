@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Reveal, Rule, CtaLink, TextReveal } from "@/components/ui";
+import { Logo, Reveal, Rule, CtaLink, TextReveal } from "@/components/ui";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { createBreadcrumbSchema, createWebPageSchema } from "@/lib/schemas";
 import { getLatestPosts } from "@/lib/blog";
@@ -38,8 +38,16 @@ export default function Home() {
       <JsonLd data={homeBreadcrumbSchema} />
       <div className="mx-auto max-w-7xl px-6 md:px-12">
       {/* ── Hero ── */}
-      <section className="flex min-h-[100svh] flex-col pb-12 pt-40 md:pt-48" aria-labelledby="hero-heading">
-        <div className="flex flex-1 items-center">
+      <section className="relative flex min-h-[100svh] flex-col pb-12 pt-40 md:pt-48" aria-labelledby="hero-heading">
+        {/* Background logo watermark */}
+        <div className="pointer-events-none absolute inset-0 flex items-center justify-end overflow-hidden">
+          <Logo
+            size={820}
+            className="mr-[-10%] text-camel/[0.22] md:mr-[0%]"
+          />
+        </div>
+
+        <div className="relative flex flex-1 items-center">
           <div>
             <TextReveal>
               <h1
