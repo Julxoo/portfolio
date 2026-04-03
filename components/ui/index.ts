@@ -1,3 +1,4 @@
+export { Logo } from "./logo";
 export { Reveal } from "./reveal";
 export { NavLink, CtaLink } from "./link";
 export { Rule } from "./rule";

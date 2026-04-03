@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
 import { NavLink } from "./link";
+import { Logo } from "./logo";
 
 const links = [
   { href: "/services", label: "Services" },
@@ -62,8 +63,9 @@ export function Navbar() {
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-5 md:px-12">
           <Link
             href="/"
-            className="font-serif text-xl text-dark-chocolate"
+            className="flex items-center gap-2.5 font-serif text-xl text-dark-chocolate"
           >
+            <Logo size={24} />
             Jules Toussenel
           </Link>
 

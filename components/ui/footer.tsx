@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Logo } from "./logo";
 import { Rule } from "./rule";
 
 const navLinks = [
@@ -25,9 +26,12 @@ export function Footer() {
       <div className="mt-12 grid gap-12 md:mt-16 md:grid-cols-3 md:gap-8">
         {/* Identité */}
         <div>
-          <p className="font-serif text-xl text-dark-chocolate">
-            Jules Toussenel
-          </p>
+          <div className="flex items-center gap-2.5">
+            <Logo size={22} className="text-dark-chocolate" />
+            <p className="font-serif text-xl text-dark-chocolate">
+              Jules Toussenel
+            </p>
+          </div>
           <p className="mt-2 font-sans text-xs text-taupe">
             D&eacute;veloppeur web freelance
           </p>

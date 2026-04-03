@@ -33,15 +33,77 @@ export default async function OgImage(): Promise<ImageResponse> {
           backgroundColor: "#F0E6D9",
         }}
       >
-        {/* Top decorative line */}
+        {/* Logo */}
         <div
           style={{
-            width: 64,
-            height: 2,
-            backgroundColor: "#C4A882",
-            marginBottom: 48,
+            display: "flex",
+            position: "relative",
+            width: 48,
+            height: 48,
+            marginBottom: 40,
           }}
-        />
+        >
+          {/* Circle top */}
+          <div
+            style={{
+              position: "absolute",
+              width: 24,
+              height: 24,
+              borderRadius: "50%",
+              backgroundColor: "rgba(196, 168, 130, 0.32)",
+              left: 12,
+              top: 5.25,
+            }}
+          />
+          {/* Circle bottom-right */}
+          <div
+            style={{
+              position: "absolute",
+              width: 24,
+              height: 24,
+              borderRadius: "50%",
+              backgroundColor: "rgba(196, 168, 130, 0.32)",
+              left: 17.85,
+              top: 15.375,
+            }}
+          />
+          {/* Circle bottom-left */}
+          <div
+            style={{
+              position: "absolute",
+              width: 24,
+              height: 24,
+              borderRadius: "50%",
+              backgroundColor: "rgba(196, 168, 130, 0.32)",
+              left: 6.15,
+              top: 15.375,
+            }}
+          />
+          {/* Center cutout */}
+          <div
+            style={{
+              position: "absolute",
+              width: 9,
+              height: 9,
+              borderRadius: "50%",
+              backgroundColor: "#F0E6D9",
+              left: 19.5,
+              top: 19.5,
+            }}
+          />
+          {/* Center dot */}
+          <div
+            style={{
+              position: "absolute",
+              width: 3.9,
+              height: 3.9,
+              borderRadius: "50%",
+              backgroundColor: "#C4A882",
+              left: 22.05,
+              top: 22.05,
+            }}
+          />
+        </div>
 
         {/* Name */}
         <div
