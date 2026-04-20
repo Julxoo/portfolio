@@ -3,10 +3,7 @@ import { Logo } from "./logo";
 import { Rule } from "./rule";
 
 const navLinks = [
-  { href: "/services", label: "Services" },
   { href: "/realisations", label: "Réalisations" },
-  { href: "/blog", label: "Blog" },
-  { href: "/a-propos", label: "À propos" },
   { href: "/contact", label: "Contact" },
 ];
 

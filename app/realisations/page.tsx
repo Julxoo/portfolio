@@ -113,7 +113,7 @@ export default function RealisationsPage() {
           <Reveal delay={350}>
             <div className="mt-12 flex flex-wrap gap-x-10 gap-y-4">
               <CtaLink href="/contact">Discutons de votre projet</CtaLink>
-              <CtaLink href="/services">Mes services</CtaLink>
+              <CtaLink href="/">Retour &agrave; l&rsquo;accueil</CtaLink>
             </div>
           </Reveal>
         </section>

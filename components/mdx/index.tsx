@@ -4,6 +4,7 @@ import * as runtime from "react/jsx-runtime";
 import { useMemo, type ReactNode } from "react";
 import { Callout } from "./callout";
 import { MdxImage } from "./mdx-image";
+import { Gallery } from "./gallery";
 
 function useMDXContent(code: string, mdxComponents: Record<string, unknown>) {
   return useMemo(() => {
@@ -16,6 +17,7 @@ function useMDXContent(code: string, mdxComponents: Record<string, unknown>) {
 const components = {
   Callout,
   MdxImage,
+  Gallery,
   h2: ({ children, ...props }: { children: ReactNode; id?: string }) => (
     <h2
       className="mb-4 mt-14 font-normal"

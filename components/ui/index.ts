@@ -8,3 +8,4 @@ export { Footer } from "./footer";
 export { TextReveal } from "./text-reveal";
 export { SmoothScroll } from "./smooth-scroll";
 export { ScrollProgress } from "./scroll-progress";
+export { ScrollHint } from "./scroll-hint";

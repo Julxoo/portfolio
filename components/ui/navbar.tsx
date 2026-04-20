@@ -7,10 +7,7 @@ import { NavLink } from "./link";
 import { Logo } from "./logo";
 
 const links = [
-  { href: "/services", label: "Services" },
   { href: "/realisations", label: "Réalisations" },
-  { href: "/blog", label: "Blog" },
-  { href: "/a-propos", label: "Me découvrir" },
   { href: "/contact", label: "Contact" },
 ];
 

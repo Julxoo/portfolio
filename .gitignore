@@ -42,3 +42,6 @@ next-env.d.ts
 
 # velite
 .velite
+
+# playwright mcp artifacts
+.playwright-mcp/

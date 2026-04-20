@@ -173,6 +173,29 @@ html.lenis body {
   }
 }
 
+/* ── Hero scroll hint (traveling tracker inside a thin rail) ─ */
+
+@keyframes scroll-hint-travel {
+  0% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  15% {
+    opacity: 1;
+  }
+  85% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(400%);
+    opacity: 0;
+  }
+}
+
+.animate-scroll-hint {
+  animation: scroll-hint-travel 2.2s var(--ease-luxury) infinite;
+}
+
 /* ── MDX table scroll indicator (mobile) ────────────── */
 
 .mdx-table-wrap {

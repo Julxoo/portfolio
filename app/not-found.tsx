@@ -31,7 +31,7 @@ export default function NotFound() {
         <Reveal delay={300}>
           <div className="mt-8 flex flex-wrap gap-x-10 gap-y-4">
             <CtaLink href="/">Retour &agrave; l&rsquo;accueil</CtaLink>
-            <CtaLink href="/services">Voir les services</CtaLink>
+            <CtaLink href="/realisations">Voir les r&eacute;alisations</CtaLink>
           </div>
         </Reveal>
       </div>

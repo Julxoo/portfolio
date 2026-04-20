@@ -87,9 +87,6 @@ export const metadata: Metadata = {
   },
   alternates: {
     canonical: "https://julestoussenel.com",
-    types: {
-      "application/rss+xml": "/feed.xml",
-    },
   },
   verification: {
     // TODO: remplacer par le code de verification Google Search Console

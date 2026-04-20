@@ -47,39 +47,5 @@ export default defineConfig({
           permalink: `/realisations/${data.slug}`,
         })),
     }),
-    posts: defineCollection({
-      name: "Post",
-      pattern: "posts/**/*.mdx",
-      schema: s
-        .object({
-          title: s.string().max(120),
-          seoTitle: s.string().max(70).optional(),
-          slug: s.slug("posts"),
-          description: s.string().max(260),
-          keyword: s.string(),
-          date: s.isodate(),
-          updated: s.isodate().optional(),
-          published: s.boolean().default(true),
-          category: s.string(),
-          tags: s.array(s.string()).default([]),
-          faq: s
-            .array(
-              s.object({
-                question: s.string(),
-                answer: s.string(),
-              })
-            )
-            .default([]),
-          cover: s.image().optional(),
-          metadata: s.metadata(),
-          excerpt: s.excerpt(),
-          toc: s.toc(),
-          content: s.mdx(),
-        })
-        .transform((data) => ({
-          ...data,
-          permalink: `/blog/${data.slug}`,
-        })),
-    }),
   },
 });
