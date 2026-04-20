@@ -50,6 +50,27 @@ const nextConfig: NextConfig = {
       },
     ];
   },
+  async redirects() {
+    return [
+      /* ── Deleted service pages → homepage services section ── */
+      { source: "/services", destination: "/#services", permanent: true },
+      { source: "/services/site-vitrine", destination: "/#services", permanent: true },
+      { source: "/services/site-annonces", destination: "/#services", permanent: true },
+      { source: "/services/bot-affiliation", destination: "/#services", permanent: true },
+      { source: "/services/identite-visuelle", destination: "/#services", permanent: true },
+      { source: "/services/:slug*", destination: "/#services", permanent: true },
+
+      /* ── Deleted blog → homepage ── */
+      { source: "/blog", destination: "/", permanent: true },
+      { source: "/blog/:slug*", destination: "/", permanent: true },
+
+      /* ── Deleted /a-propos → homepage approche section ── */
+      { source: "/a-propos", destination: "/#approche-heading", permanent: true },
+
+      /* ── Removed feed ── */
+      { source: "/feed.xml", destination: "/sitemap.xml", permanent: true },
+    ];
+  },
   webpack: (config) => {
     config.plugins.push(new VeliteWebpackPlugin());
     return config;
