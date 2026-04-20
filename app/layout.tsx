@@ -34,28 +34,38 @@ export const viewport: Viewport = {
   maximumScale: 5,
 };
 
+const SITE_TITLE =
+  "Jules Toussenel · Développeur Web Freelance à Aix-en-Provence";
+
+const SITE_DESCRIPTION =
+  "Développeur web freelance à Aix-en-Provence. Création de sites vitrine sur-mesure, CRM métier, applications SaaS, référencement SEO et GEO, maintenance de sites existants code ou WordPress.";
+
 export const metadata: Metadata = {
   metadataBase: new URL("https://julestoussenel.com"),
   title: {
-    default:
-      "Jules Toussenel · Développeur Web Freelance à Aix-en-Provence",
+    default: SITE_TITLE,
     template: "%s | Jules Toussenel",
   },
-  description:
-    "AI-Augmented Software Engineer à Aix-en-Provence. Applications web sur-mesure, CRM métier, SaaS et automatisation.",
+  description: SITE_DESCRIPTION,
+  applicationName: "Jules Toussenel",
+  authors: [{ name: "Jules Toussenel", url: "https://julestoussenel.com" }],
+  creator: "Jules Toussenel",
+  publisher: "Jules Toussenel",
+  category: "technology",
   keywords: [
     "développeur web freelance",
-    "Aix-en-Provence",
+    "développeur freelance Aix-en-Provence",
+    "création site web Aix-en-Provence",
     "développeur Next.js",
     "développeur React",
-    "création site web",
+    "site vitrine sur-mesure",
     "application web sur-mesure",
     "SaaS",
     "CRM métier",
     "automatisation",
-    "intelligence artificielle",
-    "freelance développeur",
-    "ingénieur logiciel",
+    "référencement SEO local",
+    "GEO ChatGPT Perplexity",
+    "maintenance site web",
     "TypeScript",
     "Node.js",
   ],
@@ -63,16 +73,15 @@ export const metadata: Metadata = {
     type: "website",
     locale: "fr_FR",
     siteName: "Jules Toussenel",
-    title: "Jules Toussenel · Développeur Web Freelance à Aix-en-Provence",
-    description:
-      "AI-Augmented Software Engineer à Aix-en-Provence. Applications web sur-mesure, CRM métier, SaaS et automatisation.",
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
     url: "https://julestoussenel.com",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Jules Toussenel · Développeur Web Freelance à Aix-en-Provence",
-    description:
-      "AI-Augmented Software Engineer à Aix-en-Provence. Applications web sur-mesure, CRM métier, SaaS et automatisation.",
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
+    creator: "@julestoussenel",
   },
   robots: {
     index: true,
@@ -88,9 +97,22 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "https://julestoussenel.com",
   },
+  appleWebApp: {
+    capable: true,
+    title: "Jules Toussenel",
+    statusBarStyle: "default",
+  },
+  formatDetection: {
+    telephone: true,
+    address: true,
+    email: true,
+  },
   verification: {
-    // TODO: remplacer par le code de verification Google Search Console
-    google: "REMPLACER_PAR_CODE_GSC",
+    google: process.env.GOOGLE_SITE_VERIFICATION,
+    yandex: process.env.YANDEX_VERIFICATION,
+    other: process.env.BING_SITE_VERIFICATION
+      ? { "msvalidate.01": [process.env.BING_SITE_VERIFICATION] }
+      : undefined,
   },
 };
 

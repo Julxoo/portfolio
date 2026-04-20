@@ -2,13 +2,17 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Reveal, Rule, CtaLink } from "@/components/ui";
 import { JsonLd } from "@/components/seo/JsonLd";
-import { createBreadcrumbSchema, createWebPageSchema } from "@/lib/schemas";
+import {
+  createBreadcrumbSchema,
+  createItemListSchema,
+  createWebPageSchema,
+} from "@/lib/schemas";
 import { getAllRealisations, formatDate } from "@/lib/realisations";
 
 export const metadata: Metadata = {
   title: "Réalisations",
   description:
-    "Portfolio de Jules Toussenel : CRM sur mesure, plateformes SaaS, bots Telegram et solutions analytics. Projets livrés et en cours.",
+    "Portfolio de Jules Toussenel : sites vitrine, CRM sur mesure, plateformes SaaS, bots Telegram et solutions analytics. Projets livrés et en cours.",
   alternates: { canonical: "/realisations" },
 };
 
@@ -31,6 +35,14 @@ export default function RealisationsPage() {
           description:
             "Portfolio de projets web réalisés par Jules Toussenel.",
         })}
+      />
+      <JsonLd
+        data={createItemListSchema(
+          realisations.map((project) => ({
+            name: project.title,
+            url: `https://julestoussenel.com${project.permalink}`,
+          }))
+        )}
       />
       <div className="mx-auto max-w-7xl px-6 md:px-12">
         <section className="pb-32 pt-32 md:pt-48" aria-labelledby="realisations-heading">

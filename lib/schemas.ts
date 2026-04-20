@@ -17,12 +17,13 @@ export const siteSchema = {
       "@type": "Person",
       "@id": `${BASE_URL}/#person`,
       name: "Jules Toussenel",
+      givenName: "Jules",
+      familyName: "Toussenel",
       jobTitle: "AI-Augmented Software Engineer",
       description:
-        "Ingénieur logiciel spécialisé dans les applications web sur-mesure, CRM métier, SaaS et automatisation augmentés par l'IA.",
+        "Développeur web freelance à Aix-en-Provence. Conception et développement d'applications web sur-mesure, sites vitrine, CRM métier, SaaS, référencement SEO et GEO, maintenance de sites existants.",
       url: BASE_URL,
-      // TODO: replace with actual photo URL once available
-      // image: `${BASE_URL}/images/jules-toussenel.jpg`,
+      email: "toussenelj@gmail.com",
       telephone: "+33614533229",
       address: {
         "@type": "PostalAddress",
@@ -31,19 +32,34 @@ export const siteSchema = {
         postalCode: "13100",
         addressCountry: "FR",
       },
+      nationality: "FR",
+      alumniOf: [
+        {
+          "@type": "CollegeOrUniversity",
+          name: "EPITECH Marseille",
+          sameAs: "https://www.epitech.eu/",
+        },
+      ],
       sameAs: [
         "https://www.linkedin.com/in/julestoussenel/",
         "https://www.malt.fr/profile/julestoussenel",
         "https://github.com/Julxoo",
       ],
       knowsAbout: [
+        "Développement web",
         "Next.js",
         "React",
         "TypeScript",
         "Node.js",
+        "Bun",
+        "PostgreSQL",
+        "Tailwind CSS",
+        "Site vitrine",
+        "CRM métier",
         "SaaS",
-        "CRM",
         "Automatisation",
+        "Référencement SEO",
+        "Generative Engine Optimization",
         "Intelligence artificielle",
       ],
       knowsLanguage: ["fr", "en"],
@@ -53,6 +69,8 @@ export const siteSchema = {
       "@id": `${BASE_URL}/#website`,
       name: "Jules Toussenel",
       url: BASE_URL,
+      description:
+        "Portfolio de Jules Toussenel, développeur web freelance à Aix-en-Provence.",
       publisher: { "@id": `${BASE_URL}/#person` },
       inLanguage: "fr-FR",
     },
@@ -60,8 +78,9 @@ export const siteSchema = {
       "@type": ["ProfessionalService", "LocalBusiness"],
       "@id": `${BASE_URL}/#business`,
       name: "Jules Toussenel",
+      alternateName: "Jules Toussenel · Développeur Web Freelance",
       description:
-        "Développeur web freelance à Aix-en-Provence. Applications web sur-mesure, CRM métier, SaaS et automatisation.",
+        "Développeur web freelance à Aix-en-Provence. Sites vitrine sur-mesure, applications métier, CRM, SaaS, SEO et GEO, maintenance.",
       url: BASE_URL,
       founder: { "@id": `${BASE_URL}/#person` },
       telephone: "+33614533229",
@@ -81,6 +100,14 @@ export const siteSchema = {
       areaServed: [
         { "@type": "Country", name: "France" },
         { "@type": "City", name: "Aix-en-Provence" },
+        { "@type": "AdministrativeArea", name: "Provence-Alpes-Côte d'Azur" },
+      ],
+      serviceType: [
+        "Création de site vitrine",
+        "Développement d'application web sur-mesure",
+        "Développement de CRM métier",
+        "Référencement SEO et GEO",
+        "Maintenance de sites web",
       ],
       sameAs: [
         "https://www.linkedin.com/in/julestoussenel/",
