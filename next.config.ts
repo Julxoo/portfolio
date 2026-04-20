@@ -52,13 +52,8 @@ const nextConfig: NextConfig = {
   },
   async redirects() {
     return [
-      /* ── www subdomain → apex (clean canonical) ── */
-      {
-        source: "/:path*",
-        has: [{ type: "host", value: "www.julestoussenel.com" }],
-        destination: "https://julestoussenel.com/:path*",
-        permanent: true,
-      },
+      /* www → apex is handled at the Vercel Domains level (avoids redirect
+         loops with the platform-provided redirect). Do not re-add here. */
 
       /* ── Retired i18n prefixes · site is fr-only now ── */
       { source: "/fr", destination: "/", permanent: true },
