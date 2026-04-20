@@ -52,6 +52,24 @@ const nextConfig: NextConfig = {
   },
   async redirects() {
     return [
+      /* ── www subdomain → apex (clean canonical) ── */
+      {
+        source: "/:path*",
+        has: [{ type: "host", value: "www.julestoussenel.com" }],
+        destination: "https://julestoussenel.com/:path*",
+        permanent: true,
+      },
+
+      /* ── Retired i18n prefixes · site is fr-only now ── */
+      { source: "/fr", destination: "/", permanent: true },
+      { source: "/fr/:path*", destination: "/", permanent: true },
+      { source: "/en", destination: "/", permanent: true },
+      { source: "/en/:path*", destination: "/", permanent: true },
+
+      /* ── /projects/ (old slug) → /realisations/ (new) · slugs match ── */
+      { source: "/projects", destination: "/realisations", permanent: true },
+      { source: "/projects/:slug*", destination: "/realisations/:slug*", permanent: true },
+
       /* ── Deleted service pages → homepage services section ── */
       { source: "/services", destination: "/#services", permanent: true },
       { source: "/services/site-vitrine", destination: "/#services", permanent: true },
@@ -67,8 +85,10 @@ const nextConfig: NextConfig = {
       /* ── Deleted /a-propos → homepage approche section ── */
       { source: "/a-propos", destination: "/#approche-heading", permanent: true },
 
-      /* ── Removed feed ── */
+      /* ── Removed feeds ── */
       { source: "/feed.xml", destination: "/sitemap.xml", permanent: true },
+      { source: "/atom.xml", destination: "/sitemap.xml", permanent: true },
+      { source: "/rss.xml", destination: "/sitemap.xml", permanent: true },
     ];
   },
   webpack: (config) => {
