@@ -10,8 +10,8 @@ export default function GlobalError({
     <html lang="fr">
       <body
         style={{
-          backgroundColor: "#F0E6D9",
-          color: "#2C2420",
+          backgroundColor: "#F5F1E8",
+          color: "#1A1A1A",
           fontFamily: "Inter, system-ui, sans-serif",
           margin: 0,
         }}
@@ -25,21 +25,23 @@ export default function GlobalError({
         >
           <p
             style={{
-              fontSize: "0.75rem",
+              fontSize: "0.6875rem",
               textTransform: "uppercase",
-              letterSpacing: "0.15em",
-              color: "#8C7E6E",
+              letterSpacing: "0.2em",
+              color: "#9E978A",
               marginBottom: "2rem",
+              fontFamily: "ui-monospace, SFMono-Regular, monospace",
             }}
           >
             Erreur critique
           </p>
           <h1
             style={{
-              fontFamily: "Cormorant Garamond, Georgia, serif",
+              fontFamily: "Fraunces, Georgia, serif",
               fontSize: "clamp(2rem, 4vw, 3.5rem)",
               fontWeight: 300,
-              lineHeight: 1.1,
+              lineHeight: 1.05,
+              letterSpacing: "-0.025em",
               margin: 0,
             }}
           >
@@ -49,15 +51,15 @@ export default function GlobalError({
             style={{
               height: "1px",
               border: "none",
-              backgroundColor: "#D6CFC5",
+              backgroundColor: "#D4CEC1",
               marginTop: "4rem",
             }}
           />
           <p
             style={{
               fontSize: "1.125rem",
-              lineHeight: 1.7,
-              color: "rgba(44, 36, 32, 0.8)",
+              lineHeight: 1.75,
+              color: "rgba(26, 26, 26, 0.75)",
               maxWidth: "42rem",
               marginTop: "3rem",
             }}
@@ -70,9 +72,10 @@ export default function GlobalError({
             style={{
               marginTop: "2rem",
               fontSize: "0.875rem",
+              fontWeight: 500,
               textTransform: "uppercase",
-              letterSpacing: "0.1em",
-              color: "#2C2420",
+              letterSpacing: "0.12em",
+              color: "#1A1A1A",
               background: "none",
               border: "none",
               cursor: "pointer",

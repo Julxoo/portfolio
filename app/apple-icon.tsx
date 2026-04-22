@@ -18,7 +18,7 @@ export default function AppleIcon(): ImageResponse {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          backgroundColor: "#1A1714",
+          backgroundColor: "#1A1A1A",
           borderRadius: 36,
           position: "relative",
         }}
@@ -30,7 +30,7 @@ export default function AppleIcon(): ImageResponse {
             width: 16 * S,
             height: 16 * S,
             borderRadius: "50%",
-            backgroundColor: "rgba(196, 168, 130, 0.28)",
+            backgroundColor: "rgba(196, 115, 45, 0.32)",
             left: 8 * S,
             top: 3.5 * S,
           }}
@@ -42,7 +42,7 @@ export default function AppleIcon(): ImageResponse {
             width: 16 * S,
             height: 16 * S,
             borderRadius: "50%",
-            backgroundColor: "rgba(196, 168, 130, 0.28)",
+            backgroundColor: "rgba(196, 115, 45, 0.32)",
             left: 11.9 * S,
             top: 10.25 * S,
           }}
@@ -54,7 +54,7 @@ export default function AppleIcon(): ImageResponse {
             width: 16 * S,
             height: 16 * S,
             borderRadius: "50%",
-            backgroundColor: "rgba(196, 168, 130, 0.28)",
+            backgroundColor: "rgba(196, 115, 45, 0.32)",
             left: 4.1 * S,
             top: 10.25 * S,
           }}
@@ -66,7 +66,7 @@ export default function AppleIcon(): ImageResponse {
             width: 6 * S,
             height: 6 * S,
             borderRadius: "50%",
-            backgroundColor: "#1A1714",
+            backgroundColor: "#1A1A1A",
             left: 13 * S,
             top: 13 * S,
           }}
@@ -78,7 +78,7 @@ export default function AppleIcon(): ImageResponse {
             width: 2.6 * S,
             height: 2.6 * S,
             borderRadius: "50%",
-            backgroundColor: "#C4A882",
+            backgroundColor: "#C4732D",
             left: 14.7 * S,
             top: 14.7 * S,
           }}

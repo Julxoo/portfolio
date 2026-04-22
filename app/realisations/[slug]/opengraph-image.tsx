@@ -62,7 +62,7 @@ export default async function OgImage({
           flexDirection: "column",
           justifyContent: "space-between",
           padding: "80px",
-          backgroundColor: "#F0E6D9",
+          backgroundColor: "#F5F1E8",
         }}
       >
         {/* Top section */}
@@ -73,8 +73,8 @@ export default async function OgImage({
               fontSize: 14,
               fontFamily: "Inter",
               fontWeight: 600,
-              color: "#C4A882",
-              letterSpacing: "0.15em",
+              color: "#C4732D",
+              letterSpacing: "0.2em",
               textTransform: "uppercase",
               marginBottom: 32,
             }}
@@ -87,7 +87,7 @@ export default async function OgImage({
             style={{
               width: 48,
               height: 2,
-              backgroundColor: "#C4A882",
+              backgroundColor: "#C4732D",
               marginBottom: 32,
             }}
           />
@@ -98,8 +98,9 @@ export default async function OgImage({
               fontSize: title.length > 60 ? 36 : 48,
               fontFamily: "Inter",
               fontWeight: 600,
-              color: "#1A1714",
-              lineHeight: 1.2,
+              color: "#1A1A1A",
+              lineHeight: 1.15,
+              letterSpacing: "-0.02em",
               maxWidth: 900,
             }}
           >
@@ -116,7 +117,7 @@ export default async function OgImage({
                 fontSize: 13,
                 fontFamily: "Inter",
                 fontWeight: 400,
-                color: "#8C7E6E",
+                color: "#9E978A",
               }}
             >
               {tags.map((tag) => (
@@ -140,7 +141,7 @@ export default async function OgImage({
               fontSize: 16,
               fontFamily: "Inter",
               fontWeight: 400,
-              color: "#8C7E6E",
+              color: "#9E978A",
             }}
           >
             {date}
@@ -152,8 +153,8 @@ export default async function OgImage({
               fontSize: 16,
               fontFamily: "Inter",
               fontWeight: 400,
-              color: "#8C7E6E",
-              letterSpacing: "0.05em",
+              color: "#9E978A",
+              letterSpacing: "0.08em",
             }}
           >
             julestoussenel.com

@@ -9,62 +9,83 @@
   --ease-exit: cubic-bezier(0.4, 0.0, 1.0, 1.0);
 }
 
-/* ── Fonts (inline — resolved via next/font on <body>) ── */
+/* ── Fonts (resolved via next/font on <body>) ─────────── */
 
 @theme inline {
   --font-sans: var(--font-inter);
-  --font-serif: var(--font-cormorant);
+  --font-serif: var(--font-fraunces);
   --font-mono: var(--font-geist-mono);
 }
 
-/* ── Colors (CSS custom properties + Tailwind utilities) ─ */
+/* ── Colors · Atelier chaleureux ──────────────────────── */
 
 @theme {
-  --color-espresso: #1A1714;
-  --color-dark-chocolate: #2C2420;
-  --color-parchment: #F0E6D9;
-  --color-warm-cream: #E8DCCF;
-  --color-antique-ivory: #E8E0D4;
-  --color-charcoal: #2B2B2B;
-  --color-hunter-green: #2D4A3E;
-  --color-camel: #C4A882;
-  --color-taupe: #8C7E6E;
-  --color-matte-gold: #B8A088;
-  --color-muted-burgundy: #6B3A3A;
-  --color-rule-dark: #3A3430;
-  --color-rule-light: #D6CFC5;
-  --color-hover-surface: #332C26;
+  /* Fonds */
+  --color-bone: #F5F1E8;
+  --color-chalk: #EDE7DA;
+  --color-sand: #E8E0CE;
+
+  /* Texte */
+  --color-ink: #1A1A1A;
+  --color-smoke: #6E695F;
+  --color-stone: #9E978A;
+
+  /* Structure */
+  --color-mist: #D4CEC1;
+  --color-rule-dark: #2C2C2C;
+
+  /* Accents */
+  --color-ochre: #C4732D;
+  --color-ochre-soft: #E89C5A;
+  --color-moss: #3D4A3A;
+  --color-clay: #8B4A3C;
+
+  /* Legacy aliases (migration douce vers tokens sémantiques) */
+  --color-parchment: #F5F1E8;
+  --color-warm-cream: #EDE7DA;
+  --color-antique-ivory: #E8E0CE;
+  --color-dark-chocolate: #1A1A1A;
+  --color-espresso: #0F0F0F;
+  --color-charcoal: #1A1A1A;
+  --color-taupe: #9E978A;
+  --color-camel: #C4732D;
+  --color-matte-gold: #E89C5A;
+  --color-hunter-green: #3D4A3A;
+  --color-muted-burgundy: #8B4A3C;
+  --color-rule-light: #D4CEC1;
+  --color-hover-surface: #2A2A28;
 }
 
 /* ── Base Layer ────────────────────────────────────────── */
 
 @layer base {
   body {
-    background-color: var(--color-parchment);
-    color: var(--color-dark-chocolate);
+    background-color: var(--color-bone);
+    color: var(--color-ink);
   }
 
   h1,
   h2,
   h3,
   h4 {
-    font-family: var(--font-cormorant);
-    line-height: 1.1;
+    font-family: var(--font-fraunces);
+    line-height: 1.05;
+    letter-spacing: -0.01em;
   }
 
   ::selection {
-    background-color: var(--color-camel);
-    color: var(--color-parchment);
+    background-color: var(--color-ochre);
+    color: var(--color-bone);
   }
 }
 
-/* ── Code blocks (rehype-pretty-code) ──────────────── */
+/* ── Code blocks (rehype-pretty-code) ──────────────────── */
 
 [data-rehype-pretty-code-figure] pre {
   padding: 1.25rem 1.5rem;
-  border: 1px solid var(--color-rule-light);
+  border: 1px solid var(--color-mist);
   border-radius: 0;
-  background-color: var(--color-antique-ivory) !important;
+  background-color: var(--color-chalk) !important;
   overflow-x: auto;
   font-size: 0.8125rem;
   line-height: 1.7;
@@ -80,7 +101,7 @@
 }
 
 [data-rehype-pretty-code-figure] [data-highlighted-line] {
-  background-color: color-mix(in srgb, var(--color-camel) 8%, transparent);
+  background-color: color-mix(in srgb, var(--color-ochre) 10%, transparent);
 }
 
 [data-rehype-pretty-code-title] {
@@ -88,30 +109,29 @@
   font-size: 0.6875rem;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  color: var(--color-taupe);
+  color: var(--color-smoke);
   padding: 0.5rem 1.5rem;
-  border: 1px solid var(--color-rule-light);
+  border: 1px solid var(--color-mist);
   border-bottom: 0;
-  background-color: var(--color-warm-cream);
+  background-color: var(--color-chalk);
 }
 
-/* Inline code */
 :not(pre) > code {
   font-family: var(--font-mono);
   font-size: 0.8125rem;
   padding: 0.15rem 0.35rem;
-  background-color: var(--color-antique-ivory);
-  border: 1px solid var(--color-rule-light);
+  background-color: var(--color-chalk);
+  border: 1px solid var(--color-mist);
 }
 
-/* ── Focus visible (brand-consistent outline) ────────── */
+/* ── Focus visible ─────────────────────────────────────── */
 
 *:focus-visible {
-  outline: 2px solid var(--color-camel);
+  outline: 2px solid var(--color-ochre);
   outline-offset: 2px;
 }
 
-/* ── Reduced motion ──────────────────────────────────── */
+/* ── Reduced motion ────────────────────────────────────── */
 
 @media (prefers-reduced-motion: reduce) {
   *,
@@ -124,7 +144,7 @@
   }
 }
 
-/* ── Fade-in-up animation (search filter transitions) ─ */
+/* ── Fade-in-up animation ──────────────────────────────── */
 
 @keyframes fade-in-up {
   from {
@@ -141,7 +161,7 @@
   animation: fade-in-up 400ms var(--ease-enter) both;
 }
 
-/* ── Lenis smooth scroll ─────────────────────────────── */
+/* ── Lenis smooth scroll ───────────────────────────────── */
 
 html.lenis,
 html.lenis body {
@@ -160,7 +180,7 @@ html.lenis body {
   overflow: hidden;
 }
 
-/* ── Mobile nav link stagger animation ───────────────── */
+/* ── Mobile nav link stagger animation ─────────────────── */
 
 @keyframes nav-link-enter {
   from {
@@ -173,7 +193,7 @@ html.lenis body {
   }
 }
 
-/* ── Hero scroll hint (traveling tracker inside a thin rail) ─ */
+/* ── Hero scroll hint ──────────────────────────────────── */
 
 @keyframes scroll-hint-travel {
   0% {
@@ -196,7 +216,7 @@ html.lenis body {
   animation: scroll-hint-travel 2.2s var(--ease-luxury) infinite;
 }
 
-/* ── MDX table scroll indicator (mobile) ────────────── */
+/* ── MDX table scroll indicator (mobile) ───────────────── */
 
 .mdx-table-wrap {
   -webkit-overflow-scrolling: touch;

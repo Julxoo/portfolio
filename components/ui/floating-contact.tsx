@@ -2,7 +2,7 @@ const EMAIL = "toussenelj@gmail.com";
 const WHATSAPP_NUMBER = "33614533229";
 
 const buttonBaseClass =
-  "group pointer-events-auto flex h-12 w-12 items-center justify-center rounded-full border border-rule-dark/80 bg-dark-chocolate text-parchment shadow-[0_6px_20px_-8px_rgba(26,23,20,0.55)] backdrop-blur-sm transition-all duration-300 hover:bg-camel hover:text-espresso hover:border-camel focus-visible:bg-camel focus-visible:text-espresso md:h-14 md:w-14";
+  "group pointer-events-auto flex h-12 w-12 items-center justify-center rounded-full border border-ink/40 bg-ink text-bone shadow-[0_8px_24px_-10px_rgba(26,26,26,0.5)] backdrop-blur-sm transition-all duration-300 hover:bg-ochre hover:border-ochre hover:text-bone focus-visible:bg-ochre focus-visible:border-ochre focus-visible:text-bone md:h-14 md:w-14";
 
 const buttonStyle = { transitionTimingFunction: "var(--ease-hover)" } as const;
 

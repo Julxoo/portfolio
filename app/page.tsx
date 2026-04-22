@@ -159,6 +159,34 @@ const servicesListSchema = createItemListSchema(
 
 const faqSchema = createFaqSchema(faqs);
 
+/* ─── Primitives éditoriales locales ───────────────── */
+
+function Eyebrow({ children }: { children: React.ReactNode }) {
+  return (
+    <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-stone">
+      {children}
+    </p>
+  );
+}
+
+function SectionHeading({
+  id,
+  children,
+}: {
+  id?: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <h2
+      id={id}
+      className="max-w-3xl font-serif font-normal leading-[1.05] tracking-[-0.015em]"
+      style={{ fontSize: "clamp(1.75rem, 3vw, 2.5rem)" }}
+    >
+      {children}
+    </h2>
+  );
+}
+
 export default function Home() {
   return (
     <>
@@ -176,22 +204,22 @@ export default function Home() {
           <div className="pointer-events-none absolute inset-0 flex items-center justify-end overflow-hidden">
             <Logo
               size={820}
-              className="mr-[-30%] text-camel/[0.22] md:mr-[-5%] lg:mr-[0%]"
+              className="mr-[-30%] text-stone/20 md:mr-[-5%] lg:mr-[0%]"
             />
           </div>
 
           <div className="relative flex md:flex-1 md:items-center">
             <div className="w-full">
               <Reveal delay={50}>
-                <p className="mb-5 font-sans text-[11px] uppercase tracking-[0.15em] text-taupe md:mb-6 md:text-[13px]">
-                  D&eacute;veloppeur web freelance &middot; Aix-en-Provence
-                </p>
+                <Eyebrow>
+                  Développeur web freelance &middot; Aix-en-Provence
+                </Eyebrow>
               </Reveal>
 
               <TextReveal>
                 <h1
                   id="hero-heading"
-                  className="font-normal"
+                  className="mt-5 font-serif font-light leading-[0.95] tracking-[-0.025em] md:mt-6"
                   style={{ fontSize: "clamp(2.75rem, 5.5vw, 5rem)" }}
                 >
                   Jules
@@ -207,7 +235,7 @@ export default function Home() {
               </Reveal>
 
               <Reveal delay={300}>
-                <p className="mt-6 max-w-2xl font-sans text-base leading-[1.7] text-dark-chocolate/70 md:mt-8 md:text-lg">
+                <p className="mt-6 max-w-2xl font-sans text-base leading-[1.75] text-ink/75 md:mt-8 md:text-lg">
                   AI-Augmented Software Engineer. Je con&ccedil;ois,
                   d&eacute;veloppe et fais vivre des applications web sur-mesure :
                   du site vitrine pour un commerce au CRM m&eacute;tier complet,
@@ -217,36 +245,45 @@ export default function Home() {
               </Reveal>
 
               <Reveal delay={400}>
-                <ul className="mt-8 flex flex-wrap gap-x-8 gap-y-5 md:mt-10 md:gap-x-10 md:gap-y-4">
+                <ul className="mt-10 flex flex-wrap gap-x-10 gap-y-5 md:mt-12">
                   <li>
-                    <p className="font-sans text-[8px] uppercase tracking-[0.12em] text-taupe">
+                    <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-stone">
                       Winter Is Coding
                     </p>
-                    <p className="mt-1 font-serif text-2xl text-dark-chocolate">
+                    <p
+                      className="mt-2 font-serif font-normal leading-none tracking-[-0.02em] text-ink"
+                      style={{ fontSize: "clamp(1.75rem, 2.5vw, 2.25rem)" }}
+                    >
                       1<sup className="text-sm">er</sup>
-                      <span className="ml-2 font-sans text-xs text-taupe">
+                      <span className="ml-2 font-sans text-xs font-normal text-stone">
                         / 850
                       </span>
                     </p>
                   </li>
                   <li>
-                    <p className="font-sans text-[8px] uppercase tracking-[0.12em] text-taupe">
+                    <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-stone">
                       Le Match&rsquo;Up
                     </p>
-                    <p className="mt-1 font-serif text-2xl text-dark-chocolate">
+                    <p
+                      className="mt-2 font-serif font-normal leading-none tracking-[-0.02em] text-ink"
+                      style={{ fontSize: "clamp(1.75rem, 2.5vw, 2.25rem)" }}
+                    >
                       1<sup className="text-sm">er</sup>
-                      <span className="ml-2 font-sans text-xs text-taupe">
+                      <span className="ml-2 font-sans text-xs font-normal text-stone">
                         / 1000
                       </span>
                     </p>
                   </li>
                   <li>
-                    <p className="font-sans text-[8px] uppercase tracking-[0.12em] text-taupe">
+                    <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-stone">
                       En production
                     </p>
-                    <p className="mt-1 font-serif text-2xl text-dark-chocolate">
+                    <p
+                      className="mt-2 font-serif font-normal leading-none tracking-[-0.02em] text-ink"
+                      style={{ fontSize: "clamp(1.75rem, 2.5vw, 2.25rem)" }}
+                    >
                       10+
-                      <span className="ml-2 font-sans text-xs text-taupe">
+                      <span className="ml-2 font-sans text-xs font-normal text-stone">
                         projets
                       </span>
                     </p>
@@ -257,16 +294,16 @@ export default function Home() {
           </div>
 
           <Reveal delay={500} direction="left">
-            <div className="mt-10 mb-6 md:mt-0 md:mb-8">
+            <div className="mb-6 mt-10 md:mb-8 md:mt-0">
               <Link
                 href="/contact"
                 data-track="cta"
                 data-track-label="Hero CTA"
-                className="group inline-flex w-full items-center justify-between gap-3 border border-rule-light px-6 py-4 font-sans text-[12px] uppercase tracking-[0.1em] text-dark-chocolate transition-all duration-400 hover:border-camel hover:text-camel sm:w-auto sm:justify-start sm:py-3.5"
+                className="group inline-flex w-full items-center justify-between gap-3 bg-ochre px-7 py-4 font-sans text-[12px] font-medium uppercase tracking-[0.12em] text-bone transition-all duration-300 hover:bg-ink active:scale-[0.98] sm:w-auto sm:justify-start sm:py-3.5"
                 style={{ transitionTimingFunction: "var(--ease-hover)" }}
               >
                 Discutons de votre projet
-                <span className="text-camel transition-transform duration-300 group-hover:translate-x-1">
+                <span className="transition-transform duration-300 group-hover:translate-x-1">
                   &rarr;
                 </span>
               </Link>
@@ -280,15 +317,15 @@ export default function Home() {
               <CtaLink href="#faq">Questions fr&eacute;quentes</CtaLink>
             </nav>
           </Reveal>
-
         </section>
 
-        {/* Scroll hint · desktop only, fixed to viewport so it's always visible
-            while at the top, fades out as soon as the user starts scrolling */}
         <ScrollHint targetId="approche-heading" />
 
         {/* ── Approche ── */}
-        <section className="py-20 md:py-28 lg:py-32" aria-labelledby="approche-heading">
+        <section
+          className="py-20 md:py-28 lg:py-32"
+          aria-labelledby="approche-heading"
+        >
           <Reveal direction="wipe">
             <div className="w-16 md:w-24">
               <Rule />
@@ -296,39 +333,36 @@ export default function Home() {
           </Reveal>
 
           <Reveal delay={100}>
-            <p className="mb-5 mt-10 md:mb-6 md:mt-12 font-sans text-[13px] uppercase tracking-[0.15em] text-taupe">
-              Approche
-            </p>
+            <div className="mb-5 mt-10 md:mb-6 md:mt-12">
+              <Eyebrow>Approche</Eyebrow>
+            </div>
           </Reveal>
 
           <Reveal delay={150}>
-            <h2
-              id="approche-heading"
-              className="max-w-3xl font-normal"
-              style={{ fontSize: "clamp(1.75rem, 3vw, 2.5rem)" }}
-            >
+            <SectionHeading id="approche-heading">
               Je construis des produits pens&eacute;s pour durer, pas des
               livrables qui vieillissent mal.
-            </h2>
+            </SectionHeading>
           </Reveal>
 
           <Reveal delay={250}>
-            <div className="mt-10 grid max-w-3xl gap-6 font-sans text-base leading-[1.75] text-dark-chocolate/70">
+            <div className="mt-10 grid max-w-3xl gap-6 font-sans text-base leading-[1.8] text-ink/75">
               <p>
-                Depuis Aix-en-Provence, je travaille avec des ind&eacute;pendants,
-                des commerces et des entreprises qui veulent un outil web qui
-                leur ressemble. Pas un site qu&rsquo;on reconna&icirc;t avant
-                m&ecirc;me d&rsquo;avoir lu le contenu, pas un CRM g&eacute;n&eacute;rique
-                qu&rsquo;il faut plier &agrave; son m&eacute;tier.
+                Depuis Aix-en-Provence, je travaille avec des
+                ind&eacute;pendants, des commerces et des entreprises qui veulent
+                un outil web qui leur ressemble. Pas un site qu&rsquo;on
+                reconna&icirc;t avant m&ecirc;me d&rsquo;avoir lu le contenu, pas
+                un CRM g&eacute;n&eacute;rique qu&rsquo;il faut plier &agrave;
+                son m&eacute;tier.
               </p>
               <p>
                 J&rsquo;ai livr&eacute; plus de dix projets en production. CRM
                 commercial qui a remplac&eacute; Salesforce, site vitrine qui a
-                multipli&eacute; le trafic d&rsquo;un restaurant, plateforme SaaS
-                d&rsquo;affiliation, bots conversationnels. Chaque projet est
-                diff&eacute;rent. La constante : du code propre, mesur&eacute; et
-                maintenable.
-            </p>
+                multipli&eacute; le trafic d&rsquo;un restaurant, plateforme
+                SaaS d&rsquo;affiliation, bots conversationnels. Chaque projet
+                est diff&eacute;rent. La constante : du code propre,
+                mesur&eacute; et maintenable.
+              </p>
               <p>
                 J&rsquo;utilise l&rsquo;IA au quotidien comme outil, pas comme
                 promesse. Elle acc&eacute;l&egrave;re la conception, le code et
@@ -353,43 +387,39 @@ export default function Home() {
           </Reveal>
 
           <Reveal delay={100}>
-            <p className="mb-5 mt-10 md:mb-6 md:mt-12 font-sans text-[13px] uppercase tracking-[0.15em] text-taupe">
-              Ce que je fais
-            </p>
+            <div className="mb-5 mt-10 md:mb-6 md:mt-12">
+              <Eyebrow>Ce que je fais</Eyebrow>
+            </div>
           </Reveal>
 
           <Reveal delay={150}>
-            <h2
-              id="services-heading"
-              className="max-w-3xl font-normal"
-              style={{ fontSize: "clamp(1.75rem, 3vw, 2.5rem)" }}
-            >
-              Quatre fa&ccedil;ons de travailler ensemble, selon l&rsquo;&eacute;tat
-              de votre projet.
-            </h2>
+            <SectionHeading id="services-heading">
+              Quatre fa&ccedil;ons de travailler ensemble, selon
+              l&rsquo;&eacute;tat de votre projet.
+            </SectionHeading>
           </Reveal>
 
-          <div className="mt-12 md:mt-16 border-t border-rule-light">
+          <div className="mt-12 border-t border-mist md:mt-16">
             {services.map((service, i) => (
               <Reveal key={service.id} delay={100 + i * 60}>
                 <article
                   id={service.id}
-                  className="grid gap-6 border-b border-rule-light py-10 scroll-mt-20 md:scroll-mt-24 md:grid-cols-[auto_1fr] md:gap-16 md:py-12"
+                  className="grid gap-6 border-b border-mist py-10 scroll-mt-20 md:scroll-mt-24 md:grid-cols-[auto_1fr] md:gap-16 md:py-12"
                 >
-                  <p className="shrink-0 font-mono text-xs text-taupe md:w-12 md:pt-2">
+                  <p className="shrink-0 font-mono text-xs tabular-nums text-stone md:w-12 md:pt-3">
                     {service.eyebrow}
                   </p>
                   <div className="max-w-3xl">
                     <h3
-                      className="font-normal"
+                      className="font-serif font-normal leading-[1.15] tracking-[-0.015em]"
                       style={{ fontSize: "clamp(1.35rem, 2.2vw, 1.75rem)" }}
                     >
                       {service.title}
                     </h3>
-                    <p className="mt-5 font-sans text-base leading-[1.7] text-dark-chocolate">
+                    <p className="mt-5 font-sans text-base leading-[1.7] text-ink">
                       {service.capsule}
                     </p>
-                    <p className="mt-4 font-sans text-sm leading-[1.75] text-dark-chocolate/65">
+                    <p className="mt-4 font-sans text-sm leading-[1.75] text-ink/65">
                       {service.body}
                     </p>
                     {service.proof && (
@@ -406,16 +436,19 @@ export default function Home() {
           </div>
 
           <Reveal delay={200}>
-            <p className="mt-10 max-w-2xl font-sans text-sm leading-[1.7] text-dark-chocolate/60">
+            <p className="mt-10 max-w-2xl font-sans text-sm leading-[1.75] text-ink/60">
               Votre besoin n&rsquo;entre dans aucune de ces cases ? On en parle
-              quand m&ecirc;me. Un bon cadrage vaut souvent mieux
-              qu&rsquo;une cat&eacute;gorie pr&eacute;d&eacute;finie.
+              quand m&ecirc;me. Un bon cadrage vaut souvent mieux qu&rsquo;une
+              cat&eacute;gorie pr&eacute;d&eacute;finie.
             </p>
           </Reveal>
         </section>
 
         {/* ── Résultats ── */}
-        <section className="py-20 md:py-28 lg:py-32" aria-labelledby="resultats-heading">
+        <section
+          className="py-20 md:py-28 lg:py-32"
+          aria-labelledby="resultats-heading"
+        >
           <Reveal direction="wipe">
             <div className="w-16 md:w-24">
               <Rule />
@@ -423,37 +456,36 @@ export default function Home() {
           </Reveal>
 
           <Reveal delay={100}>
-            <p className="mb-5 mt-10 md:mb-6 md:mt-12 font-sans text-[13px] uppercase tracking-[0.15em] text-taupe">
-              R&eacute;sultats
-            </p>
+            <div className="mb-5 mt-10 md:mb-6 md:mt-12">
+              <Eyebrow>R&eacute;sultats</Eyebrow>
+            </div>
           </Reveal>
 
           <Reveal delay={150}>
-            <h2
-              id="resultats-heading"
-              className="max-w-3xl font-normal"
-              style={{ fontSize: "clamp(1.75rem, 3vw, 2.5rem)" }}
-            >
+            <SectionHeading id="resultats-heading">
               Des chiffres, pas des slogans.
-            </h2>
+            </SectionHeading>
           </Reveal>
 
-          <div className="mt-10 md:mt-14 grid gap-10 border-t border-rule-light pt-8 md:grid-cols-3 md:pt-10">
+          <div className="mt-10 grid gap-10 border-t border-mist pt-8 md:mt-14 md:grid-cols-3 md:pt-10">
             <Reveal delay={200}>
               <Link
                 href="/realisations/le-vieux-tonneau"
                 className="group block"
               >
                 <p
-                  className="font-normal text-dark-chocolate transition-colors duration-300 group-hover:text-camel"
-                  style={{ fontSize: "clamp(3rem, 5vw, 4.5rem)" }}
+                  className="font-serif font-light leading-none tracking-[-0.03em] text-ink transition-colors duration-500 group-hover:text-ochre"
+                  style={{
+                    fontSize: "clamp(3.5rem, 6vw, 5.5rem)",
+                    transitionTimingFunction: "var(--ease-luxury)",
+                  }}
                 >
                   +694%
                 </p>
-                <p className="mt-2 font-sans text-sm leading-[1.6] text-dark-chocolate/70">
+                <p className="mt-3 font-sans text-sm leading-[1.65] text-ink/75">
                   trafic organique apr&egrave;s la mise en ligne
                 </p>
-                <p className="mt-1 font-sans text-xs uppercase tracking-[0.12em] text-taupe">
+                <p className="mt-2 font-mono text-[11px] uppercase tracking-[0.2em] text-stone">
                   Le Vieux Tonneau &middot; Aix
                 </p>
               </Link>
@@ -465,15 +497,18 @@ export default function Home() {
                 className="group block"
               >
                 <p
-                  className="font-normal text-dark-chocolate transition-colors duration-300 group-hover:text-camel"
-                  style={{ fontSize: "clamp(3rem, 5vw, 4.5rem)" }}
+                  className="font-serif font-light leading-none tracking-[-0.03em] text-ink transition-colors duration-500 group-hover:text-ochre"
+                  style={{
+                    fontSize: "clamp(3.5rem, 6vw, 5.5rem)",
+                    transitionTimingFunction: "var(--ease-luxury)",
+                  }}
                 >
                   5
                 </p>
-                <p className="mt-2 font-sans text-sm leading-[1.6] text-dark-chocolate/70">
+                <p className="mt-3 font-sans text-sm leading-[1.65] text-ink/75">
                   utilisateurs quotidiens sur un CRM rempla&ccedil;ant Salesforce
                 </p>
-                <p className="mt-1 font-sans text-xs uppercase tracking-[0.12em] text-taupe">
+                <p className="mt-2 font-mono text-[11px] uppercase tracking-[0.2em] text-stone">
                   CRM ATC Immobilier
                 </p>
               </Link>
@@ -482,15 +517,18 @@ export default function Home() {
             <Reveal delay={400}>
               <Link href="/realisations" className="group block">
                 <p
-                  className="font-normal text-dark-chocolate transition-colors duration-300 group-hover:text-camel"
-                  style={{ fontSize: "clamp(3rem, 5vw, 4.5rem)" }}
+                  className="font-serif font-light leading-none tracking-[-0.03em] text-ink transition-colors duration-500 group-hover:text-ochre"
+                  style={{
+                    fontSize: "clamp(3.5rem, 6vw, 5.5rem)",
+                    transitionTimingFunction: "var(--ease-luxury)",
+                  }}
                 >
                   100
                 </p>
-                <p className="mt-2 font-sans text-sm leading-[1.6] text-dark-chocolate/70">
+                <p className="mt-3 font-sans text-sm leading-[1.65] text-ink/75">
                   sur 100 en performance, accessibilit&eacute; et SEO Lighthouse
                 </p>
-                <p className="mt-1 font-sans text-xs uppercase tracking-[0.12em] text-taupe">
+                <p className="mt-2 font-mono text-[11px] uppercase tracking-[0.2em] text-stone">
                   Sur les sites livr&eacute;s en 2025
                 </p>
               </Link>
@@ -498,7 +536,7 @@ export default function Home() {
           </div>
 
           <Reveal delay={500}>
-            <div className="mt-10">
+            <div className="mt-12">
               <CtaLink href="/realisations">
                 Voir toutes les r&eacute;alisations
               </CtaLink>
@@ -507,7 +545,10 @@ export default function Home() {
         </section>
 
         {/* ── Comment on travaille ── */}
-        <section className="py-20 md:py-28 lg:py-32" aria-labelledby="process-heading">
+        <section
+          className="py-20 md:py-28 lg:py-32"
+          aria-labelledby="process-heading"
+        >
           <Reveal direction="wipe">
             <div className="w-16 md:w-24">
               <Rule />
@@ -515,33 +556,31 @@ export default function Home() {
           </Reveal>
 
           <Reveal delay={100}>
-            <p className="mb-5 mt-10 md:mb-6 md:mt-12 font-sans text-[13px] uppercase tracking-[0.15em] text-taupe">
-              Comment on travaille
-            </p>
+            <div className="mb-5 mt-10 md:mb-6 md:mt-12">
+              <Eyebrow>Comment on travaille</Eyebrow>
+            </div>
           </Reveal>
 
           <Reveal delay={150}>
-            <h2
-              id="process-heading"
-              className="max-w-3xl font-normal"
-              style={{ fontSize: "clamp(1.75rem, 3vw, 2.5rem)" }}
-            >
+            <SectionHeading id="process-heading">
               Quatre &eacute;tapes, pas une de plus.
-            </h2>
+            </SectionHeading>
           </Reveal>
 
-          <div className="mt-10 md:mt-14 grid gap-10 md:grid-cols-2 md:gap-14 lg:grid-cols-4">
+          <div className="mt-10 grid gap-10 md:mt-14 md:grid-cols-2 md:gap-14 lg:grid-cols-4">
             {process.map((step, i) => (
               <Reveal key={step.number} delay={200 + i * 80}>
                 <div>
-                  <p className="font-mono text-xs text-taupe">{step.number}</p>
+                  <p className="font-mono text-xs tabular-nums text-stone">
+                    {step.number}
+                  </p>
                   <h3
-                    className="mt-3 font-normal"
+                    className="mt-3 font-serif font-normal leading-[1.15] tracking-[-0.015em]"
                     style={{ fontSize: "clamp(1.25rem, 2vw, 1.5rem)" }}
                   >
                     {step.title}
                   </h3>
-                  <p className="mt-3 font-sans text-sm leading-[1.7] text-dark-chocolate/65">
+                  <p className="mt-3 font-sans text-sm leading-[1.75] text-ink/70">
                     {step.body}
                   </p>
                 </div>
@@ -551,7 +590,10 @@ export default function Home() {
         </section>
 
         {/* ── Convictions ── */}
-        <section className="py-20 md:py-28 lg:py-32" aria-labelledby="convictions-heading">
+        <section
+          className="py-20 md:py-28 lg:py-32"
+          aria-labelledby="convictions-heading"
+        >
           <Reveal direction="wipe">
             <div className="w-16 md:w-24">
               <Rule />
@@ -559,32 +601,28 @@ export default function Home() {
           </Reveal>
 
           <Reveal delay={100}>
-            <p className="mb-5 mt-10 md:mb-6 md:mt-12 font-sans text-[13px] uppercase tracking-[0.15em] text-taupe">
-              Convictions
-            </p>
+            <div className="mb-5 mt-10 md:mb-6 md:mt-12">
+              <Eyebrow>Convictions</Eyebrow>
+            </div>
           </Reveal>
 
           <Reveal delay={150}>
-            <h2
-              id="convictions-heading"
-              className="max-w-3xl font-normal"
-              style={{ fontSize: "clamp(1.75rem, 3vw, 2.5rem)" }}
-            >
+            <SectionHeading id="convictions-heading">
               Pourquoi travailler avec moi plut&ocirc;t qu&rsquo;avec un autre.
-            </h2>
+            </SectionHeading>
           </Reveal>
 
-          <div className="mt-10 md:mt-14 grid gap-10 md:grid-cols-3 md:gap-12">
+          <div className="mt-10 grid gap-10 md:mt-14 md:grid-cols-3 md:gap-12">
             {convictions.map((c, i) => (
               <Reveal key={c.title} delay={200 + i * 80}>
-                <div>
+                <div className="border-t border-mist pt-6">
                   <h3
-                    className="font-normal"
+                    className="font-serif font-normal leading-[1.2] tracking-[-0.015em]"
                     style={{ fontSize: "clamp(1.2rem, 1.8vw, 1.4rem)" }}
                   >
                     {c.title}
                   </h3>
-                  <p className="mt-4 font-sans text-sm leading-[1.75] text-dark-chocolate/65">
+                  <p className="mt-4 font-sans text-sm leading-[1.8] text-ink/70">
                     {c.body}
                   </p>
                 </div>
@@ -606,28 +644,25 @@ export default function Home() {
           </Reveal>
 
           <Reveal delay={100}>
-            <p className="mb-5 mt-10 md:mb-6 md:mt-12 font-sans text-[13px] uppercase tracking-[0.15em] text-taupe">
-              Questions fr&eacute;quentes
-            </p>
+            <div className="mb-5 mt-10 md:mb-6 md:mt-12">
+              <Eyebrow>Questions fr&eacute;quentes</Eyebrow>
+            </div>
           </Reveal>
 
           <Reveal delay={150}>
-            <h2
-              id="faq-heading"
-              className="max-w-3xl font-normal"
-              style={{ fontSize: "clamp(1.75rem, 3vw, 2.5rem)" }}
-            >
-              Les r&eacute;ponses avant que vous n&rsquo;ayez &agrave; les poser.
-            </h2>
+            <SectionHeading id="faq-heading">
+              Les r&eacute;ponses avant que vous n&rsquo;ayez &agrave; les
+              poser.
+            </SectionHeading>
           </Reveal>
 
-          <div className="mt-10 md:mt-14 border-t border-rule-light">
+          <div className="mt-10 border-t border-mist md:mt-14">
             {faqs.map((faq, i) => (
               <Reveal key={faq.question} delay={180 + i * 50}>
-                <details className="group border-b border-rule-light py-6">
-                  <summary className="flex cursor-pointer items-start justify-between gap-6 list-none [&::-webkit-details-marker]:hidden">
+                <details className="group border-b border-mist py-6">
+                  <summary className="flex cursor-pointer list-none items-start justify-between gap-6 [&::-webkit-details-marker]:hidden">
                     <h3
-                      className="font-normal text-dark-chocolate transition-colors duration-300 group-hover:text-camel"
+                      className="font-serif font-normal leading-[1.3] text-ink transition-colors duration-300 group-hover:text-ochre"
                       style={{
                         fontSize: "clamp(1.05rem, 1.4vw, 1.2rem)",
                         transitionTimingFunction: "var(--ease-hover)",
@@ -637,13 +672,13 @@ export default function Home() {
                     </h3>
                     <span
                       aria-hidden="true"
-                      className="shrink-0 pt-1 font-serif text-xl text-camel transition-transform duration-300 group-open:rotate-45"
+                      className="shrink-0 pt-1 font-mono text-lg text-ochre transition-transform duration-300 group-open:rotate-45"
                       style={{ transitionTimingFunction: "var(--ease-hover)" }}
                     >
                       +
                     </span>
                   </summary>
-                  <p className="mt-5 max-w-3xl font-sans text-sm leading-[1.75] text-dark-chocolate/70">
+                  <p className="mt-5 max-w-3xl font-sans text-sm leading-[1.8] text-ink/70">
                     {faq.answer}
                   </p>
                 </details>
@@ -653,7 +688,10 @@ export default function Home() {
         </section>
 
         {/* ── CTA final ── */}
-        <section className="pb-20 pt-10 md:pb-32 md:pt-16" aria-labelledby="cta-heading">
+        <section
+          className="pb-20 pt-10 md:pb-32 md:pt-16"
+          aria-labelledby="cta-heading"
+        >
           <Reveal direction="wipe">
             <div className="w-16 md:w-24">
               <Rule />
@@ -663,29 +701,29 @@ export default function Home() {
           <Reveal delay={100}>
             <h2
               id="cta-heading"
-              className="mt-10 md:mt-12 max-w-3xl font-normal"
-              style={{ fontSize: "clamp(2rem, 4vw, 3rem)" }}
+              className="mt-10 max-w-3xl font-serif font-light leading-[1.05] tracking-[-0.02em] md:mt-12"
+              style={{ fontSize: "clamp(2rem, 4vw, 3.25rem)" }}
             >
               Un projet en t&ecirc;te&thinsp;? Parlons-en.
             </h2>
           </Reveal>
 
           <Reveal delay={150}>
-            <p className="mt-6 max-w-xl font-sans text-base leading-[1.7] text-dark-chocolate/65">
+            <p className="mt-6 max-w-xl font-sans text-base leading-[1.75] text-ink/70">
               Premier &eacute;change gratuit, sans engagement. Devis clair sous
               24h. Aix-en-Provence et toute la France.
             </p>
           </Reveal>
 
           <Reveal delay={200}>
-            <div className="mt-10 space-y-3">
+            <div className="mt-12 space-y-3">
               <a
                 href="mailto:toussenelj@gmail.com?subject=Prise%20de%20contact&amp;body=Salut%20Jules%20!%0A%0AJ%E2%80%99aimerais%20discuter%20d%E2%80%99un%20projet%20avec%20toi.%0A%0A%C3%80%20bient%C3%B4t%20!"
                 data-track="cta"
                 data-track-label="Home CTA Email"
-                className="block transition-colors duration-300 hover:text-camel"
+                className="block font-serif font-light tracking-[-0.02em] text-ink transition-colors duration-300 hover:text-ochre"
                 style={{
-                  fontSize: "clamp(1.25rem, 2.5vw, 2rem)",
+                  fontSize: "clamp(1.35rem, 2.8vw, 2.25rem)",
                   transitionTimingFunction: "var(--ease-hover)",
                 }}
               >
@@ -695,7 +733,7 @@ export default function Home() {
                 href="sms:0614533229?body=Salut%20Jules%20!%20J%E2%80%99aimerais%20discuter%20d%E2%80%99un%20projet%20avec%20toi.%20%C3%80%20bient%C3%B4t%20!"
                 data-track="cta"
                 data-track-label="Home CTA SMS"
-                className="block font-sans text-sm text-dark-chocolate/60 transition-colors duration-300 hover:text-camel"
+                className="block font-sans text-sm text-ink/60 transition-colors duration-300 hover:text-ochre"
                 style={{ transitionTimingFunction: "var(--ease-hover)" }}
               >
                 06 14 53 32 29

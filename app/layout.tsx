@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import Script from "next/script";
-import { Cormorant_Garamond, Geist_Mono, Inter } from "next/font/google";
+import { Fraunces, Geist_Mono, Inter } from "next/font/google";
 import { Navbar, Footer, SmoothScroll, FloatingContact } from "@/components/ui";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { siteSchema } from "@/lib/schemas";
@@ -12,10 +12,9 @@ const inter = Inter({
   display: "swap",
 });
 
-const cormorant = Cormorant_Garamond({
-  variable: "--font-cormorant",
+const fraunces = Fraunces({
+  variable: "--font-fraunces",
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600"],
   style: ["normal", "italic"],
   display: "swap",
 });
@@ -28,7 +27,7 @@ const geistMono = Geist_Mono({
 });
 
 export const viewport: Viewport = {
-  themeColor: "#F0E6D9",
+  themeColor: "#F5F1E8",
   width: "device-width",
   initialScale: 1,
   maximumScale: 5,
@@ -130,12 +129,12 @@ export default function RootLayout({
         strategy="afterInteractive"
       />
       <body
-        className={`${inter.variable} ${cormorant.variable} ${geistMono.variable} antialiased`}
+        className={`${inter.variable} ${fraunces.variable} ${geistMono.variable} antialiased`}
       >
         <SmoothScroll>
           <a
             href="#main-content"
-            className="sr-only focus:not-sr-only fixed left-4 top-4 z-[100] bg-parchment px-4 py-2 font-sans text-sm text-espresso shadow-md focus:outline-2 focus:outline-offset-2 focus:outline-camel"
+            className="sr-only focus:not-sr-only fixed left-4 top-4 z-[100] bg-bone px-4 py-2 font-sans text-sm text-ink shadow-md focus:outline-2 focus:outline-offset-2 focus:outline-ochre"
           >
             Aller au contenu principal
           </a>

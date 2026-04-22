@@ -49,18 +49,18 @@ export function Navbar() {
         style={{
           transitionTimingFunction: "var(--ease-luxury)",
           backgroundColor:
-            scrolled || open ? "rgba(240, 230, 217, 0.95)" : "transparent",
+            scrolled || open ? "rgba(245, 241, 232, 0.94)" : "transparent",
           backdropFilter: scrolled || open ? "blur(12px)" : "none",
           WebkitBackdropFilter: scrolled || open ? "blur(12px)" : "none",
           borderBottom: scrolled
-            ? "1px solid var(--color-rule-light)"
+            ? "1px solid var(--color-mist)"
             : "1px solid transparent",
         }}
       >
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-5 md:px-12">
           <Link
             href="/"
-            className="flex items-center gap-2.5 font-serif text-xl text-dark-chocolate"
+            className="flex items-center gap-2.5 font-serif text-xl text-ink"
           >
             <Logo size={24} />
             Jules Toussenel
@@ -87,7 +87,7 @@ export function Navbar() {
             onClick={() => setOpen(!open)}
             aria-expanded={open}
             aria-label={open ? "Fermer le menu" : "Ouvrir le menu"}
-            className="relative z-50 font-sans text-[13px] font-medium uppercase tracking-[0.1em] text-dark-chocolate md:hidden"
+            className="relative z-50 font-sans text-[13px] font-medium uppercase tracking-[0.1em] text-ink md:hidden"
           >
             {open ? "Fermer" : "Menu"}
           </button>
@@ -96,7 +96,7 @@ export function Navbar() {
 
       {/* Full-screen mobile overlay */}
       <div
-        className="fixed inset-0 z-40 flex flex-col items-start justify-center bg-parchment px-6 transition-all duration-500 md:pointer-events-none md:hidden"
+        className="fixed inset-0 z-40 flex flex-col items-start justify-center bg-bone px-6 transition-all duration-500 md:pointer-events-none md:hidden"
         role={open ? "dialog" : undefined}
         aria-modal={open ? true : undefined}
         aria-label="Navigation mobile"
@@ -114,7 +114,7 @@ export function Navbar() {
               href={l.href}
               onClick={() => setOpen(false)}
               aria-current={isCurrent(l.href) ? "page" : undefined}
-              className="font-serif text-dark-chocolate transition-colors duration-300 hover:text-camel"
+              className="font-serif text-ink transition-colors duration-300 hover:text-ochre"
               style={{
                 fontSize: "clamp(2rem, 5vw, 3rem)",
                 transitionTimingFunction: "var(--ease-hover)",
@@ -144,12 +144,12 @@ export function Navbar() {
         >
           <a
             href="mailto:toussenelj@gmail.com"
-            className="font-sans text-xs text-taupe transition-colors duration-300 hover:text-camel"
+            className="font-sans text-xs text-stone transition-colors duration-300 hover:text-ochre"
             style={{ transitionTimingFunction: "var(--ease-hover)" }}
           >
             toussenelj@gmail.com
           </a>
-          <p className="mt-1 font-sans text-xs text-taupe/50">
+          <p className="mt-1 font-sans text-xs text-stone/70">
             Aix-en-Provence
           </p>
         </div>

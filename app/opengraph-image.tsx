@@ -30,7 +30,7 @@ export default async function OgImage(): Promise<ImageResponse> {
           justifyContent: "center",
           alignItems: "flex-start",
           padding: "80px",
-          backgroundColor: "#F0E6D9",
+          backgroundColor: "#F5F1E8",
         }}
       >
         {/* Logo */}
@@ -50,7 +50,7 @@ export default async function OgImage(): Promise<ImageResponse> {
               width: 24,
               height: 24,
               borderRadius: "50%",
-              backgroundColor: "rgba(196, 168, 130, 0.32)",
+              backgroundColor: "rgba(196, 115, 45, 0.34)",
               left: 12,
               top: 5.25,
             }}
@@ -62,7 +62,7 @@ export default async function OgImage(): Promise<ImageResponse> {
               width: 24,
               height: 24,
               borderRadius: "50%",
-              backgroundColor: "rgba(196, 168, 130, 0.32)",
+              backgroundColor: "rgba(196, 115, 45, 0.34)",
               left: 17.85,
               top: 15.375,
             }}
@@ -74,7 +74,7 @@ export default async function OgImage(): Promise<ImageResponse> {
               width: 24,
               height: 24,
               borderRadius: "50%",
-              backgroundColor: "rgba(196, 168, 130, 0.32)",
+              backgroundColor: "rgba(196, 115, 45, 0.34)",
               left: 6.15,
               top: 15.375,
             }}
@@ -86,7 +86,7 @@ export default async function OgImage(): Promise<ImageResponse> {
               width: 9,
               height: 9,
               borderRadius: "50%",
-              backgroundColor: "#F0E6D9",
+              backgroundColor: "#F5F1E8",
               left: 19.5,
               top: 19.5,
             }}
@@ -98,7 +98,7 @@ export default async function OgImage(): Promise<ImageResponse> {
               width: 3.9,
               height: 3.9,
               borderRadius: "50%",
-              backgroundColor: "#C4A882",
+              backgroundColor: "#C4732D",
               left: 22.05,
               top: 22.05,
             }}
@@ -111,8 +111,9 @@ export default async function OgImage(): Promise<ImageResponse> {
             fontSize: 64,
             fontFamily: "Inter",
             fontWeight: 600,
-            color: "#1A1714",
-            lineHeight: 1.1,
+            color: "#1A1A1A",
+            lineHeight: 1.05,
+            letterSpacing: "-0.02em",
             marginBottom: 20,
           }}
         >
@@ -125,7 +126,7 @@ export default async function OgImage(): Promise<ImageResponse> {
             fontSize: 28,
             fontFamily: "Inter",
             fontWeight: 400,
-            color: "#8C7E6E",
+            color: "#9E978A",
             marginBottom: 12,
           }}
         >
@@ -138,8 +139,8 @@ export default async function OgImage(): Promise<ImageResponse> {
             fontSize: 20,
             fontFamily: "Inter",
             fontWeight: 400,
-            color: "#8C7E6E",
-            letterSpacing: "0.08em",
+            color: "#9E978A",
+            letterSpacing: "0.12em",
             textTransform: "uppercase",
           }}
         >
@@ -154,7 +155,7 @@ export default async function OgImage(): Promise<ImageResponse> {
             right: 80,
             width: 64,
             height: 2,
-            backgroundColor: "#C4A882",
+            backgroundColor: "#C4732D",
           }}
         />
 
@@ -167,8 +168,8 @@ export default async function OgImage(): Promise<ImageResponse> {
             fontSize: 16,
             fontFamily: "Inter",
             fontWeight: 400,
-            color: "#8C7E6E",
-            letterSpacing: "0.05em",
+            color: "#9E978A",
+            letterSpacing: "0.08em",
           }}
         >
           julestoussenel.com

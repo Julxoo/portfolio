@@ -16,11 +16,11 @@ export function NavLink({ href, children, current }: NavLinkProps) {
     <Link
       href={href}
       aria-current={current ? "page" : undefined}
-      className="group relative font-sans text-[13px] font-medium uppercase tracking-[0.1em] text-dark-chocolate"
+      className="group relative font-sans text-[13px] font-medium uppercase tracking-[0.1em] text-ink"
     >
       {children}
       <span
-        className={`absolute -bottom-1 left-0 h-px w-full origin-left bg-camel transition-transform duration-300 ${current ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"}`}
+        className={`absolute -bottom-1 left-0 h-px w-full origin-left bg-ochre transition-transform duration-300 ${current ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"}`}
         style={{ transitionTimingFunction: "var(--ease-hover)" }}
       />
     </Link>
@@ -36,7 +36,8 @@ interface CtaLinkProps {
 }
 
 export function CtaLink({ href, children, className = "" }: CtaLinkProps) {
-  const classes = `group inline-flex items-center gap-3 font-sans text-sm text-camel transition-colors duration-[400ms] hover:text-matte-gold ${className}`.trim();
+  const classes =
+    `group inline-flex items-center gap-3 font-sans text-sm font-medium text-ochre transition-colors duration-300 hover:text-ink ${className}`.trim();
   const style = {
     transitionTimingFunction: "var(--ease-hover)",
   } as React.CSSProperties;
@@ -45,7 +46,7 @@ export function CtaLink({ href, children, className = "" }: CtaLinkProps) {
     <>
       {children}
       <span
-        className="inline-block transition-transform duration-[400ms] group-hover:translate-x-1"
+        className="inline-block transition-transform duration-300 group-hover:translate-x-1"
         style={{ transitionTimingFunction: "var(--ease-hover)" }}
       >
         &rarr;

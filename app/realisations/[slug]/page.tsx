@@ -82,14 +82,14 @@ export default async function RealisationPage({
         <header className="pt-28 md:pt-40 lg:pt-48">
           <Reveal>
             <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
-              <p className="font-sans text-[13px] uppercase tracking-[0.15em] text-taupe">
+              <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-stone">
                 {project.category}
               </p>
               {project.status === "en-cours" && (
-                <span className="inline-flex items-center gap-2 font-sans text-[11px] uppercase tracking-[0.12em] text-camel">
+                <span className="inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.2em] text-ochre">
                   <span className="relative inline-flex h-2 w-2">
-                    <span className="absolute inset-0 animate-ping rounded-full bg-camel opacity-60" />
-                    <span className="relative inline-flex h-2 w-2 rounded-full bg-camel" />
+                    <span className="absolute inset-0 animate-ping rounded-full bg-ochre opacity-60" />
+                    <span className="relative inline-flex h-2 w-2 rounded-full bg-ochre" />
                   </span>
                   En cours
                 </span>
@@ -99,26 +99,26 @@ export default async function RealisationPage({
 
           <Reveal delay={100}>
             <h1
-              className="mt-6 max-w-4xl font-normal"
-              style={{ fontSize: "clamp(2.25rem, 5vw, 4.5rem)" }}
+              className="mt-8 max-w-4xl font-serif font-light leading-[1.02] tracking-[-0.025em]"
+              style={{ fontSize: "clamp(2.5rem, 5.5vw, 5rem)" }}
             >
               {project.title}
             </h1>
           </Reveal>
 
           <Reveal delay={200}>
-            <p className="mt-6 max-w-2xl font-sans text-base leading-[1.7] text-dark-chocolate/70 md:mt-8 md:text-lg">
+            <p className="mt-8 max-w-2xl font-sans text-base leading-[1.8] text-ink/75 md:mt-10 md:text-lg">
               {project.description}
             </p>
           </Reveal>
 
           <Reveal delay={300}>
-            <dl className="mt-10 grid grid-cols-2 gap-6 border-t border-rule-light pt-8 md:mt-14 md:grid-cols-4 md:gap-10 md:pt-10">
+            <dl className="mt-12 grid grid-cols-2 gap-8 border-t border-mist pt-10 md:mt-16 md:grid-cols-4 md:gap-10">
               <div>
-                <dt className="font-sans text-[10px] uppercase tracking-[0.15em] text-taupe">
+                <dt className="font-mono text-[10px] uppercase tracking-[0.2em] text-stone">
                   Livr&eacute;
                 </dt>
-                <dd className="mt-2 font-serif text-xl text-dark-chocolate">
+                <dd className="mt-3 font-serif text-xl font-normal tracking-[-0.015em] text-ink">
                   <time dateTime={project.date}>
                     {formatDate(project.date)}
                   </time>
@@ -126,27 +126,27 @@ export default async function RealisationPage({
               </div>
               {project.client && (
                 <div>
-                  <dt className="font-sans text-[10px] uppercase tracking-[0.15em] text-taupe">
+                  <dt className="font-mono text-[10px] uppercase tracking-[0.2em] text-stone">
                     Client
                   </dt>
-                  <dd className="mt-2 font-serif text-xl text-dark-chocolate">
+                  <dd className="mt-3 font-serif text-xl font-normal tracking-[-0.015em] text-ink">
                     {project.client}
                   </dd>
                 </div>
               )}
               <div>
-                <dt className="font-sans text-[10px] uppercase tracking-[0.15em] text-taupe">
+                <dt className="font-mono text-[10px] uppercase tracking-[0.2em] text-stone">
                   Cat&eacute;gorie
                 </dt>
-                <dd className="mt-2 font-serif text-xl text-dark-chocolate">
+                <dd className="mt-3 font-serif text-xl font-normal tracking-[-0.015em] text-ink">
                   {project.category}
                 </dd>
               </div>
               <div>
-                <dt className="font-sans text-[10px] uppercase tracking-[0.15em] text-taupe">
+                <dt className="font-mono text-[10px] uppercase tracking-[0.2em] text-stone">
                   Lecture
                 </dt>
-                <dd className="mt-2 font-serif text-xl text-dark-chocolate">
+                <dd className="mt-3 font-serif text-xl font-normal tracking-[-0.015em] text-ink">
                   {project.metadata.readingTime}&nbsp;min
                 </dd>
               </div>
@@ -155,15 +155,15 @@ export default async function RealisationPage({
 
           {project.tags.length > 0 && (
             <Reveal delay={400}>
-              <div className="mt-10">
-                <p className="font-sans text-[10px] uppercase tracking-[0.15em] text-taupe">
+              <div className="mt-12">
+                <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-stone">
                   Stack
                 </p>
-                <ul className="mt-4 flex flex-wrap gap-2">
+                <ul className="mt-5 flex flex-wrap gap-2">
                   {project.tags.map((tag) => (
                     <li
                       key={tag}
-                      className="border border-rule-light px-3 py-1.5 font-sans text-[11px] uppercase tracking-[0.08em] text-dark-chocolate/70 transition-colors duration-300 hover:border-camel hover:text-camel"
+                      className="border border-mist px-3 py-1.5 font-mono text-[11px] uppercase tracking-[0.1em] text-ink/75 transition-colors duration-300 hover:border-ochre hover:text-ochre"
                       style={{ transitionTimingFunction: "var(--ease-hover)" }}
                     >
                       {tag}
@@ -176,19 +176,19 @@ export default async function RealisationPage({
 
           {project.url && (
             <Reveal delay={500} direction="left">
-              <div className="mt-10">
+              <div className="mt-12">
                 <a
                   href={project.url}
                   target="_blank"
                   rel="noopener noreferrer"
                   data-track="realisation-external"
-                  className="group inline-flex items-center gap-3 border border-rule-light px-6 py-3.5 font-sans text-[12px] uppercase tracking-[0.1em] text-dark-chocolate transition-all duration-400 hover:border-camel hover:text-camel"
+                  className="group inline-flex items-center gap-3 bg-ochre px-7 py-4 font-sans text-[12px] font-medium uppercase tracking-[0.12em] text-bone transition-all duration-300 hover:bg-ink active:scale-[0.98]"
                   style={{ transitionTimingFunction: "var(--ease-hover)" }}
                 >
                   Voir le site en production
                   <span
                     aria-hidden="true"
-                    className="text-camel transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+                    className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
                   >
                     &#8599;
                   </span>
@@ -198,14 +198,14 @@ export default async function RealisationPage({
           )}
 
           <Reveal delay={600} direction="wipe">
-            <div className="mt-14 w-16 md:mt-20 md:w-24">
+            <div className="mt-16 w-16 md:mt-24 md:w-24">
               <Rule />
             </div>
           </Reveal>
         </header>
 
         {/* ── Content with sticky TOC on desktop ── */}
-        <div className="pb-20 pt-10 md:grid md:grid-cols-[220px_1fr] md:gap-16 md:pb-28 md:pt-14 lg:grid-cols-[240px_1fr] lg:gap-20">
+        <div className="pb-20 pt-12 md:grid md:grid-cols-[220px_1fr] md:gap-16 md:pb-28 md:pt-16 lg:grid-cols-[240px_1fr] lg:gap-20">
           {project.toc && project.toc.length > 0 && (
             <aside className="mb-8 md:mb-0">
               <div className="md:sticky md:top-28">
@@ -221,37 +221,37 @@ export default async function RealisationPage({
           </article>
         </div>
 
-        {/* ── Next project · hover-reveals arrow ── */}
+        {/* ── Next project ── */}
         {nextProject && (
           <Reveal direction="wipe">
             <Link
               href={nextProject.permalink}
               data-track="realisation-next"
-              className="group relative block border-y border-rule-light py-10 transition-colors duration-500 hover:bg-warm-cream/40 md:py-14"
+              className="group relative block border-y border-mist py-12 transition-colors duration-500 hover:bg-chalk/50 md:py-16"
               style={{ transitionTimingFunction: "var(--ease-luxury)" }}
             >
               <div className="flex items-baseline justify-between gap-6">
                 <div className="min-w-0 flex-1">
-                  <p className="font-sans text-[11px] uppercase tracking-[0.15em] text-taupe">
+                  <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-stone">
                     Projet suivant
                   </p>
                   <h2
-                    className="mt-3 font-normal transition-colors duration-300 group-hover:text-camel"
+                    className="mt-4 font-serif font-normal leading-[1.1] tracking-[-0.02em] transition-colors duration-500 group-hover:text-ochre"
                     style={{
-                      fontSize: "clamp(1.5rem, 3vw, 2.25rem)",
-                      transitionTimingFunction: "var(--ease-hover)",
+                      fontSize: "clamp(1.75rem, 3.5vw, 2.75rem)",
+                      transitionTimingFunction: "var(--ease-luxury)",
                     }}
                   >
                     {nextProject.title}
                   </h2>
-                  <p className="mt-3 max-w-2xl font-sans text-sm leading-[1.6] text-dark-chocolate/60">
+                  <p className="mt-4 max-w-2xl font-sans text-sm leading-[1.75] text-ink/65">
                     {nextProject.description}
                   </p>
                 </div>
                 <span
                   aria-hidden="true"
-                  className="shrink-0 font-serif text-3xl text-camel transition-transform duration-400 group-hover:translate-x-2 md:text-4xl"
-                  style={{ transitionTimingFunction: "var(--ease-hover)" }}
+                  className="shrink-0 font-serif text-3xl text-ochre transition-transform duration-500 group-hover:translate-x-2 md:text-4xl"
+                  style={{ transitionTimingFunction: "var(--ease-luxury)" }}
                 >
                   &rarr;
                 </span>
@@ -266,7 +266,7 @@ export default async function RealisationPage({
           aria-labelledby="realisation-cta-heading"
         >
           <Reveal delay={100}>
-            <p className="mb-5 font-sans text-[13px] uppercase tracking-[0.15em] text-taupe">
+            <p className="mb-6 font-mono text-[11px] uppercase tracking-[0.2em] text-stone">
               Et vous&thinsp;?
             </p>
           </Reveal>
@@ -274,29 +274,29 @@ export default async function RealisationPage({
           <Reveal delay={150}>
             <h2
               id="realisation-cta-heading"
-              className="max-w-3xl font-normal"
-              style={{ fontSize: "clamp(2rem, 4vw, 3rem)" }}
+              className="max-w-3xl font-serif font-light leading-[1.05] tracking-[-0.02em]"
+              style={{ fontSize: "clamp(2rem, 4vw, 3.25rem)" }}
             >
               Un projet dans le m&ecirc;me esprit&thinsp;? Parlons-en.
             </h2>
           </Reveal>
 
           <Reveal delay={200}>
-            <p className="mt-6 max-w-xl font-sans text-base leading-[1.7] text-dark-chocolate/65">
+            <p className="mt-6 max-w-xl font-sans text-base leading-[1.75] text-ink/70">
               Premier &eacute;change gratuit, sans engagement. Devis clair sous
               24h.
             </p>
           </Reveal>
 
           <Reveal delay={250}>
-            <div className="mt-10 space-y-3">
+            <div className="mt-12 space-y-3">
               <a
                 href="mailto:toussenelj@gmail.com?subject=Prise%20de%20contact&amp;body=Salut%20Jules%20!%0A%0AJ%E2%80%99aimerais%20discuter%20d%E2%80%99un%20projet%20avec%20toi.%0A%0A%C3%80%20bient%C3%B4t%20!"
                 data-track="cta"
                 data-track-label="Realisation CTA Email"
-                className="block transition-colors duration-300 hover:text-camel"
+                className="block font-serif font-light tracking-[-0.02em] text-ink transition-colors duration-300 hover:text-ochre"
                 style={{
-                  fontSize: "clamp(1.25rem, 2.5vw, 2rem)",
+                  fontSize: "clamp(1.35rem, 2.8vw, 2.25rem)",
                   transitionTimingFunction: "var(--ease-hover)",
                 }}
               >
@@ -306,7 +306,7 @@ export default async function RealisationPage({
                 href="sms:0614533229?body=Salut%20Jules%20!%20J%E2%80%99aimerais%20discuter%20d%E2%80%99un%20projet%20avec%20toi.%20%C3%80%20bient%C3%B4t%20!"
                 data-track="cta"
                 data-track-label="Realisation CTA SMS"
-                className="block font-sans text-sm text-dark-chocolate/60 transition-colors duration-300 hover:text-camel"
+                className="block font-sans text-sm text-ink/60 transition-colors duration-300 hover:text-ochre"
                 style={{ transitionTimingFunction: "var(--ease-hover)" }}
               >
                 06 14 53 32 29
@@ -315,7 +315,7 @@ export default async function RealisationPage({
           </Reveal>
 
           <Reveal delay={300}>
-            <div className="mt-10 flex flex-wrap gap-x-10 gap-y-4">
+            <div className="mt-12 flex flex-wrap gap-x-10 gap-y-4">
               <CtaLink href="/realisations">
                 Toutes les r&eacute;alisations
               </CtaLink>

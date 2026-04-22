@@ -24,20 +24,20 @@ export function Footer() {
         {/* Identité */}
         <div>
           <div className="flex items-center gap-2.5">
-            <Logo size={22} className="text-dark-chocolate" />
-            <p className="font-serif text-xl text-dark-chocolate">
+            <Logo size={22} className="text-ink" />
+            <p className="font-serif text-xl text-ink">
               Jules Toussenel
             </p>
           </div>
-          <p className="mt-2 font-sans text-xs text-taupe">
+          <p className="mt-2 font-sans text-xs text-stone">
             D&eacute;veloppeur web freelance
           </p>
-          <p className="font-sans text-xs text-taupe">Aix-en-Provence</p>
+          <p className="font-sans text-xs text-stone">Aix-en-Provence</p>
         </div>
 
         {/* Navigation */}
         <nav aria-label="Navigation pied de page">
-          <p className="mb-4 font-sans text-[10px] uppercase tracking-[0.15em] text-taupe/60">
+          <p className="mb-4 font-sans text-[10px] uppercase tracking-[0.15em] text-stone/70">
             Navigation
           </p>
           <ul className="space-y-2">
@@ -45,7 +45,7 @@ export function Footer() {
               <li key={l.href}>
                 <Link
                   href={l.href}
-                  className="font-sans text-sm text-dark-chocolate/70 transition-colors duration-300 hover:text-camel"
+                  className="font-sans text-sm text-ink/75 transition-colors duration-300 hover:text-ochre"
                   style={{
                     transitionTimingFunction: "var(--ease-hover)",
                   }}
@@ -59,12 +59,12 @@ export function Footer() {
 
         {/* Contact */}
         <div>
-          <p className="mb-4 font-sans text-[10px] uppercase tracking-[0.15em] text-taupe/60">
+          <p className="mb-4 font-sans text-[10px] uppercase tracking-[0.15em] text-stone/70">
             Contact
           </p>
           <a
             href="mailto:toussenelj@gmail.com"
-            className="block font-sans text-sm text-dark-chocolate/70 transition-colors duration-300 hover:text-camel"
+            className="block font-sans text-sm text-ink/75 transition-colors duration-300 hover:text-ochre"
             style={{ transitionTimingFunction: "var(--ease-hover)" }}
           >
             toussenelj@gmail.com
@@ -76,7 +76,7 @@ export function Footer() {
                 href={s.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="font-sans text-sm text-taupe transition-colors duration-300 hover:text-camel"
+                className="font-sans text-sm text-stone transition-colors duration-300 hover:text-ochre"
                 style={{
                   transitionTimingFunction: "var(--ease-hover)",
                 }}
@@ -89,8 +89,8 @@ export function Footer() {
       </div>
 
       {/* Copyright */}
-      <div className="mt-12 border-t border-rule-light pt-6 md:mt-16">
-        <p className="font-sans text-[11px] text-taupe/50">
+      <div className="mt-12 border-t border-mist pt-6 md:mt-16">
+        <p className="font-sans text-[11px] text-stone/70">
           &copy; {new Date().getFullYear()} Jules Toussenel
         </p>
       </div>

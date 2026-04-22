@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-/** 8x8 parchment-colored placeholder (matches site background) */
+/** 8x8 bone-colored placeholder (matches site background) */
 const BLUR_PLACEHOLDER =
   "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAB3RJTUUH6QMEAAEAATkMogAAAAxJREFUGFdjYKAeAAAAeAAB7tJRhAAAAABJRU5ErkJggg==" as const;
 
@@ -51,10 +51,10 @@ export function MdxImage({
         }
         placeholder="blur"
         blurDataURL={BLUR_PLACEHOLDER}
-        className="w-full border border-rule-light"
+        className="w-full border border-mist"
       />
       {caption && (
-        <figcaption className="mt-3 font-sans text-[11px] uppercase tracking-[0.12em] text-taupe">
+        <figcaption className="mt-3 font-mono text-[11px] uppercase tracking-[0.2em] text-stone">
           {caption}
         </figcaption>
       )}

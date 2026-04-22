@@ -26,7 +26,7 @@ export function ScrollProgress() {
 
   return (
     <div
-      className="fixed inset-x-0 top-0 z-[60] h-px bg-camel/40"
+      className="fixed inset-x-0 top-0 z-[60] h-px bg-ochre/30"
       role="progressbar"
       aria-valuenow={Math.round(progress * 100)}
       aria-valuemin={0}
@@ -34,7 +34,7 @@ export function ScrollProgress() {
       aria-label="Progression de lecture"
     >
       <div
-        className="h-full bg-camel"
+        className="h-full bg-ochre"
         style={{
           transform: `scaleX(${progress})`,
           transformOrigin: "left",

@@ -60,10 +60,10 @@ export function Gallery({
               sizes={sizes}
               placeholder="blur"
               blurDataURL={BLUR_PLACEHOLDER}
-              className="w-full border border-rule-light"
+              className="w-full border border-mist"
             />
             {img.caption && (
-              <p className="mt-2 font-sans text-[10px] uppercase tracking-[0.12em] text-taupe">
+              <p className="mt-2 font-mono text-[10px] uppercase tracking-[0.2em] text-stone">
                 {img.caption}
               </p>
             )}
@@ -71,7 +71,7 @@ export function Gallery({
         ))}
       </div>
       {caption && (
-        <figcaption className="mt-5 font-sans text-[11px] uppercase tracking-[0.12em] text-taupe">
+        <figcaption className="mt-5 font-mono text-[11px] uppercase tracking-[0.2em] text-stone">
           {caption}
         </figcaption>
       )}

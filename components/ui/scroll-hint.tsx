@@ -43,7 +43,7 @@ export function ScrollHint({
       style={{ transitionTimingFunction: "var(--ease-luxury)" }}
     >
       <span
-        className="font-sans text-[9px] uppercase tracking-[0.22em] text-taupe transition-colors duration-300 group-hover:text-camel md:text-[10px] md:tracking-[0.25em]"
+        className="font-mono text-[9px] uppercase tracking-[0.22em] text-stone transition-colors duration-300 group-hover:text-ochre md:text-[10px] md:tracking-[0.25em]"
         style={{
           writingMode: "vertical-rl",
           transitionTimingFunction: "var(--ease-hover)",
@@ -53,9 +53,9 @@ export function ScrollHint({
       </span>
       <span
         aria-hidden="true"
-        className="relative block h-10 w-px overflow-hidden bg-rule-light md:h-14"
+        className="relative block h-10 w-px overflow-hidden bg-mist md:h-14"
       >
-        <span className="absolute inset-x-0 top-0 h-3 bg-camel animate-scroll-hint md:h-4" />
+        <span className="absolute inset-x-0 top-0 h-3 bg-ochre animate-scroll-hint md:h-4" />
       </span>
     </a>
   );
