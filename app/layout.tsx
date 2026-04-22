@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import Script from "next/script";
 import { Cormorant_Garamond, Geist_Mono, Inter } from "next/font/google";
-import { Navbar, Footer, SmoothScroll } from "@/components/ui";
+import { Navbar, Footer, SmoothScroll, FloatingContact } from "@/components/ui";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { siteSchema } from "@/lib/schemas";
 import "./globals.css";
@@ -143,6 +143,7 @@ export default function RootLayout({
           <Navbar />
           <main id="main-content">{children}</main>
           <Footer />
+          <FloatingContact />
         </SmoothScroll>
       </body>
     </html>
