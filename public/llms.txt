@@ -1,0 +1,18 @@
+# Jules Toussenel
+
+> Développeur freelance basé à Aix-en-Provence. Conçois et construis des sites vitrines et applications web sur-mesure pour artisans, commerces premium, restaurants, architectes d'intérieur et PME. Chaque projet est dessiné sans template, avec une direction artistique propre.
+
+Stack principale : Next.js 16 (App Router), TypeScript, React 19, Tailwind CSS v4, hébergement Vercel. Spécialisé dans les sites éditoriaux à forte identité typographique, les portails clients et les interfaces de suivi de projet. Approche artisanale : pas de templates, pas de DA recyclées, pas de CMS générique.
+
+## Pages clés
+
+- [Accueil](https://julestoussenel.com/): présentation, approche, services proposés
+- [Projets](https://julestoussenel.com/projets): études de cas détaillées des missions récentes
+- [Carnet](https://julestoussenel.com/carnet): notes sur typographie, design système, développement web
+- [Méthode](https://julestoussenel.com/methode): comment je travaille — phases, livrables, délais
+- [À propos](https://julestoussenel.com/a-propos): parcours, philosophie de travail, stack
+- [Contact](https://julestoussenel.com/contact): formulaire de prise de contact
+
+## Optional
+
+- [Design system](https://julestoussenel.com/design): documentation interne du design system — typographie, palette, espace, grille, composants (pages techniques, exclues du sitemap public)

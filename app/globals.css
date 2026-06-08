@@ -1,26 +1,348 @@
 @import "tailwindcss";
 
+/* =============================================================================
+ * Custom variants — pour écrire `at-rest:opacity-100`, `scrolling:...` etc.
+ * La classe `.at-rest` est posée sur <html> par LenisProvider quand isScrolling === false
+ * depuis 1500 ms. `.scrolling` est l'inverse.
+ * ============================================================================= */
+@custom-variant at-rest (&:where(html.at-rest *));
+@custom-variant scrolling (&:where(html:not(.at-rest) *));
+
+/* `revealed:` — s'applique quand un ancêtre (ou l'élément lui-même) a
+ * data-revealed="true". Permet `revealed:opacity-100 revealed:translate-y-0`
+ * sur les enfants d'une section observée par useReveal(). */
+@custom-variant revealed (&:where([data-revealed="true"], [data-revealed="true"] *));
+
+/* =============================================================================
+ * Pinède sur toile — tokens bruts
+ * Exposés sur :root pour être lisibles côté JS si besoin (getComputedStyle).
+ * ============================================================================= */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Couleurs sémantiques */
+  --bg: #f4f1e8;
+  --surface: #535040;
+  --ink: #1f1f1b;
+  --accent-warm: #d9c7a7;
+  --accent-deep: #8c6a4a;
+  --muted: #a8a189;
+
+  /* Pair pattern — couleur du texte attendue sur chaque surface colorée */
+  --bg-foreground: #1f1f1b;
+  --surface-foreground: #f4f1e8;
+  --accent-warm-foreground: #1f1f1b;
+  --accent-deep-foreground: #f4f1e8;
+
+  /* Rythme vertical — padding de section, fluide via clamp() */
+  --section-sm: clamp(3rem, 6vw, 5rem);       /*  48 →  80 px — transitions, pieds */
+  --section-md: clamp(5rem, 9vw, 7.5rem);     /*  80 → 120 px — section standard */
+  --section-lg: clamp(6rem, 12vw, 10rem);     /*  96 → 160 px — moment pivot */
+  --section-xl: clamp(8rem, 16vw, 12.5rem);   /* 128 → 200 px — hero, finale */
+
+  /* Marges latérales fluides — même valeur à gauche et à droite */
+  --gutter: clamp(1.5rem, 5vw, 6rem);         /*  24 →  96 px */
+
+  /* Gouttière de grille éditoriale 6 colonnes */
+  --grid-gap: clamp(1rem, 2vw, 2rem);         /*  16 →  32 px */
+
+  /* Containers — max-widths */
+  --w-reading: 42rem;                          /*  672 px — colonne lecture article */
+  --w-narrow:  64rem;                          /* 1024 px — contenu éditorial dense */
+  --w-default: 80rem;                          /* 1280 px — pages standard */
+  --w-wide:    96rem;                          /* 1536 px — études de cas larges */
+
+  /* Lignes — radius, filets, élévations.
+   * Règle : angles vifs (radius 0), filets 1px honnêtes, aucune box-shadow.
+   * La profondeur naît du blanc, du filet et de la couleur de fond — jamais d'un flou.
+   */
+  --r-none:     0;                             /* défaut sur 95 % des éléments */
+  --r-hairline: 2px;                           /* exception : tags, focus ring */
+  --r-pill:     9999px;                        /* exception unique : avatar rond */
+
+  --rule:        color-mix(in oklch, var(--ink) 12%, transparent);  /* filet standard */
+  --rule-strong: color-mix(in oklch, var(--ink) 25%, transparent);  /* filet éditorial fort */
+  --rule-warm:   color-mix(in oklch, var(--accent-deep) 20%, transparent); /* filet sur surface kaki */
+
+  /* Mouvements — durées et courbes.
+   * Philosophie : motion rare, brève, jamais démonstrative. Si l'animation
+   * attire le regard sur elle-même plutôt que sur le contenu, elle est ratée.
+   * Aucune durée > 480ms, aucune courbe avec rebond.
+   */
+  --dur-instant:    100ms;                     /* focus/active — feedback tactile */
+  --dur-quick:      180ms;                     /* hover, états UI */
+  --dur-standard:   280ms;                     /* menus, page transitions */
+  --dur-deliberate: 480ms;                     /* image reveal éditoriale */
+
+  --eoq: cubic-bezier(0.22, 1, 0.36, 1);       /* défaut — démarre vite, finit doucement */
+  --eoc: cubic-bezier(0.33, 1, 0.68, 1);       /* translations discrètes */
+  --eio: cubic-bezier(0.65, 0, 0.35, 1);       /* cas symétriques — menu open/close */
+
+  /* Scroll state — écrits par LenisProvider, consommés librement par CSS.
+   * Défauts honnêtes : 0 = scroll immobile. */
+  --scroll-velocity:  0;                       /* 0..50 (abs px/frame) */
+  --scroll-direction: 0;                       /* -1 haut, 1 bas */
+  --scroll-progress:  0;                       /* 0..1 sur la page entière */
 }
 
+/* =============================================================================
+ * @theme inline — génère les utilitaires Tailwind à partir des variables.
+ * "inline" est obligatoire dès qu'on référence d'autres var(...) (cas des
+ * fontes next/font injectées sur <html>).
+ * ============================================================================= */
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  /* Couleurs sémantiques → bg-bg, text-ink, border-muted, bg-surface, etc. */
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-ink: var(--ink);
+  --color-accent-warm: var(--accent-warm);
+  --color-accent-deep: var(--accent-deep);
+  --color-muted: var(--muted);
+  --color-bg-foreground: var(--bg-foreground);
+  --color-surface-foreground: var(--surface-foreground);
+  --color-accent-warm-foreground: var(--accent-warm-foreground);
+  --color-accent-deep-foreground: var(--accent-deep-foreground);
+
+  /* Fontes — reliées aux variables injectées par next/font sur <html>.
+   * Paire signature : Clash Display (affichage + signature) × Cabinet Grotesk
+   * (corps). Deux grotesques sans italique → l'emphase passe par le poids, pas
+   * par le penché (synthèse d'italique coupée dans @layer base). */
+  --font-sans: var(--font-cabinet), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-clash), ui-sans-serif, system-ui, sans-serif;
+  --font-signature: var(--font-clash), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: ui-monospace, "SF Mono", Menlo, monospace;
+
+  /* Type scale — chaque rôle embarque taille + line-height + tracking + weight. */
+  --text-eyebrow: 0.6875rem;
+  --text-eyebrow--line-height: 1.2;
+  --text-eyebrow--letter-spacing: 0.2em;
+  --text-eyebrow--font-weight: 500;
+
+  --text-caption: 0.75rem;
+  --text-caption--line-height: 1.5;
+
+  --text-body: 0.9375rem;
+  --text-body--line-height: 1.65;
+
+  --text-lead: clamp(1.15rem, 1.7vw, 1.45rem);
+  --text-lead--line-height: 1.5;
+
+  --text-h3: clamp(1.75rem, 3.5vw, 2.6rem);
+  --text-h3--line-height: 1.1;
+  --text-h3--letter-spacing: -0.015em;
+
+  --text-display: clamp(3rem, 9.5vw, 9.5rem);
+  --text-display--line-height: 0.92;
+  --text-display--letter-spacing: -0.035em;
+
+  /* Spacing sémantique — génère py-section-md, px-gutter, mt-section-sm, etc. */
+  --spacing-section-sm: var(--section-sm);
+  --spacing-section-md: var(--section-md);
+  --spacing-section-lg: var(--section-lg);
+  --spacing-section-xl: var(--section-xl);
+  --spacing-gutter: var(--gutter);
+  --spacing-grid: var(--grid-gap);
+
+  /* Containers — génère max-w-reading, max-w-default, etc. + container queries */
+  --container-reading: var(--w-reading);
+  --container-narrow: var(--w-narrow);
+  --container-default: var(--w-default);
+  --container-wide: var(--w-wide);
+
+  /* Radius — rounded-none, rounded-hairline, rounded-pill. Aucune échelle sm/md/lg. */
+  --radius-none: var(--r-none);
+  --radius-hairline: var(--r-hairline);
+  --radius-pill: var(--r-pill);
+
+  /* Filets — border-rule, border-rule-strong, border-rule-warm. */
+  --color-rule: var(--rule);
+  --color-rule-strong: var(--rule-strong);
+  --color-rule-warm: var(--rule-warm);
+
+  /* Élévations — volontairement absentes. `shadow-none` est le seul état valide. */
+
+  /* Easings — génère ease-out-quint, ease-out-cubic, ease-in-out. */
+  --ease-out-quint: var(--eoq);
+  --ease-out-cubic: var(--eoc);
+  --ease-in-out:    var(--eio);
+
+  /* Durations — voir @utility plus bas. Le namespace --duration-* de
+   * Tailwind v4 n'accepte pas de noms custom, seulement du numérique. */
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* =============================================================================
+ * Utilities custom — classes avec noms sémantiques que le namespace @theme ne
+ * peut pas générer directement. Syntaxe officielle Tailwind v4.
+ * ============================================================================= */
+@utility duration-instant {
+  transition-duration: var(--dur-instant);
+}
+@utility duration-quick {
+  transition-duration: var(--dur-quick);
+}
+@utility duration-standard {
+  transition-duration: var(--dur-standard);
+}
+@utility duration-deliberate {
+  transition-duration: var(--dur-deliberate);
+}
+
+/* Petites capitales — Tailwind v4 n'expose pas font-variant-caps nativement. */
+@utility small-caps {
+  font-variant-caps: small-caps;
+}
+
+/* field-sizing pour textarea auto-resize (pas d'utility Tailwind v4 natif).
+ * Support fin 2026 : Chrome 123+, Safari 18+, Firefox 136+. */
+@utility field-sizing-content {
+  field-sizing: content;
+}
+
+/* `sillage` — letter-spacing piloté par --scroll-velocity-n.
+ * Au repos, tracking serré (-0.03em). Scroll rapide, les chars s'étirent
+ * jusqu'à +0.06em. Transition courte pour rester fluide sans lag visible. */
+@utility sillage {
+  letter-spacing: calc(-0.03em + var(--scroll-velocity-n, 0) * 0.06em);
+  transition: letter-spacing 140ms linear;
+}
+
+/* Animation du filet de chargement — traverse horizontalement en 1.2s.
+ * `animate-filet-sweep` utilisé par <ThinFilet />. */
+@keyframes filet-sweep {
+  0%   { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+@utility animate-filet-sweep {
+  animation: filet-sweep 1.2s linear infinite;
+}
+
+/* =============================================================================
+ * Styles de base
+ * ============================================================================= */
+@layer base {
+  html {
+    color-scheme: light;
+  }
+  /* Masque la scrollbar native sur desktop — CustomScrollbar prend le relais.
+   * Mobile (< 768px) garde la scrollbar native : pas de custom scrollbar,
+   * et le touch scroll a besoin du feedback natif. */
+  @media (min-width: 768px) {
+    html {
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+    html::-webkit-scrollbar {
+      display: none;
+    }
+  }
+  /* État "en train de drag" : curseur grabbing partout + sélection désactivée. */
+  html.scrollbar-grabbing,
+  html.scrollbar-grabbing * {
+    cursor: grabbing !important;
+    user-select: none !important;
+  }
+  body {
+    background-color: var(--color-bg);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    /* Clash & Cabinet n'ont pas d'italique. On coupe la synthèse de penché
+     * (faux oblique cheap sur un grotesque) : `font-style: italic` rend alors
+     * en romain propre. On garde la synthèse de poids et de petites capitales. */
+    font-synthesis: weight small-caps;
+  }
+  ::selection {
+    background-color: var(--color-accent-warm);
+    color: var(--color-ink);
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* =============================================================================
+ * Reduced motion — règle globale.
+ * Quand l'utilisateur demande moins d'animation, on respecte sans débat.
+ * L'état final compte, pas la transition qui y mène.
+ * ============================================================================= */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* =============================================================================
+ * ProjectScene — couches visuelles pilotées par la boucle rAF.
+ * --focus (0..1) et --px (px) sont écrits par carte dans ProjectScene.tsx.
+ *   • Profondeur de champ : les cartes hors focus se désaturent, s'assombrissent
+ *     et se floutent légèrement (focus-pull éditorial). Le flou — coûteux — est
+ *     coupé au tactile (pointer: coarse).
+ *   • Parallaxe : l'image glisse à contre-sens dans son cadre, la carte centrale
+ *     gagne en profondeur. L'échelle 1.1 couvre le débord du décalage.
+ * Transitions désactivées : tout est piloté frame par frame, pas d'interp CSS.
+ * ============================================================================= */
+.scene-card [data-card-visual] {
+  filter:
+    saturate(calc(0.45 + 0.55 * var(--focus, 1)))
+    brightness(calc(0.9 + 0.1 * var(--focus, 1)))
+    blur(calc((1 - var(--focus, 1)) * 2.5px));
+  transition: none;
+}
+.scene-card [data-card-media] {
+  transform: translate3d(var(--px, 0px), 0, 0) scale(1.1);
+  transition: none;
+}
+@media (pointer: coarse) {
+  .scene-card [data-card-visual] {
+    filter:
+      saturate(calc(0.55 + 0.45 * var(--focus, 1)))
+      brightness(calc(0.94 + 0.06 * var(--focus, 1)));
+  }
+}
+
+/* =============================================================================
+ * ProjectScene — fallback grille verticale.
+ * Uniquement en prefers-reduced-motion : la scène 3D se dissout en empilement
+ * vertical. Le contenu reste accessible, seule la chorégraphie disparaît, les
+ * cartes reprennent leurs dimensions normales. Sur mobile la scène 3D tourne
+ * (paramètres adoucis côté JS, voir ProjectScene.tsx / SCENE_PARAMS).
+ * ============================================================================= */
+@media (prefers-reduced-motion: reduce) {
+  .scene-projects {
+    height: auto !important;
+  }
+  .scene-sticky {
+    position: static !important;
+    height: auto !important;
+    perspective: none !important;
+    overflow: visible !important;
+  }
+  .scene-stage {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: clamp(2rem, 5vw, 4rem);
+    padding: clamp(2rem, 5vw, 4rem) 0;
+    transform-style: flat !important;
+    height: auto !important;
+  }
+  .scene-card {
+    position: static !important;
+    left: auto !important;
+    top: auto !important;
+    width: 100% !important;
+    max-width: 560px;
+    margin: 0 auto;
+    transform: none !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+    will-change: auto !important;
+  }
+  .scene-card [data-card-visual] {
+    filter: none !important;
+  }
+  .scene-card [data-card-media] {
+    transform: none !important;
+  }
+  .scene-hud {
+    display: none !important;
+  }
 }
