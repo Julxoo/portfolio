@@ -281,81 +281,22 @@
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
-}
 
-/* =============================================================================
- * ProjectScene — couches visuelles pilotées par la boucle rAF.
- * --focus (0..1) et --px (px) sont écrits par carte dans ProjectScene.tsx.
- *   • Profondeur de champ : les cartes hors focus se désaturent, s'assombrissent
- *     et se floutent légèrement (focus-pull éditorial). Le flou — coûteux — est
- *     coupé au tactile (pointer: coarse).
- *   • Parallaxe : l'image glisse à contre-sens dans son cadre, la carte centrale
- *     gagne en profondeur. L'échelle 1.1 couvre le débord du décalage.
- * Transitions désactivées : tout est piloté frame par frame, pas d'interp CSS.
- * ============================================================================= */
-.scene-card [data-card-visual] {
-  filter:
-    saturate(calc(0.45 + 0.55 * var(--focus, 1)))
-    brightness(calc(0.9 + 0.1 * var(--focus, 1)))
-    blur(calc((1 - var(--focus, 1)) * 2.5px));
-  transition: none;
-}
-.scene-card [data-card-media] {
-  transform: translate3d(var(--px, 0px), 0, 0) scale(1.1);
-  transition: none;
-}
-@media (pointer: coarse) {
-  .scene-card [data-card-visual] {
-    filter:
-      saturate(calc(0.55 + 0.45 * var(--focus, 1)))
-      brightness(calc(0.94 + 0.06 * var(--focus, 1)));
-  }
-}
-
-/* =============================================================================
- * ProjectScene — fallback grille verticale.
- * Uniquement en prefers-reduced-motion : la scène 3D se dissout en empilement
- * vertical. Le contenu reste accessible, seule la chorégraphie disparaît, les
- * cartes reprennent leurs dimensions normales. Sur mobile la scène 3D tourne
- * (paramètres adoucis côté JS, voir ProjectScene.tsx / SCENE_PARAMS).
- * ============================================================================= */
-@media (prefers-reduced-motion: reduce) {
-  .scene-projects {
+  /* ProjectScene — pas de scroll-jack : scroll horizontal natif (swipe + snap). */
+  .ps-section {
     height: auto !important;
   }
-  .scene-sticky {
+  .ps-sticky {
     position: static !important;
     height: auto !important;
-    perspective: none !important;
-    overflow: visible !important;
+    overflow-x: auto !important;
+    overscroll-behavior-x: contain;
   }
-  .scene-stage {
-    display: flex !important;
-    flex-direction: column !important;
-    gap: clamp(2rem, 5vw, 4rem);
-    padding: clamp(2rem, 5vw, 4rem) 0;
-    transform-style: flat !important;
-    height: auto !important;
-  }
-  .scene-card {
-    position: static !important;
-    left: auto !important;
-    top: auto !important;
-    width: 100% !important;
-    max-width: 560px;
-    margin: 0 auto;
+  .ps-row {
     transform: none !important;
-    opacity: 1 !important;
-    pointer-events: auto !important;
-    will-change: auto !important;
+    scroll-snap-type: x mandatory;
   }
-  .scene-card [data-card-visual] {
-    filter: none !important;
-  }
-  .scene-card [data-card-media] {
-    transform: none !important;
-  }
-  .scene-hud {
-    display: none !important;
+  .ps-row > * {
+    scroll-snap-align: start;
   }
 }
