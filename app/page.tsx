@@ -182,7 +182,7 @@ export default function Home() {
       ================================================================= */}
       <section
         data-contrast-mask-target
-        className="relative z-[25] min-h-screen flex items-center px-gutter py-section-xl bg-surface text-surface-foreground border-t border-rule"
+        className="relative z-[25] min-h-[100svh] flex items-center px-gutter py-section-xl bg-surface text-surface-foreground border-t border-rule"
       >
         <div className="max-w-default mx-auto w-full">
           <div className="grid md:grid-cols-[1.3fr_1fr] gap-16 items-end">

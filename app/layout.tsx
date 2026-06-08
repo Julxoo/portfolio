@@ -80,9 +80,16 @@ export const metadata: Metadata = {
 // navigateur n'essaie pas d'auto-darkifier les scrollbars et form controls.
 export const viewport: Viewport = {
   colorScheme: "light",
+  // theme-color : encore lu par Chrome Android / anciens Safari. Safari 26
+  // (Liquid Glass) l'ignore et dérive sa barre du background-color du body /
+  // des éléments sticky aux bords → ici, body crème = barre flottante crème.
   themeColor: "#F4F1E8",
   width: "device-width",
   initialScale: 1,
+  // Edge-to-edge : indispensable pour que env(safe-area-inset-*) fonctionne.
+  viewportFit: "cover",
+  // Le clavier virtuel redimensionne le contenu (formulaire contact lisible).
+  interactiveWidget: "resizes-content",
 };
 
 // JSON-LD — identité Person pour les SERP Google. Injecté dans <body>
@@ -116,7 +123,7 @@ export default function RootLayout({
       lang="fr"
       className={`${clashDisplay.variable} ${cabinetGrotesk.variable} antialiased`}
     >
-      <body className="min-h-screen flex flex-col">
+      <body className="min-h-dvh flex flex-col">
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(JSON_LD_PERSON) }}

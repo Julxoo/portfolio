@@ -87,7 +87,7 @@ export function MobileMenu({ open, onClose, links }: MobileMenuProps) {
       aria-modal="true"
       aria-label="Menu principal"
       aria-hidden={!open}
-      className="fixed inset-0 z-50 bg-surface text-bg md:hidden flex flex-col outline-none"
+      className="fixed inset-0 z-50 bg-surface text-bg md:hidden flex flex-col outline-none pt-[env(safe-area-inset-top,0px)] pb-[env(safe-area-inset-bottom,0px)]"
       initial={false}
       animate={{ clipPath: open ? BLOOM("150%") : BLOOM("0%") }}
       transition={{ duration: 0.6, ease: EXPO }}

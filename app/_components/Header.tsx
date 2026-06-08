@@ -40,16 +40,18 @@ export function Header() {
   return (
     <>
       <header
-        className={`sticky top-0 z-40 relative transition-colors duration-standard ease-out-quint ${
+        className={`sticky top-0 z-40 relative pt-[env(safe-area-inset-top,0px)] transition-colors duration-standard ease-out-quint ${
           scrolled ? "text-bg" : "text-ink"
         } motion-reduce:transition-none`}
       >
         {/* Le bandeau kaki qui SE POSE depuis le haut (geste du rideau). Plus
             rapide que l'inversion du texte → le kaki couvre avant que le texte
-            passe en crème, donc zéro flicker. */}
+            passe en crème, donc zéro flicker. `top` négatif → il couvre aussi
+            la zone d'encoche (safe-area) pour aller bord-à-bord. */}
         <span
           aria-hidden
-          className={`absolute inset-0 origin-top bg-surface transition-transform duration-quick ease-out-quint motion-reduce:transition-none ${
+          style={{ top: "calc(-1 * env(safe-area-inset-top, 0px))" }}
+          className={`absolute inset-x-0 bottom-0 origin-top bg-surface transition-transform duration-quick ease-out-quint motion-reduce:transition-none ${
             scrolled ? "scale-y-100" : "scale-y-0"
           }`}
         />
@@ -109,7 +111,7 @@ export function Header() {
         aria-expanded={mobileOpen}
         aria-controls="mobile-menu"
         onClick={() => setMobileOpen((s) => !s)}
-        className="fixed top-0 right-0 z-[60] md:hidden h-14 flex items-center px-gutter focus-visible:outline-2 focus-visible:outline-offset-[3px] focus-visible:outline-accent-deep"
+        className="fixed top-[env(safe-area-inset-top,0px)] right-0 z-[60] md:hidden h-14 flex items-center px-gutter focus-visible:outline-2 focus-visible:outline-offset-[3px] focus-visible:outline-accent-deep"
       >
         <span className="relative block w-6 h-[14px]" aria-hidden>
           <span

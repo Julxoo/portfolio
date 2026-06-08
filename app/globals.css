@@ -39,7 +39,13 @@
   --section-xl: clamp(8rem, 16vw, 12.5rem);   /* 128 → 200 px — hero, finale */
 
   /* Marges latérales fluides — même valeur à gauche et à droite */
-  --gutter: clamp(1.5rem, 5vw, 6rem);         /*  24 →  96 px */
+  /* Marge latérale — au moins la safe-area (encoche en paysage). env() vaut
+   * 0px là où il n'y a pas de safe-area → identique sur tout appareil. */
+  --gutter: max(
+    clamp(1.5rem, 5vw, 6rem),
+    env(safe-area-inset-left, 0px),
+    env(safe-area-inset-right, 0px)
+  );                                          /*  24 →  96 px (+ safe-area) */
 
   /* Gouttière de grille éditoriale 6 colonnes */
   --grid-gap: clamp(1rem, 2vw, 2rem);         /*  16 →  32 px */
@@ -220,6 +226,13 @@
 @layer base {
   html {
     color-scheme: light;
+    /* Pas d'inflation auto du texte en paysage iOS. */
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+  /* Pas de flash gris au tap (iOS/Android). Le feedback vient de nos états. */
+  * {
+    -webkit-tap-highlight-color: transparent;
   }
   /* Masque la scrollbar native sur desktop — CustomScrollbar prend le relais.
    * Mobile (< 768px) garde la scrollbar native : pas de custom scrollbar,
