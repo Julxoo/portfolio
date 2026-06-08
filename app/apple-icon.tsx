@@ -1,12 +1,18 @@
 import { ImageResponse } from "next/og";
+import { readFile } from "node:fs/promises";
+import { join } from "node:path";
 
-// Icône Apple (home screen iOS / iPadOS) — même composition que le favicon
-// mais 180×180, padding ajusté pour laisser iOS appliquer son corner radius.
+// Icône Apple (180×180, home screen iOS/iPadOS) — « J » Clash Display crème
+// sur kaki, padding pour laisser iOS appliquer son corner radius.
 
 export const size = { width: 180, height: 180 };
 export const contentType = "image/png";
 
-export default function AppleIcon() {
+export default async function AppleIcon() {
+  const bold = await readFile(
+    join(process.cwd(), "app/_fonts/ClashDisplay-Bold.ttf"),
+  );
+
   return new ImageResponse(
     (
       <div
@@ -17,17 +23,19 @@ export default function AppleIcon() {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          fontFamily: "serif",
-          fontStyle: "italic",
-          fontSize: 140,
+          fontFamily: "Clash",
+          fontWeight: 700,
+          fontSize: 132,
           color: "#F4F1E8",
           lineHeight: 1,
-          paddingBottom: 10,
         }}
       >
         J
       </div>
     ),
-    size,
+    {
+      ...size,
+      fonts: [{ name: "Clash", data: bold, weight: 700, style: "normal" }],
+    },
   );
 }

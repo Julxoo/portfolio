@@ -1,87 +1,94 @@
 import { ImageResponse } from "next/og";
+import { readFile } from "node:fs/promises";
+import { join } from "node:path";
 
-// OG image globale — utilisée pour toutes les routes qui ne définissent
-// pas leur propre `opengraph-image.tsx` (pages projet, articles...).
-//
-// Composition : pure typographie éditoriale sur toile de lin.
-// - Header : « JULES TOUSSENEL » small-caps kaki
-// - Bloc central : titre Instrument Serif italique, ink
-// - Footer : filet kaki + label gauche + URL droite
-//
-// Fontes : pour l'instant fallback système (serif italic + sans-serif).
-// TODO : charger Instrument Serif Italic + Instrument Sans Medium en TTF
-// local (via `readFile(process.cwd(), 'app/_fonts/...')`) quand on aura
-// déposé les fichiers dans le repo. Satori ne peut pas fetcher Google Fonts
-// directement — il faut des ArrayBuffer.
+// OG image globale (1200×630) — la signature du site, façon hero : la phrase
+// « Des sites dessinés, pas décorés. » en Clash Display, « dessinés » en kaki
+// sur la toile de lin. Fontes Clash chargées en TTF (Satori ne lit pas le woff2).
 
-export const alt = "Jules Toussenel — Sites sur-mesure pour artisans et commerces premium";
+export const alt =
+  "Jules Toussenel — Des sites dessinés, pas décorés. Développeur freelance à Aix-en-Provence.";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
+const CREAM = "#F4F1E8";
+const INK = "#1F1F1B";
+const KAKI = "#535040";
+
 export default async function OpengraphImage() {
+  const [medium, bold] = await Promise.all([
+    readFile(join(process.cwd(), "app/_fonts/ClashDisplay-Medium.ttf")),
+    readFile(join(process.cwd(), "app/_fonts/ClashDisplay-Bold.ttf")),
+  ]);
+
   return new ImageResponse(
     (
       <div
         style={{
           width: "100%",
           height: "100%",
-          background: "#F4F1E8",
+          background: CREAM,
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
-          padding: 72,
-          fontFamily: "sans-serif",
+          padding: 84,
+          fontFamily: "Clash",
         }}
       >
-        {/* Header — petite capitale */}
-        <div
-          style={{
-            display: "flex",
-            fontSize: 22,
-            letterSpacing: 3,
-            textTransform: "uppercase",
-            color: "#535040",
-            fontWeight: 500,
-          }}
-        >
+        {/* Signature */}
+        <div style={{ display: "flex", fontSize: 30, fontWeight: 500, color: KAKI }}>
           Jules Toussenel
         </div>
 
-        {/* Bloc central — titre Serif italique */}
+        {/* Le titre — la phrase signature, « dessinés » en kaki */}
         <div
           style={{
             display: "flex",
-            fontFamily: "serif",
-            fontStyle: "italic",
-            fontSize: 104,
-            lineHeight: 1.05,
-            color: "#1F1F1B",
-            maxWidth: 980,
-            letterSpacing: -1,
+            flexDirection: "column",
+            fontWeight: 700,
+            fontSize: 100,
+            lineHeight: 0.98,
+            letterSpacing: -3,
           }}
         >
-          Sites sur-mesure pour artisans et commerces premium.
+          <div style={{ display: "flex" }}>
+            <span style={{ color: INK }}>Des sites&nbsp;</span>
+            <span style={{ color: KAKI }}>{" "}dessinés,</span>
+          </div>
+          <div style={{ display: "flex", color: INK }}>pas décorés.</div>
         </div>
 
-        {/* Footer — filet + labels */}
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-            fontSize: 20,
-            color: "#535040",
-            borderTop: "1px solid rgba(83, 80, 64, 0.25)",
-            paddingTop: 20,
-          }}
-        >
-          <span style={{ letterSpacing: 2, textTransform: "uppercase" }}>
-            Portfolio
-          </span>
-          <span>julestoussenel.com</span>
+        {/* Pied — filet kaki + rôle / url */}
+        <div style={{ display: "flex", flexDirection: "column" }}>
+          <div
+            style={{
+              display: "flex",
+              height: 1,
+              background: "rgba(83,80,64,0.3)",
+              marginBottom: 24,
+            }}
+          />
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              fontSize: 27,
+              fontWeight: 500,
+              color: KAKI,
+            }}
+          >
+            <span>Développeur freelance · Aix-en-Provence</span>
+            <span>julestoussenel.com</span>
+          </div>
         </div>
       </div>
     ),
-    size,
+    {
+      ...size,
+      fonts: [
+        { name: "Clash", data: medium, weight: 500, style: "normal" },
+        { name: "Clash", data: bold, weight: 700, style: "normal" },
+      ],
+    },
   );
 }
