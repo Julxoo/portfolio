@@ -9,6 +9,11 @@ import { Manifeste } from "./_components/Manifeste";
 import { ScrollMarquee } from "./_components/ScrollMarquee";
 import { MethodeHome } from "./_components/MethodeHome";
 import { Terrain } from "./_components/Terrain";
+import { PourQui } from "./_components/PourQui";
+import { Services } from "./_components/Services";
+import { Temoignages } from "./_components/Temoignages";
+import { Tarifs } from "./_components/Tarifs";
+import { Faq } from "./_components/Faq";
 
 export const metadata: Metadata = {
   title: {
@@ -73,32 +78,34 @@ export default function Home() {
       ================================================================= */}
       <Overture />
 
-      <Manifeste />
+      {/* NOUVELLE ARBORESCENCE (entonnoir) — sections 🆕 en placeholder,
+          à retravailler une à une. Ordre : Hero → Pour qui → Services →
+          Projets → Témoignages → Manifeste → Méthode → Tarifs → Terrain →
+          À propos/Carnet → FAQ → CTA. */}
+
+      {/* 🆕 placeholder */}
+      <PourQui />
+
+      {/* 🆕 placeholder */}
+      <Services />
 
       {/* =================================================================
-        PROJETS — « Le défilé de l'atelier » : intro éditoriale + galerie
-        horizontale. Desktop = balayage scroll-driven épinglé (HUD index +
-        progression). Tactile = scroll-snap natif (swipe), buttery iOS.
-        Le titre + le compteur vivent dans le composant (un seul bloc).
+        PROJETS — « Le défilé de l'atelier » : galerie horizontale
+        scroll-driven (desktop) / scroll-snap natif (tactile).
       ================================================================= */}
       <ProjectScene projects={FEATURED} />
 
       <ScrollMarquee />
 
-      <section className="px-gutter pt-section-md pb-section-lg">
-        <div className="max-w-default mx-auto max-w-[52ch]">
-          <p className="font-sans text-[15px] text-ink/70 leading-relaxed">
-            Les études de cas complètes s&apos;écrivent au fur et à mesure.
-            En attendant, le travail se montre par email — captures,
-            références directes, discussion.
-          </p>
-          <div className="mt-5">
-            <SlideLink href="/contact">Écrire pour voir</SlideLink>
-          </div>
-        </div>
-      </section>
+      {/* 🆕 placeholder — preuve sociale */}
+      <Temoignages />
+
+      <Manifeste />
 
       <MethodeHome />
+
+      {/* 🆕 placeholder — prix à définir (A/B/C) */}
+      <Tarifs />
 
       <Terrain />
 
@@ -146,6 +153,9 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* 🆕 placeholder — FAQ (SEO longue-traîne + objections) */}
+      <Faq />
 
       {/* =================================================================
         BRISURE CHROMATIQUE — voile kaki qui fade-in au passage de la CTA.
