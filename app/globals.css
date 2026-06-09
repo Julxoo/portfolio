@@ -275,6 +275,93 @@
 }
 
 /* =============================================================================
+ * ProjectScene (.ps-*) — « Le défilé de l'atelier ».
+ *
+ * Le scroll vertical pilote le défilé HORIZONTAL (sur tout appareil).
+ *
+ * DÉFAUT = mode natif (data-mode="native") : scroll horizontal au doigt
+ * (swipe + snap). C'est la baseline sans-JS (rendue côté serveur) ET le mode
+ * reduced-motion. Aucun mouvement imposé.
+ *
+ * data-mode="pan" (posé en JS, motion ok) : section épinglée, rangée translatée
+ * au scroll. Moteur = CSS scroll-driven (`animation-timeline: view()`) quand
+ * supporté → piloté par le COMPOSITEUR, hors main thread, impossible à faire
+ * saccader (même pendant l'inertie tactile iOS). Repli = lerp JS (Firefox).
+ * La translate exacte vient de --ps-x (posé en JS, scrollbar exclue).
+ * ============================================================================= */
+.ps-viewport {
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-padding-inline: var(--gutter);
+  overscroll-behavior-x: contain; /* pas de back-swipe nav iOS */
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.ps-viewport::-webkit-scrollbar {
+  display: none;
+}
+.ps-card {
+  scroll-snap-align: start;
+  scroll-snap-stop: always; /* un projet par swipe — feel délibéré */
+}
+.ps-hud {
+  display: none;
+}
+
+/* Mode pan — section épinglée, défilé piloté par le scroll. */
+.ps-section[data-mode="pan"] .ps-viewport {
+  position: sticky;
+  top: 0;
+  height: 100svh;
+  overflow: hidden;
+  scroll-snap-type: none;
+  display: flex;
+  align-items: center;
+  scroll-padding-inline: 0;
+}
+.ps-section[data-mode="pan"] .ps-card {
+  scroll-snap-align: none;
+  scroll-snap-stop: normal;
+}
+.ps-section[data-mode="pan"] .ps-hud {
+  display: block;
+}
+
+/* Moteur compositor-driven (CSS scroll-driven) — quand supporté. La section
+ * porte une view-timeline ; sa plage `contain` correspond EXACTEMENT à la
+ * phase épinglée (haut de section au sommet → bas de section au pied). */
+@supports (animation-timeline: view()) {
+  .ps-section[data-mode="pan"] {
+    view-timeline-name: --ps-track;
+    view-timeline-axis: block;
+  }
+  .ps-section[data-mode="pan"] .ps-row {
+    animation: ps-pan linear both;
+    animation-timeline: --ps-track;
+    animation-range: contain 0% contain 100%;
+  }
+  .ps-section[data-mode="pan"] .ps-fill {
+    animation: ps-fill linear both;
+    animation-timeline: --ps-track;
+    animation-range: contain 0% contain 100%;
+  }
+}
+
+@keyframes ps-pan {
+  to {
+    transform: translate3d(calc(-1 * var(--ps-x, 0px)), 0, 0);
+  }
+}
+@keyframes ps-fill {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+/* =============================================================================
  * Reduced motion — règle globale.
  * Quand l'utilisateur demande moins d'animation, on respecte sans débat.
  * L'état final compte, pas la transition qui y mène.
@@ -287,21 +374,22 @@
     scroll-behavior: auto !important;
   }
 
-  /* ProjectScene — pas de scroll-jack : scroll horizontal natif (swipe + snap). */
-  .ps-section {
+  /* ProjectScene — le JS ne bascule jamais en mode pan si reduced-motion ;
+     le défilé reste en mode natif (scroll horizontal, snap). Filet de sécurité
+     au cas où data-mode resterait "pan", + neutralisation du scroll-driven. */
+  .ps-section[data-mode="pan"] {
     height: auto !important;
   }
-  .ps-sticky {
+  .ps-section[data-mode="pan"] .ps-viewport {
     position: static !important;
     height: auto !important;
     overflow-x: auto !important;
-    overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory !important;
+    display: block !important;
   }
-  .ps-row {
+  .ps-section[data-mode="pan"] .ps-row,
+  .ps-section[data-mode="pan"] .ps-fill {
+    animation: none !important;
     transform: none !important;
-    scroll-snap-type: x mandatory;
-  }
-  .ps-row > * {
-    scroll-snap-align: start;
   }
 }

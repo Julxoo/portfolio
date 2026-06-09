@@ -77,27 +77,11 @@ export default function Home() {
       <Manifeste />
 
       {/* =================================================================
-        PROJETS — intro éditoriale + ProjectScene 3D sticky.
-        Les cartes traversent la scène au passage du scroll, à la Wodniack
-        mais en kaki sur toile de lin. Fallback mobile et reduced-motion =
-        grille verticale classique (voir globals.css .scene-*).
+        PROJETS — « Le défilé de l'atelier » : intro éditoriale + galerie
+        horizontale. Desktop = balayage scroll-driven épinglé (HUD index +
+        progression). Tactile = scroll-snap natif (swipe), buttery iOS.
+        Le titre + le compteur vivent dans le composant (un seul bloc).
       ================================================================= */}
-      <section className="px-gutter pt-section-lg pb-section-md border-t border-rule">
-        <div className="max-w-default mx-auto">
-          <div className="flex items-baseline justify-between gap-6 flex-wrap">
-            <div>
-              <div className="text-eyebrow uppercase text-ink/60 mb-3">
-                Projets récents
-              </div>
-              <h2 className="font-display italic text-[clamp(2rem,4vw,3rem)] leading-tight text-ink max-w-[18ch]">
-                Ce qui sort de l&apos;atelier.
-              </h2>
-            </div>
-            <SlideLink href="/projets">Tous les projets</SlideLink>
-          </div>
-        </div>
-      </section>
-
       <ProjectScene projects={FEATURED} />
 
       <ScrollMarquee />

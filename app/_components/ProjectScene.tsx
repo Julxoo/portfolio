@@ -5,16 +5,27 @@ import Link from "next/link";
 import { useTempus } from "tempus/react";
 import { useEffect, useRef } from "react";
 import { Tag } from "../_lib/ui/Tag";
+import { SlideLink } from "../_lib/ui/Link";
 
 // =====================================================================
-// ProjectScene — galerie horizontale pilotée par le scroll vertical.
+// ProjectScene — « Le défilé de l'atelier ».
 //
-// Version allégée (l'ancienne scène 3D saccadait sur iOS) : la rangée se
-// déplace via UNE SEULE transform translate3d (composée GPU), lissée par un
-// lerp. Aucune 3D, aucun filtre blur, aucun calcul par-carte → fluide mobile.
+// LE SCROLL VERTICAL PILOTE LE DÉFILÉ HORIZONTAL (sur tout appareil). La
+// section est épinglée et rendue haute ; en scrollant, la rangée se translate
+// latéralement. Geste signature, intégré au scroll normal.
 //
-// Fallback prefers-reduced-motion : scroll horizontal natif (swipe + snap),
-// zéro JS (voir .ps-* dans globals.css).
+// Moteur du mouvement, par ordre de préférence :
+//  1. CSS scroll-driven (`animation-timeline: view()`) quand supporté
+//     (iOS 26 Safari, Chrome) → piloté par le COMPOSITEUR, hors main thread :
+//     impossible de saccader, même pendant l'inertie tactile iOS.
+//  2. Repli JS (lerp Tempus) pour les moteurs sans support (Firefox).
+//
+// reduced-motion → on abandonne le scroll-jack : scroll horizontal natif
+// (swipe + snap), zéro mouvement imposé.
+//
+// La numérotation géante (01–04) fait colonne vertébrale (écho du Manifeste).
+// Survol desktop = morph de graisse du titre (Clash variable, « matière
+// vivante »). HUD = filet de progression, lui aussi compositor-driven.
 // =====================================================================
 
 export type SceneProject = {
@@ -35,42 +46,60 @@ function clamp(v: number, min: number, max: number) {
 export function ProjectScene({ projects }: { projects: SceneProject[] }) {
   const sectionRef = useRef<HTMLElement | null>(null);
   const rowRef = useRef<HTMLDivElement | null>(null);
-  const distanceRef = useRef(0); // largeur de translation horizontale (px)
-  const currentRef = useRef(0); // translation lissée (px)
-  const visibleRef = useRef(false);
-  const reducedRef = useRef(false);
+  const fillRef = useRef<HTMLSpanElement | null>(null);
 
-  // Mesure la distance horizontale et fixe la hauteur de scroll (1:1).
+  const distanceRef = useRef(0); // largeur de translation horizontale (px)
+  const currentRef = useRef(0); // translation lissée (px) — repli JS
+  const visibleRef = useRef(false);
+  const modeRef = useRef<"native" | "pan">("native");
+  const cssDrivenRef = useRef(false); // true → CSS gère le mouvement, le JS se tait
+
+  // Choix du mode + mesure (--ps-x + hauteur de section).
   useEffect(() => {
     const section = sectionRef.current;
     const row = rowRef.current;
     if (!section || !row) return;
 
-    const mqReduced = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const measure = () => {
-      reducedRef.current = mqReduced.matches;
-      if (reducedRef.current) {
+    cssDrivenRef.current =
+      typeof CSS !== "undefined" &&
+      typeof CSS.supports === "function" &&
+      CSS.supports("animation-timeline: view()");
+
+    const mqReduce = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+    const apply = () => {
+      if (mqReduce.matches) {
+        // Mode natif : scroll horizontal au doigt, aucun mouvement imposé.
+        modeRef.current = "native";
+        section.dataset.mode = "native";
         section.style.height = "";
+        section.style.removeProperty("--ps-x");
         row.style.transform = "";
         return;
       }
-      const distance = Math.max(0, row.scrollWidth - window.innerWidth);
+
+      modeRef.current = "pan";
+      section.dataset.mode = "pan";
+      // clientWidth exclut la scrollbar → translation exacte (pas de débord).
+      const clientW = document.documentElement.clientWidth;
+      const distance = Math.max(0, row.scrollWidth - clientW);
       distanceRef.current = distance;
-      // Hauteur = 1 viewport (sticky) + la distance horizontale → mapping 1:1.
+      section.style.setProperty("--ps-x", `${distance}px`);
+      // Hauteur = 1 viewport épinglé + distance horizontale → mapping 1:1.
       section.style.height = `${window.innerHeight + distance}px`;
     };
 
-    measure();
-    document.fonts?.ready?.then(measure);
-    window.addEventListener("resize", measure);
-    mqReduced.addEventListener("change", measure);
+    apply();
+    document.fonts?.ready?.then(apply);
+    window.addEventListener("resize", apply);
+    mqReduce.addEventListener("change", apply);
     return () => {
-      window.removeEventListener("resize", measure);
-      mqReduced.removeEventListener("change", measure);
+      window.removeEventListener("resize", apply);
+      mqReduce.removeEventListener("change", apply);
     };
   }, [projects.length]);
 
-  // Gate hors-champ.
+  // Gate hors-champ (repli JS uniquement).
   useEffect(() => {
     const section = sectionRef.current;
     if (!section) return;
@@ -84,9 +113,16 @@ export function ProjectScene({ projects }: { projects: SceneProject[] }) {
     return () => obs.disconnect();
   }, []);
 
-  // Une transform, lissée. rAF partagé (Tempus) — marche avec/sans Lenis.
+  // Repli JS (Firefox & co.) : lerp de la translate + du filet. Ne tourne PAS
+  // quand le CSS scroll-driven pilote déjà (cssDrivenRef), ni en mode natif.
   useTempus((_t: number, deltaTime: number) => {
-    if (!visibleRef.current || reducedRef.current) return;
+    if (
+      cssDrivenRef.current ||
+      modeRef.current !== "pan" ||
+      !visibleRef.current
+    ) {
+      return;
+    }
     const section = sectionRef.current;
     const row = rowRef.current;
     const distance = distanceRef.current;
@@ -101,36 +137,87 @@ export function ProjectScene({ projects }: { projects: SceneProject[] }) {
     const dt = Math.min(deltaTime / 1000, 0.05);
     currentRef.current += (target - currentRef.current) * (1 - Math.exp(-14 * dt));
     row.style.transform = `translate3d(${currentRef.current.toFixed(2)}px, 0, 0)`;
+    if (fillRef.current) {
+      fillRef.current.style.transform = `scaleX(${progress.toFixed(4)})`;
+    }
   });
 
   if (projects.length === 0) return null;
 
+  const total = String(projects.length).padStart(2, "0");
+
   return (
-    <section
-      ref={sectionRef}
-      className="ps-section relative bg-bg"
-      aria-label="Projets récents"
-    >
-      <div className="ps-sticky sticky top-0 h-[100svh] overflow-hidden flex items-center">
-        <div
-          ref={rowRef}
-          className="ps-row flex items-center gap-[var(--grid-gap)] px-gutter [will-change:transform]"
-        >
-          {projects.map((project) => (
-            <div
-              key={project.slug}
-              className="shrink-0 w-[80vw] sm:w-[58vw] lg:w-[34vw] max-w-[440px]"
-            >
-              <ProjectCard {...project} />
+    <>
+      {/* Intro éditoriale — flux vertical normal (jamais de texte à lire dans
+          la zone qui défile : NN/g). */}
+      <section
+        aria-labelledby="projets-titre"
+        className="px-gutter pt-section-lg pb-section-md border-t border-rule"
+      >
+        <div className="max-w-default mx-auto">
+          <div className="flex items-end justify-between gap-x-10 gap-y-6 flex-wrap">
+            <div>
+              <div className="text-eyebrow uppercase text-ink/60 mb-3">
+                Projets récents
+              </div>
+              <h2
+                id="projets-titre"
+                className="font-display text-[clamp(2rem,4.5vw,3.25rem)] leading-[0.98] text-ink max-w-[16ch]"
+              >
+                Ce qui sort de{" "}
+                <span className="text-surface">l&apos;atelier.</span>
+              </h2>
             </div>
-          ))}
+            <div className="flex items-center gap-5">
+              <span className="font-display text-ink/40 text-[0.95rem] tabular-nums">
+                {total} études
+              </span>
+              <SlideLink href="/projets">Tous les projets</SlideLink>
+            </div>
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+
+      {/* Le défilé. data-mode posé en JS ("native" par défaut = baseline
+          sans-JS scrollable + reduced-motion). Styles dans globals.css. */}
+      <section
+        ref={sectionRef}
+        data-mode="native"
+        className="ps-section relative bg-bg"
+        aria-label="Galerie des projets récents"
+      >
+        <div className="ps-viewport">
+          <div
+            ref={rowRef}
+            className="ps-row flex items-stretch gap-[var(--grid-gap)] px-gutter [will-change:transform]"
+          >
+            {projects.map((project, i) => (
+              <ProjectCard key={project.slug} index={i} {...project} />
+            ))}
+            <EndCard />
+          </div>
+
+          {/* HUD — filet de progression. Visible en mode pan (CSS). En CSS
+              scroll-driven, .ps-fill est animé par le compositeur ; en repli
+              JS, son scaleX est posé dans la boucle Tempus. */}
+          <div className="ps-hud pointer-events-none absolute inset-x-0 bottom-[max(1.5rem,env(safe-area-inset-bottom,0px))] px-gutter">
+            <span className="relative block h-px w-full bg-rule overflow-hidden">
+              <span
+                ref={fillRef}
+                aria-hidden
+                className="ps-fill absolute inset-0 origin-left bg-surface"
+                style={{ transform: "scaleX(0)" }}
+              />
+            </span>
+          </div>
+        </div>
+      </section>
+    </>
   );
 }
 
-export function ProjectCard({
+function ProjectCard({
+  index,
   slug,
   eyebrow,
   title,
@@ -139,43 +226,62 @@ export function ProjectCard({
   tags = [],
   imageSrc,
   imageAlt,
-}: SceneProject) {
+}: SceneProject & { index: number }) {
   const href = `/projets/${slug}`;
+  const num = String(index + 1).padStart(2, "0");
+
   return (
-    <article className="group relative bg-bg border border-rule-strong">
-      <div className="relative aspect-[4/5] overflow-hidden bg-accent-warm/25">
+    <article className="ps-card group relative shrink-0 w-[78vw] sm:w-[58vw] lg:w-[34vw] max-w-[440px] flex flex-col">
+      {/* Bande index — numéro géant (colonne vertébrale) + filet + année. */}
+      <div className="flex items-baseline gap-4 mb-4">
+        <span
+          aria-hidden
+          className="font-display text-surface text-[clamp(1.5rem,2.6vw,2.1rem)] leading-none tabular-nums"
+        >
+          {num}
+        </span>
+        <span aria-hidden className="flex-1 h-px bg-rule-strong" />
+        <span className="font-display text-ink/55 text-[0.9rem] tabular-nums">
+          {year}
+        </span>
+      </div>
+
+      {/* Image — cadre net, sans bordure. Aplat kaki tant que pas de capture. */}
+      <div className="relative aspect-[4/5] overflow-hidden bg-surface">
         {imageSrc ? (
           <Image
             src={imageSrc}
             alt={imageAlt ?? ""}
             fill
-            className="object-cover transition-transform duration-deliberate ease-out-quint group-hover:scale-[1.03] motion-reduce:transition-none"
-            sizes="(min-width: 1024px) 34vw, (min-width: 640px) 58vw, 80vw"
+            className="object-cover transition-transform duration-deliberate ease-out-quint group-hover:scale-[1.04] motion-reduce:transition-none"
+            sizes="(min-width: 1024px) 34vw, (min-width: 640px) 58vw, 78vw"
           />
         ) : (
-          <div className="size-full bg-surface" aria-hidden />
+          <div className="absolute inset-0 grid place-items-center" aria-hidden>
+            <span className="font-display text-bg/10 text-[clamp(5rem,20vw,11rem)] leading-none tabular-nums select-none">
+              {num}
+            </span>
+            <span className="absolute bottom-5 left-5 text-eyebrow uppercase text-bg/55">
+              Étude à venir
+            </span>
+          </div>
         )}
       </div>
 
-      <div className="p-5 md:p-6">
-        <div className="flex items-baseline justify-between gap-4 mb-3">
-          <span className="font-sans text-[11px] tracking-[0.12em] small-caps text-ink/65">
-            {eyebrow}
-          </span>
-          <span className="font-display text-[0.95rem] text-ink/70">{year}</span>
-        </div>
-
-        <h3 className="font-display text-[clamp(1.4rem,2.2vw,1.75rem)] leading-tight text-ink mb-3">
+      {/* Texte. */}
+      <div className="pt-5">
+        <div className="text-eyebrow uppercase text-ink/55 mb-2">{eyebrow}</div>
+        <h3 className="font-display text-[clamp(1.45rem,2.2vw,1.9rem)] leading-[1.05] text-ink mb-3 [font-variation-settings:'wght'_480] lg:group-hover:[font-variation-settings:'wght'_660] transition-[font-variation-settings] duration-deliberate ease-out-quint motion-reduce:transition-none">
           <Link
             href={href}
-            className="pb-1 border-b border-transparent transition-[border-color] duration-quick ease-out-quint group-hover:border-ink after:absolute after:inset-0 after:content-[''] focus-visible:outline-2 focus-visible:outline-offset-[3px] focus-visible:outline-accent-deep motion-reduce:transition-none"
+            className="after:absolute after:inset-0 after:content-[''] focus-visible:outline-2 focus-visible:outline-offset-[4px] focus-visible:outline-accent-deep"
           >
             {title}
           </Link>
         </h3>
-
-        {teaser && <p className="text-body text-ink/70 max-w-[42ch]">{teaser}</p>}
-
+        {teaser && (
+          <p className="font-sans text-body text-ink/70 max-w-[42ch]">{teaser}</p>
+        )}
         {tags.length > 0 && (
           <div className="mt-4 flex flex-wrap gap-2 relative z-[2]">
             {tags.map((t) => (
@@ -185,5 +291,26 @@ export function ProjectCard({
         )}
       </div>
     </article>
+  );
+}
+
+// Fin du défilé : panneau kaki-CTA. Le défilé se conclut sur une invitation.
+function EndCard() {
+  return (
+    <Link
+      href="/projets"
+      className="ps-card group relative shrink-0 w-[78vw] sm:w-[48vw] lg:w-[24vw] max-w-[360px] min-h-[24rem] flex flex-col justify-between bg-surface text-surface-foreground p-7 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent-warm"
+    >
+      <span className="text-eyebrow uppercase text-bg/55">Et la suite</span>
+      <span className="font-display text-[clamp(1.7rem,2.6vw,2.2rem)] leading-[1.02] text-bg [font-variation-settings:'wght'_500] lg:group-hover:[font-variation-settings:'wght'_660] transition-[font-variation-settings] duration-deliberate ease-out-quint motion-reduce:transition-none">
+        Voir tous
+        <br />
+        les projets
+        <span className="inline-block transition-transform duration-quick ease-out-quint lg:group-hover:translate-x-1">
+          {" "}
+          →
+        </span>
+      </span>
+    </Link>
   );
 }
