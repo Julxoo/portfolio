@@ -226,6 +226,11 @@
 @layer base {
   html {
     color-scheme: light;
+    /* Fond racine crème : avec viewport-fit=cover, les safe-areas (sous la
+     * Dynamic Island, sous la barre Safari) et l'overscroll iOS montrent le
+     * fond de <html>. Sans ça, bords blancs/défaut « qui font pas bien ».
+     * Donne aussi à Safari 26 (Liquid Glass) une teinte de barre fiable. */
+    background-color: var(--color-bg);
     /* Pas d'inflation auto du texte en paysage iOS. */
     -webkit-text-size-adjust: 100%;
     text-size-adjust: 100%;
