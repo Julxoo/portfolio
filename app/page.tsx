@@ -8,7 +8,6 @@ import { Overture } from "./_components/Overture";
 import { Manifeste } from "./_components/Manifeste";
 import { ScrollMarquee } from "./_components/ScrollMarquee";
 import { MethodeHome } from "./_components/MethodeHome";
-import { Chiffres } from "./_components/Chiffres";
 import { Terrain } from "./_components/Terrain";
 
 export const metadata: Metadata = {
@@ -100,8 +99,6 @@ export default function Home() {
       </section>
 
       <MethodeHome />
-
-      <Chiffres />
 
       <Terrain />
 
