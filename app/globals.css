@@ -362,6 +362,95 @@
 }
 
 /* =============================================================================
+ * MethodeHome (.ms-*) — « Les étapes se posent ».
+ *
+ * Réplique du système d'empilement de lenis.dev (feature-cards), habillé à
+ * notre DA. La section est haute (piste de scroll) ; un enfant sticky épingle
+ * titre + scène. Chaque carte est posée à un cran de scroll : le JS ajoute la
+ * classe .current (lecture rect via Tempus, pas de Lenis requis), le CSS anime
+ * la pose (opacité + transform, ~0.6s ease-out-quint, zéro rebond).
+ *
+ * Position de repos par carte calculée depuis --i (0..3) : escalier DIAGONAL
+ * sur desktop (top + left croissants), pile VERTICALE centrée sur mobile.
+ * État caché (avant pose) : repoussée hors-champ bas-droite + opacité 0.
+ * ============================================================================= */
+.ms-section {
+  --ms-inset: clamp(1rem, 3vw, 2.5rem);
+  /* Décalage haut pour passer sous le header persistant (+ safe-area). */
+  --ms-pad-top: calc(env(safe-area-inset-top, 0px) + 4rem);
+  --ms-card-w: clamp(19rem, 33vw, 29rem);
+  --ms-card-h: clamp(23rem, 42vw, 33rem);
+  /* --ms-count / --ms-steps (N-1) posés en inline par le composant. */
+  position: relative;
+  height: calc(var(--ms-count, 9) * 76vh); /* piste de scroll */
+}
+.ms-sticky {
+  position: sticky;
+  top: 0;
+  height: 100svh;
+  overflow: hidden;
+  padding: var(--ms-inset);
+  padding-top: var(--ms-pad-top);
+  display: flex;
+  flex-direction: column;
+}
+.ms-head {
+  position: relative;
+  z-index: 2;
+}
+.ms-stage {
+  position: relative;
+  flex: 1 1 auto;
+  width: 100%;
+}
+.ms-card {
+  position: absolute;
+  width: var(--ms-card-w);
+  height: var(--ms-card-h);
+  will-change: transform;
+  transition:
+    opacity 0.6s var(--eoq),
+    transform 0.62s var(--eoq);
+  /* mobile (défaut) : centré horizontalement, escalier vertical dense via --i */
+  left: 50%;
+  margin-left: calc(var(--ms-card-w) / -2);
+  top: calc((100% - var(--ms-card-h)) / var(--ms-steps, 8) * var(--i));
+}
+/* État caché — uniquement quand le JS a pris la main (data-ready). Sans JS /
+   reduced-motion : toutes les cartes restent visibles à leur position de repos. */
+.ms-section[data-ready] .ms-card:not(.current) {
+  opacity: 0;
+  transform: translate(0, 90%);
+}
+
+@media (max-width: 767.98px) {
+  .ms-section {
+    --ms-card-w: min(86vw, 22rem);
+    --ms-card-h: clamp(19rem, 74vw, 25rem);
+  }
+}
+
+@media (min-width: 768px) {
+  .ms-head {
+    position: absolute;
+    top: var(--ms-pad-top);
+    right: var(--ms-inset);
+    text-align: right;
+    max-width: 22ch;
+  }
+  /* Escalier DIAGONAL : top ET left croissent de espace/(N-1) → pas plus petit
+     que la carte = chevauchement dense (look lenis). */
+  .ms-card {
+    margin-left: 0;
+    left: calc((100% - var(--ms-card-w)) / var(--ms-steps, 8) * var(--i));
+    top: calc((100% - var(--ms-card-h)) / var(--ms-steps, 8) * var(--i));
+  }
+  .ms-section[data-ready] .ms-card:not(.current) {
+    transform: translate(100%, 100%);
+  }
+}
+
+/* =============================================================================
  * Reduced motion — règle globale.
  * Quand l'utilisateur demande moins d'animation, on respecte sans débat.
  * L'état final compte, pas la transition qui y mène.
