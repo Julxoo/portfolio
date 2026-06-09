@@ -451,6 +451,69 @@
 }
 
 /* =============================================================================
+ * Services (.sv-*) — « L'encre qui remplit ».
+ *
+ * Signature font-driven : chaque discipline est tracée en CONTOUR (text-stroke
+ * kaki, remplissage transparent) au repos, puis l'ENCRE la remplit de gauche à
+ * droite au scroll — le mot se « dessine ». Écho direct du positionnement
+ * « dessiné, pas décoré ». Pur CSS scroll-driven (animation-timeline: view()),
+ * zéro JS. Repli (Firefox / sans support / reduced-motion) : mot plein, lisible.
+ * ============================================================================= */
+.sv-line {
+  width: fit-content;
+  /* line-height généreux : contient les descendantes (q, g, p) dans la boîte,
+     pour que l'encre (fond clippé au texte) les couvre — sans overshoot. */
+  line-height: 1.1;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  -webkit-text-stroke: 1.25px var(--color-surface);
+  font-variation-settings: "wght" 600; /* défaut/repli = plein, gras */
+  transform-origin: left center;
+  /* Encre pleine, bord NET : la dernière lettre se remplit complètement. */
+  background-image: linear-gradient(
+    90deg,
+    var(--color-surface),
+    var(--color-surface)
+  );
+  background-repeat: no-repeat;
+  background-position: left top;
+  background-size: 100% 100%; /* défaut = plein → repli lisible */
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+@supports (animation-timeline: view()) {
+  .sv-line {
+    background-size: 0% 100%; /* contour seul au repos, l'encre balaie L→R */
+    animation: sv-ink linear both;
+    animation-timeline: view();
+    animation-range: cover 6% cover 46%;
+  }
+}
+/* La discipline se DESSINE : trait fin et fantôme → l'encre l'envahit de gauche
+   à droite (bord net), pendant que les fûts s'épaississent (axe variable Clash)
+   et que le mot se cale en place. Le mot prend corps. */
+@keyframes sv-ink {
+  from {
+    background-size: 0% 100%;
+    font-variation-settings: "wght" 220;
+    opacity: 0.45;
+    transform: scale(0.97);
+  }
+  to {
+    background-size: 100% 100%;
+    font-variation-settings: "wght" 600;
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .sv-line {
+    background-size: 100% 100% !important;
+    animation: none !important;
+  }
+}
+
+/* =============================================================================
  * Reduced motion — règle globale.
  * Quand l'utilisateur demande moins d'animation, on respecte sans débat.
  * L'état final compte, pas la transition qui y mène.
