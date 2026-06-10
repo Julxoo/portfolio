@@ -83,10 +83,17 @@ export default function Home() {
           Projets → Témoignages → Manifeste → Méthode → Tarifs → Terrain →
           À propos/Carnet → FAQ → CTA. */}
 
-      {/* 🆕 placeholder */}
+      {/* =================================================================
+        POUR QUI — « La plume choisit » : liste de qualification, les
+        audiences acceptées s'encrent, les refusées sont biffées au scroll.
+      ================================================================= */}
       <PourQui />
 
-      {/* 🆕 placeholder */}
+      {/* =================================================================
+        SERVICES — « Le tunnel de caractères » : section épinglée, chaque
+        métier fonce du fond de la scène vers le visiteur, puis l'index
+        se pose, lisible. Pur CSS scroll-driven.
+      ================================================================= */}
       <Services />
 
       {/* =================================================================
@@ -97,7 +104,11 @@ export default function Home() {
 
       <ScrollMarquee />
 
-      {/* 🆕 placeholder — preuve sociale */}
+      {/* =================================================================
+        TÉMOIGNAGES — « À voix haute » : scène épinglée, une voix à la fois
+        en encre pleine, les autres en murmures. Verbatims factices à
+        remplacer par les vrais. Scroll lissé (Tempus), zéro saut.
+      ================================================================= */}
       <Temoignages />
 
       <Manifeste />

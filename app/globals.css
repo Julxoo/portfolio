@@ -451,65 +451,291 @@
 }
 
 /* =============================================================================
- * Services (.sv-*) — « L'encre qui remplit ».
+ * Pour qui (.pq-*) — « Lumière rasante ».
  *
- * Signature font-driven : chaque discipline est tracée en CONTOUR (text-stroke
- * kaki, remplissage transparent) au repos, puis l'ENCRE la remplit de gauche à
- * droite au scroll — le mot se « dessine ». Écho direct du positionnement
- * « dessiné, pas décoré ». Pur CSS scroll-driven (animation-timeline: view()),
- * zéro JS. Repli (Firefox / sans support / reduced-motion) : mot plein, lisible.
+ * Les trois clientèles sont GRAVÉES dans la toile : à plat, des lettres kaki
+ * à peine en relief. Une source de lumière suit le pointeur (doigt ou souris,
+ * un seul modèle partout) ; au repos elle balaie lentement toute seule. Le
+ * relief accroche la lumière à son passage — le biseau se tourne vers elle
+ * (--bx/--by, posés par JS par nom) et un éclat chaud parcourt les lettres
+ * (dégradé radial clippé au texte, centré sur --lx/--ly). Les noms surgissent
+ * gaufrés, puis se rendorment dans la toile.
+ *
+ * Le mécanisme : Tempus écrit --lx/--ly (px relatifs au panneau) et le biseau
+ * par nom ; tout le rendu est CSS, GPU-friendly (pas de filtre par frame).
+ * SSR / sans JS : lumière figée en haut-gauche (valeurs % par défaut) → les
+ * noms restent lisibles, gaufrés. Reduced motion : pas de balayage auto, la
+ * lumière se fige ; le pointeur (geste volontaire) reste actif.
  * ============================================================================= */
-.sv-line {
+.pq-panel {
+  position: relative;
+  /* Défauts SSR / sans JS : lumière haut-gauche, biseau orienté vers elle. */
+  --lx: 26%;
+  --ly: -8%;
+}
+/* La lumière grazie AUSSI la toile, pas seulement les lettres : halo chaud
+   très discret posé sur le panneau, centré sur la source. */
+.pq-panel::before {
+  content: "";
+  position: absolute;
+  inset: 0; /* même repère que --lx/--ly → halo et éclat partagent le centre */
+  pointer-events: none;
+  background: radial-gradient(
+    30rem 30rem at var(--lx) var(--ly),
+    color-mix(in srgb, var(--color-accent-warm) 26%, transparent),
+    transparent 62%
+  );
+  opacity: 0.75;
+  z-index: 0;
+}
+.pq-list {
+  position: relative;
+  z-index: 1;
+}
+/* base + calque de lumière partagent la même cellule de grille → alignés au
+   pixel (mêmes métriques de texte, mêmes positions). */
+.pq-grid {
+  display: grid;
+}
+.pq-grid > * {
+  grid-area: 1 / 1;
+}
+/* Le nom GRAVÉ : kaki lisible, biseau double (haute lumière vers la source,
+   ombre à l'opposé) dont le sens se tourne avec --bx/--by. */
+.pq-nom {
   width: fit-content;
-  /* line-height généreux : contient les descendantes (q, g, p) dans la boîte,
-     pour que l'encre (fond clippé au texte) les couvre — sans overshoot. */
-  line-height: 1.1;
+  color: var(--color-surface);
+  font-variation-settings: "wght" 560;
+  text-shadow:
+    calc(var(--bx, -0.7) * 1.6px) calc(var(--by, -0.7) * 1.6px) 0
+      color-mix(in srgb, var(--color-bg) 78%, transparent),
+    calc(var(--bx, -0.7) * -1.6px) calc(var(--by, -0.7) * -1.6px) 1px
+      color-mix(in srgb, var(--color-ink) 42%, transparent);
+}
+/* Le calque de lumière : une seule copie des noms, transparente, dont le
+   fond est un éclat chaud centré sur la source — clippé à TOUTES les lettres
+   du panneau d'un coup (background-clip:text sur le conteneur). Les notes y
+   sont présentes mais invisibles, seules garantes de l'alignement vertical. */
+.pq-gloss {
+  pointer-events: none;
   color: transparent;
-  -webkit-text-fill-color: transparent;
-  -webkit-text-stroke: 1.25px var(--color-surface);
-  font-variation-settings: "wght" 600; /* défaut/repli = plein, gras */
-  transform-origin: left center;
-  /* Encre pleine, bord NET : la dernière lettre se remplit complètement. */
-  background-image: linear-gradient(
-    90deg,
-    var(--color-surface),
-    var(--color-surface)
+  background-image: radial-gradient(
+    17rem 17rem at var(--lx) var(--ly),
+    color-mix(in srgb, var(--color-accent-warm) 22%, white) 0%,
+    var(--color-accent-warm) 16%,
+    color-mix(in srgb, var(--color-accent-warm) 48%, transparent) 40%,
+    transparent 60%
   );
   background-repeat: no-repeat;
-  background-position: left top;
-  background-size: 100% 100%; /* défaut = plein → repli lisible */
   -webkit-background-clip: text;
   background-clip: text;
 }
-@supports (animation-timeline: view()) {
-  .sv-line {
-    background-size: 0% 100%; /* contour seul au repos, l'encre balaie L→R */
-    animation: sv-ink linear both;
-    animation-timeline: view();
-    animation-range: cover 6% cover 46%;
-  }
+/* Les noms du calque gloss : transparents et sans biseau — ils ne servent
+   qu'à découper l'éclat du conteneur (background-clip:text). */
+.pq-gloss .pq-nom {
+  color: transparent;
+  text-shadow: none;
 }
-/* La discipline se DESSINE : trait fin et fantôme → l'encre l'envahit de gauche
-   à droite (bord net), pendant que les fûts s'épaississent (axe variable Clash)
-   et que le mot se cale en place. Le mot prend corps. */
-@keyframes sv-ink {
-  from {
-    background-size: 0% 100%;
-    font-variation-settings: "wght" 220;
-    opacity: 0.45;
-    transform: scale(0.97);
-  }
-  to {
-    background-size: 100% 100%;
-    font-variation-settings: "wght" 600;
-    opacity: 1;
-    transform: scale(1);
-  }
+.pq-gloss .pq-note {
+  visibility: hidden; /* garde la place, ne capte pas l'éclat */
 }
-@media (prefers-reduced-motion: reduce) {
-  .sv-line {
-    background-size: 100% 100% !important;
-    animation: none !important;
+/* Pression universelle (doigt ou clic) : la ligne s'enfonce d'un cran dans
+   la toile et ressort — le ressort vient de la transition de repos. */
+.pq-row {
+  -webkit-tap-highlight-color: transparent;
+  transition: transform 0.34s var(--eoq);
+}
+.pq-row:active {
+  transform: scale(0.992);
+  transition-duration: 0.1s;
+}
+
+/* =============================================================================
+ * Services (.svt-*) — « Le tunnel de caractères ».
+ *
+ * La section s'épingle plein écran et devient une caméra : chaque service
+ * arrive du FOND (contour fantôme, graisse 200), DÉCÉLÈRE jusqu'au plan de
+ * lecture où il S'ARRÊTE (palier net, légende affichée), puis ACCÉLÈRE et
+ * traverse l'écran pendant que le suivant émerge. Voyage en Z, réversible.
+ *
+ * Piloté en JS (Tempus) depuis une progression LISSÉE — voir Services.tsx.
+ * Le lissage (lerp) découple l'image du scroll : impossible de sauter un mot,
+ * même lancé à pleine vitesse. Le CSS ici ne pose QUE la mise en scène
+ * (sous [data-svt="play"]) et le repli (sans JS / reduced-motion = index
+ * seul, en flux). Les valeurs animées (transform, opacity, couleur, graisse)
+ * sont écrites en inline par le moteur.
+ * ============================================================================= */
+.svt-title {
+  color: var(--color-surface);
+  -webkit-text-stroke: 1px transparent;
+  font-variation-settings: "wght" 600;
+}
+/* Base = repli (sans JS / reduced-motion) : le spectacle n'existe pas,
+   l'index porte tout, en flux. */
+.svt-words {
+  display: none;
+}
+.svt-index {
+  margin-top: 3.5rem;
+}
+
+/* Moteur actif (data-svt="play", posé par le JS hors reduced-motion) : la
+   scène s'épingle et le JS pilote chaque mot image par image, depuis une
+   progression LISSÉE (lerp Tempus). Plus d'animation-timeline : c'est
+   justement le lissage qui interdit tout saut, même à pleine vitesse.
+   Le JS écrit transform/opacity/couleur/graisse en inline ; le CSS ne pose
+   que la mise en scène et les états de repli. */
+.svt-section[data-svt="play"] {
+  height: 560svh;
+}
+.svt-section[data-svt="play"] .svt-sticky {
+  position: sticky;
+  top: 0;
+  height: 100svh;
+  overflow: clip;
+}
+.svt-section[data-svt="play"] .svt-words {
+  display: contents; /* les mots se positionnent sur la scène entière */
+}
+/* Une scène par mot : plein écran, centrée. Le plus avancé dans le tunnel
+   est le plus proche de l'œil → au-dessus. opacity 0 par défaut : le JS
+   prend la main dès la première frame (aucun flash de mots empilés). */
+.svt-section[data-svt="play"] .svt-word {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  padding-inline: max(var(--gutter, 1.25rem), 4vw);
+  z-index: calc(10 - var(--si, 0));
+  pointer-events: none;
+}
+.svt-section[data-svt="play"] .svt-title {
+  opacity: 0;
+  transform: scale(0.05);
+  will-change: transform, opacity;
+}
+.svt-section[data-svt="play"] .svt-desc {
+  position: absolute;
+  bottom: 9svh;
+  left: 50%;
+  transform: translateX(-50%);
+  width: max-content;
+  max-width: min(80vw, 42ch);
+  opacity: 0;
+}
+/* La sortie du tunnel : l'index se pose pendant que le dernier mot s'éjecte
+   — les quatre, lisibles, rangée par rangée (piloté en JS). */
+.svt-section[data-svt="play"] .svt-index {
+  position: absolute;
+  inset: 0;
+  margin-top: 0;
+  display: flex;
+  align-items: center;
+  padding-inline: max(var(--gutter, 1.25rem), 4vw);
+  z-index: 20;
+  pointer-events: none;
+}
+.svt-section[data-svt="play"] .svt-row {
+  opacity: 0;
+}
+
+/* =============================================================================
+ * Témoignages (.tm-*) — « À voix haute ».
+ *
+ * Repli (sans JS / reduced-motion) : les voix en colonne, lisibles, en flux.
+ * Mode actif (data-tm="play", posé par le JS hors reduced-motion) : scène
+ * épinglée, une voix centrée à l'encre pleine, les autres en murmures. Le JS
+ * écrit par voix --ty (décalage vertical), --sc (échelle), --op (opacité),
+ * --wght (graisse) et --foc (proximité du centre, 0..1) ; le CSS consomme.
+ * Profondeur par poids/opacité/échelle — aucun flou.
+ * ============================================================================= */
+/* Repli : colonne éditoriale simple. */
+.tm-voices {
+  margin-top: 3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 3.5rem;
+  max-width: 46rem;
+}
+.tm-quote {
+  font-variation-settings: "wght" var(--wght, 460);
+}
+.tm-quote::before {
+  content: "« ";
+}
+.tm-quote::after {
+  content: " »";
+}
+/* Le guillemet géant : décor d'ancrage, visible seulement en scène. */
+.tm-guillemet {
+  display: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .tm-section[data-tm="play"] {
+    height: 600svh; /* 5 voix, avec temps de lecture sur chacune */
+  }
+  .tm-section[data-tm="play"] .tm-stage {
+    position: sticky;
+    top: 0;
+    height: 100svh;
+    overflow: clip;
+  }
+  /* En scène, l'en-tête se réduit à l'eyebrow, posé en haut au centre. */
+  .tm-section[data-tm="play"] .tm-header {
+    position: absolute;
+    top: 7svh;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    z-index: 3;
+  }
+  .tm-section[data-tm="play"] .tm-h2 {
+    display: none;
+  }
+  .tm-section[data-tm="play"] .tm-guillemet {
+    display: block;
+    position: absolute;
+    left: 50%;
+    top: 17svh;
+    transform: translateX(-50%);
+    font-size: clamp(6rem, 16vw, 14rem);
+    line-height: 0.7;
+    color: var(--color-surface);
+    opacity: 0.12;
+    pointer-events: none;
+    user-select: none;
+    z-index: 0;
+  }
+  .tm-section[data-tm="play"] .tm-voices {
+    position: absolute;
+    inset: 0;
+    margin: 0;
+    max-width: none;
+    z-index: 1;
+  }
+  /* Chaque voix : centrée sur la scène, décalée/échelonnée par le JS. La voix
+     active (--foc≈1) est en encre pleine ; les murmures s'éteignent (--op). */
+  .tm-section[data-tm="play"] .tm-voice {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: min(90vw, 40rem);
+    margin: 0;
+    text-align: center;
+    transform: translate(-50%, calc(-50% + var(--ty, 0px))) scale(var(--sc, 1));
+    transform-origin: center center;
+    opacity: var(--op, 1);
+    will-change: transform, opacity;
+  }
+  .tm-section[data-tm="play"] .tm-quote::before,
+  .tm-section[data-tm="play"] .tm-quote::after {
+    content: ""; /* le guillemet géant joue ce rôle en scène */
+  }
+  /* L'attribution n'apparaît que pour la voix au centre. */
+  .tm-section[data-tm="play"] .tm-cap {
+    opacity: calc((var(--foc, 1) - 0.6) / 0.4);
   }
 }
 
