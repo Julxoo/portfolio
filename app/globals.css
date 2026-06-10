@@ -740,6 +740,83 @@
 }
 
 /* =============================================================================
+ * Tarifs (.prix-*) — « Le prix qui s'ouvre ».
+ *
+ * Le chiffre « 500 € » arrive plein (encre, graisse haute) puis, à mesure que
+ * la section se pose, sa graisse retombe et il passe en CONTOUR : ses
+ * contre-formes s'ouvrent. Trois inclus s'y encrent (nom de domaine /
+ * hébergement / mise en ligne). Le prix CONTIENT ce qu'il comprend.
+ *
+ * Piloté en JS (Tempus) depuis une progression LISSÉE — voir Tarifs.tsx. Le JS
+ * écrit graisse + remplissage + contour du chiffre et l'encrage des mots, en
+ * inline. Le CSS ne pose que la mise en scène et les replis.
+ *
+ * Repli (sans JS / reduced-motion) ET mobile (< md) : pas de nichage. Le
+ * chiffre reste en encre pleine lisible, les inclus en liste sous lui.
+ * ============================================================================= */
+.prix-figure {
+  position: relative;
+  margin: clamp(2.5rem, 6vw, 5rem) 0 clamp(2rem, 4vw, 3rem);
+}
+.prix-number {
+  display: block;
+  font-size: clamp(5rem, 22vw, 16rem);
+  line-height: 0.9;
+  letter-spacing: -0.02em;
+  color: var(--color-ink);
+  font-variation-settings: "wght" 560;
+  -webkit-text-stroke: 2px transparent;
+}
+/* Repli / mobile : les inclus en liste propre sous le chiffre. */
+.prix-inclus {
+  margin-top: 1.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.75rem;
+}
+.prix-inclus-item {
+  font-size: clamp(1rem, 2.2vw, 1.35rem);
+  color: var(--color-surface);
+  font-variation-settings: "wght" 520;
+}
+.prix-inclus-item::before {
+  content: "— ";
+  color: var(--color-accent-deep);
+}
+.prix-line strong {
+  font-variation-settings: "wght" 640;
+}
+
+/* ≥ md ET moteur actif : le nichage. Les inclus se posent DANS le chiffre, sur
+   leurs ancres (--sx/--sy) ; le JS les encre. État initial du chiffre = arrivée
+   (plein) pour éviter tout flash avant la 1re frame. */
+@media (min-width: 768px) {
+  .prix-section[data-prix="play"] .prix-number {
+    font-variation-settings: "wght" 640;
+    will-change: font-variation-settings, color;
+  }
+  .prix-section[data-prix="play"] .prix-inclus {
+    position: absolute;
+    inset: 0;
+    margin: 0;
+    pointer-events: none;
+  }
+  .prix-section[data-prix="play"] .prix-inclus-item {
+    position: absolute;
+    left: var(--sx);
+    top: var(--sy);
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    white-space: nowrap;
+    font-size: clamp(0.9rem, 1.5vw, 1.25rem);
+    will-change: opacity, transform, font-variation-settings;
+  }
+  .prix-section[data-prix="play"] .prix-inclus-item::before {
+    content: none;
+  }
+}
+
+/* =============================================================================
  * Reduced motion — règle globale.
  * Quand l'utilisateur demande moins d'animation, on respecte sans débat.
  * L'état final compte, pas la transition qui y mène.
