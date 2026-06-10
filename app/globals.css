@@ -740,80 +740,102 @@
 }
 
 /* =============================================================================
- * Tarifs (.prix-*) — « Le prix qui s'ouvre ».
+ * Tarifs (.prix-*) — « Les reels infinis ».
  *
- * Le chiffre « 500 € » arrive plein (encre, graisse haute) puis, à mesure que
- * la section se pose, sa graisse retombe et il passe en CONTOUR : ses
- * contre-formes s'ouvrent. Trois inclus s'y encrent (nom de domaine /
- * hébergement / mise en ligne). Le prix CONTIENT ce qu'il comprend.
+ * Trois colonnes de chiffres défilent en boucle SANS FIN, vitesses décalées
+ * (vagues). Le « 500 € » n'est jamais figé : le flux est le motif. Le vrai
+ * prix vit dans la ligne « Dès 500 € » en dessous.
  *
- * Piloté en JS (Tempus) depuis une progression LISSÉE — voir Tarifs.tsx. Le JS
- * écrit graisse + remplissage + contour du chiffre et l'encrage des mots, en
- * inline. Le CSS ne pose que la mise en scène et les replis.
+ * Piloté en JS (anime.js v4) — voir Tarifs.tsx : une animation linéaire en
+ * loop par colonne translate le strip de 0 → -50 % (strip dupliqué → boucle
+ * sans couture). Le CSS pose la fenêtre des reels (overflow + masque fondu),
+ * la chasse fixe des chiffres, et le repli.
  *
- * Repli (sans JS / reduced-motion) ET mobile (< md) : pas de nichage. Le
- * chiffre reste en encre pleine lisible, les inclus en liste sous lui.
+ * Repli (sans JS / reduced-motion) : « 500 € » posé, net (rendu serveur). Le
+ * swap vers les reels n'a lieu qu'au montage.
  * ============================================================================= */
-.prix-figure {
-  position: relative;
-  margin: clamp(2.5rem, 6vw, 5rem) 0 clamp(2rem, 4vw, 3rem);
+/* Layout : mobile = reels pleine largeur + texte dessous ; desktop = reels
+   larges à gauche + texte à droite. */
+.prix-layout {
+  margin-top: clamp(2rem, 5vw, 4rem);
+  display: grid;
+  gap: clamp(2rem, 5vw, 3.5rem);
+  align-items: center;
 }
+@media (min-width: 768px) {
+  .prix-layout {
+    grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr);
+    gap: clamp(2.5rem, 5vw, 5rem);
+  }
+}
+
+/* La figure est le CONTENEUR de dimensionnement : les chiffres se mesurent en
+   cqw → ils remplissent la largeur disponible (pleine largeur en mobile, large
+   colonne en desktop), donc « beaucoup plus gros » sans média-queries de taille. */
+.prix-figure {
+  container-type: inline-size;
+}
+/* Repli (sans JS / reduced-motion) : le prix posé, net. */
 .prix-number {
   display: block;
-  font-size: clamp(5rem, 22vw, 16rem);
-  line-height: 0.9;
+  white-space: nowrap;
+  font-size: clamp(3rem, 33cqw, 15rem);
+  line-height: 1;
   letter-spacing: -0.02em;
   color: var(--color-ink);
-  font-variation-settings: "wght" 560;
-  -webkit-text-stroke: 2px transparent;
+  font-variation-settings: "wght" 600;
 }
-/* Repli / mobile : les inclus en liste propre sous le chiffre. */
-.prix-inclus {
-  margin-top: 1.5rem;
+
+/* Les reels : rangée de colonnes + €, alignées sur la bande lisible. */
+.prix-reels {
   display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem 1.75rem;
+  align-items: center;
+  gap: 0;
+  font-size: clamp(3rem, 33cqw, 15rem);
+  line-height: 1;
+  color: var(--color-ink);
+  font-variation-settings: "wght" 600;
 }
-.prix-inclus-item {
-  font-size: clamp(1rem, 2.2vw, 1.35rem);
-  color: var(--color-surface);
-  font-variation-settings: "wght" 520;
+/* Fenêtre d'une colonne : ~1,9 chiffre visible (centre net + voisins fondus).
+   La largeur contient pleinement le glyphe (pas de coupe à droite) ; seul le
+   vertical est rogné (overflow + masque). */
+.prix-reel {
+  width: 0.72em;
+  height: 1.9em;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    #000 20%,
+    #000 80%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    #000 20%,
+    #000 80%,
+    transparent 100%
+  );
 }
-.prix-inclus-item::before {
-  content: "— ";
-  color: var(--color-accent-deep);
+.prix-reel-strip {
+  display: flex;
+  flex-direction: column;
+  will-change: transform;
+}
+.prix-reel-d {
+  height: 1em;
+  line-height: 1;
+  text-align: center;
+  letter-spacing: 0;
+  font-variant-numeric: tabular-nums;
+}
+.prix-euro {
+  margin-left: 0.14em;
+  align-self: center;
 }
 .prix-line strong {
   font-variation-settings: "wght" 640;
-}
-
-/* ≥ md ET moteur actif : le nichage. Les inclus se posent DANS le chiffre, sur
-   leurs ancres (--sx/--sy) ; le JS les encre. État initial du chiffre = arrivée
-   (plein) pour éviter tout flash avant la 1re frame. */
-@media (min-width: 768px) {
-  .prix-section[data-prix="play"] .prix-number {
-    font-variation-settings: "wght" 640;
-    will-change: font-variation-settings, color;
-  }
-  .prix-section[data-prix="play"] .prix-inclus {
-    position: absolute;
-    inset: 0;
-    margin: 0;
-    pointer-events: none;
-  }
-  .prix-section[data-prix="play"] .prix-inclus-item {
-    position: absolute;
-    left: var(--sx);
-    top: var(--sy);
-    transform: translate(-50%, -50%);
-    opacity: 0;
-    white-space: nowrap;
-    font-size: clamp(0.9rem, 1.5vw, 1.25rem);
-    will-change: opacity, transform, font-variation-settings;
-  }
-  .prix-section[data-prix="play"] .prix-inclus-item::before {
-    content: none;
-  }
 }
 
 /* =============================================================================
