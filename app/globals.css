@@ -863,6 +863,15 @@
   }
 }
 
+/* Footer kaki : recolore en crème les liens (qui hardcodent text-ink dans les
+   composants Link/EmailLink) ; .footer-dark a a plus de spécificité que .text-ink. */
+.footer-dark a {
+  color: var(--color-bg);
+}
+.footer-dark a[href^="mailto:"] {
+  text-decoration-color: color-mix(in srgb, var(--color-bg) 45%, transparent);
+}
+
 /* =============================================================================
  * Reduced motion — règle globale.
  * Quand l'utilisateur demande moins d'animation, on respecte sans débat.
