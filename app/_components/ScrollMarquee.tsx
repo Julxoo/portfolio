@@ -17,13 +17,14 @@ import { useEffect, useRef } from "react";
 // première copie a complètement disparu à gauche.
 // =====================================================================
 
+// Bandeau-mantra : vocabulaire 100 % orienté client, aucun terme technique.
 const ITEMS = [
   "Sites sur-mesure",
+  "Dessiné depuis zéro",
+  "Aucun template",
   "Aix-en-Provence",
-  "Design éditorial",
-  "Next.js · Vercel",
-  "Artisans & PME",
-  "2026 → 2027",
+  "Artisans & commerces",
+  "Mise en ligne comprise",
 ];
 
 const BASE_SPEED = 0.04; // px par ms, soit 40 px/s
