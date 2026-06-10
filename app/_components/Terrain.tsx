@@ -3,17 +3,9 @@
 import { type CSSProperties } from "react";
 import { useReveal } from "../_lib/motion/useReveal";
 
-// =====================================================================
-// Terrain — version minimaliste.
-//
-// Composition type-led, beaucoup d'air : un titre net, un filet qui se trace
-// (scaleX, le geste signé réduit à l'essentiel), puis trois informations
-// claires en grille. Aucun décor, aucune carte, aucune coordonnée.
-//
-// Reveal via useReveal (IntersectionObserver → data-revealed) ; fondu-montée
-// en cascade. Reduced-motion : la règle globale neutralise les transitions →
-// tout s'affiche posé.
-// =====================================================================
+// Terrain — version minimaliste : titre net, un filet qui se trace (scaleX),
+// puis trois informations en grille. Aucun décor. Reveal via useReveal
+// (fondu-montée) ; reduced-motion neutralise les transitions, tout reste posé.
 
 const FACTS = [
   { label: "Atelier", value: "Aix-en-Provence" },

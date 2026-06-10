@@ -4,26 +4,11 @@ import { useEffect, useRef, useSyncExternalStore } from "react";
 import { animate } from "animejs";
 import { SlideLink, InlineLink } from "../_lib/ui/Link";
 
-// =====================================================================
-// Tarifs — « Les reels qui se figent sur 500 ».
-//
-// Trois colonnes de chiffres défilent en boucle SANS FIN, à des vitesses
-// décalées (vagues). Quand l'utilisateur ARRIVE sur la section (elle occupe
-// la bande centrale du viewport), le flux déroule encore un instant puis
-// FREINE et se fige, colonne après colonne, sur 5-0-0. S'il repart, ça se
-// ré-arme : le flux reprend, et se refigera à la prochaine visite.
-//
-// Moteur : anime.js v4. La position de chaque reel est pilotée au pixel via
-// un proxy `pos` ; transform = translateY(-(pos mod cycle)) avec un strip
-// dupliqué → boucle sans couture. Le freinage (ease outExpo) vise l'offset
-// exact qui centre le chiffre cible (atterrissage déterministe). Deux
-// IntersectionObservers : « proche » (perf : pause hors-champ) et « centre »
-// (déclenche le freinage / ré-arme).
-//
-// Séquences déterministes (LCG graine fixe) : aucun saut d'hydratation. La
-// figure est décor (aria-hidden) ; le vrai prix vit dans la ligne « Dès
-// 500 € » en dessous. Repli sans JS / reduced-motion : « 500 € » posé (SSR).
-// =====================================================================
+// Tarifs — trois colonnes de chiffres qui défilent en boucle puis FREINENT
+// sur 5-0-0 quand la section atteint le centre du viewport (ré-armé hors-champ).
+// anime.js v4 : position pilotée au pixel (proxy `pos`, strip dupliqué = boucle
+// sans couture), freinage outExpo vers l'offset qui centre la cible. La figure
+// est décor (aria-hidden) ; le vrai prix vit dans la ligne « Dès 500 € » dessous.
 
 const REEL_COUNT = 3;
 // Roue de compteur ORDONNÉE 0→9 : les voisins sont toujours cohérents
