@@ -7,7 +7,7 @@ import { useLenis } from "lenis/react";
 import { MobileMenu, type NavLink } from "./MobileMenu";
 
 /**
- * Architecture de l'info — 5 liens top-level uniquement.
+ * Architecture de l'info — 6 liens top-level uniquement.
  * `/design` reste hors nav (accessible par URL directe, interne/technique).
  */
 const LINKS: NavLink[] = [
@@ -15,6 +15,7 @@ const LINKS: NavLink[] = [
   { href: "/carnet", label: "Carnet" },
   { href: "/methode", label: "Méthode" },
   { href: "/a-propos", label: "À propos" },
+  { href: "/tarifs", label: "Tarifs" },
   { href: "/contact", label: "Contact" },
 ];
 
