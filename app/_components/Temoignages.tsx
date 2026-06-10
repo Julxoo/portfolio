@@ -3,64 +3,45 @@
 import { useEffect, useRef, useSyncExternalStore } from "react";
 import { useTempus } from "tempus/react";
 
-// =====================================================================
-// Témoignages — « À voix haute ».
-//
-// Une scène épinglée où UNE seule voix parle à la fois : centrée, en encre
-// pleine, immense. Les autres ne sont que des murmures autour — pâles, plus
-// petits, plus fins — qui montent et descendent. La voix active porte seule
-// son attribution (nom · métier · ville → preuve + SEO local). Un guillemet
-// « démesuré ancre la composition.
-//
-// Le scroll est DÉCOUPLÉ (lerp Tempus, comme Services) : pas de saut. Et la
-// position de focus passe par un smootherstep — chaque voix MARQUE un temps
-// au centre (lecture posée) avant de céder la parole. Profondeur par le
-// poids / l'opacité / l'échelle — jamais par le flou (règle de la DA).
-//
-// Temps suspendu, à dessein : contraste avec la marquee rapide qui précède,
-// et registre distinct du Manifeste (liste qui se révèle) qui suit.
-//
-// Repli (sans JS / reduced-motion) : les voix en colonne, lisibles, en flux.
-// Verbatims FACTICES en attendant les vrais — à remplacer.
-// =====================================================================
+// Témoignages — « À voix haute ». Scène épinglée : une voix à la fois
+// (centrée, encre pleine), les autres en murmures. Scroll découplé (lerp
+// Tempus) avec un palier par voix (smootherstep) ; profondeur par poids,
+// opacité et échelle, jamais par le flou. Repli : voix en colonne lisible.
 
-type Voix = { citation: string; auteur: string; metier: string; ville: string };
+type Voix = {
+  citation: string;
+  auteur: string;
+  metier: string;
+  ville?: string;
+};
 
 const VOIX: Voix[] = [
   {
     citation:
-      "Jules a saisi notre métier en une seule réunion. Le site nous ressemble enfin — pas un template de plus.",
-    auteur: "Camille R.",
-    metier: "Cave à vins",
+      "Il a compris le lieu en une soirée. Le site sent le vin et la truffe, et je gère la carte tout seul.",
+    auteur: "Thomas Comptour",
+    metier: "Le Vieux Tonneau",
     ville: "Aix-en-Provence",
   },
   {
     citation:
-      "On a doublé les réservations en ligne dès le premier mois. Et je peux tout modifier moi-même, sans appeler personne.",
-    auteur: "Thomas B.",
-    metier: "Studio de pilates",
-    ville: "Sisteron",
+      "J'avais RedRoom en tête, il l'a posé à l'écran exactement comme je l'imaginais. Une vraie identité avant même d'ouvrir.",
+    auteur: "Chahineze Bekhit",
+    metier: "RedRoom, studio de Pilates",
+    ville: "Dubaï",
   },
   {
     citation:
-      "Travailler avec une seule personne, du premier appel à la livraison, ça change tout. Zéro intermédiaire, zéro malentendu.",
-    auteur: "Sophie M.",
-    metier: "Maison d'hôtes",
-    ville: "Lourmarin",
-  },
-  {
-    citation:
-      "La direction artistique se défendait à l'oral avant la première ligne de code. Du sur-mesure, vraiment.",
-    auteur: "Karim D.",
-    metier: "Torréfacteur",
+      "Notre métier est technique. Il l'a rendu clair sans le caricaturer, et les clients comprennent ce qu'on fait avant même de nous appeler.",
+    auteur: "Anis, Lyes et Karim",
+    metier: "Voltalika",
     ville: "Marseille",
   },
   {
     citation:
-      "Livré en trois semaines, publié au fil de l'eau. On commentait sur la vraie version, jamais sur une maquette figée.",
-    auteur: "Élodie F.",
-    metier: "Architecte d'intérieur",
-    ville: "Aix-en-Provence",
+      "Je fais de la com toute la journée, j'étais donc exigeante. Le rendu est éditorial, sans template, et il représente l'agence mieux que je l'aurais fait seule.",
+    auteur: "Anahé Sabatié",
+    metier: "Swipe Up Agency",
   },
 ];
 
@@ -177,8 +158,9 @@ export function Temoignages() {
               <figcaption className="tm-cap mt-6 font-sans text-body">
                 <cite className="not-italic text-ink/80">{v.auteur}</cite>
                 <span className="text-ink/45">
-                  {" "}
-                  · {v.metier} · {v.ville}
+                  {" · "}
+                  {v.metier}
+                  {v.ville ? ` · ${v.ville}` : ""}
                 </span>
               </figcaption>
             </figure>
