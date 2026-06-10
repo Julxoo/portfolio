@@ -838,6 +838,31 @@
   font-variation-settings: "wght" 640;
 }
 
+/* FAQ — accordéon natif <details> : marqueur +/× et révélation douce. */
+.faq-item summary {
+  list-style: none;
+}
+.faq-item summary::-webkit-details-marker {
+  display: none;
+}
+.faq-icon {
+  transition: transform 260ms var(--eoq);
+}
+.faq-item[open] .faq-icon {
+  transform: rotate(45deg);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .faq-item[open] .faq-answer {
+    animation: faq-reveal 380ms var(--eoq) both;
+  }
+}
+@keyframes faq-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+}
+
 /* =============================================================================
  * Reduced motion — règle globale.
  * Quand l'utilisateur demande moins d'animation, on respecte sans débat.
