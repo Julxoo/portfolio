@@ -41,6 +41,10 @@ export type SceneProject = {
   url?: string;
   /** Libellé du repli kaki quand il n'y a pas de capture (défaut « Étude à venir »). */
   imageLabel?: string;
+  /** Projet sans visuel de site : "mcp" → carte dédiée (capacités → IA). */
+  kind?: "mcp";
+  /** Capacités exposées par le serveur MCP (rendu de la carte « mcp »). */
+  tools?: string[];
 };
 
 function clamp(v: number, min: number, max: number) {
@@ -232,6 +236,8 @@ function ProjectCard({
   imageAlt,
   url,
   imageLabel,
+  kind,
+  tools = [],
 }: SceneProject & { index: number }) {
   const external = Boolean(url);
   const href = url ?? `/projets/${slug}`;
@@ -253,9 +259,11 @@ function ProjectCard({
         </span>
       </div>
 
-      {/* Image — cadre net, sans bordure. Aplat kaki tant que pas de capture. */}
+      {/* Image — cadre net, sans bordure. Capture, carte MCP dédiée, ou aplat kaki. */}
       <div className="relative aspect-[4/5] overflow-hidden bg-surface">
-        {imageSrc ? (
+        {kind === "mcp" ? (
+          <McpCard tools={tools} />
+        ) : imageSrc ? (
           <Image
             src={imageSrc}
             alt={imageAlt ?? ""}
@@ -300,6 +308,115 @@ function ProjectCard({
         )}
       </div>
     </article>
+  );
+}
+
+// Carte dédiée aux projets MCP (sans visuel de site) : sur le panneau kaki,
+// les capacités exposées convergent par des courbes fines vers un nœud « IA »
+// (halo chaud). Tout en SVG → alignement déterministe, net à toute taille.
+function McpCard({ tools }: { tools: string[] }) {
+  const TOP = 150;
+  const BOTTOM = 384;
+  const PORT_X = 206; // colonne des points de sortie des capacités
+  const HUB_X = 330;
+  const HUB_Y = (TOP + BOTTOM) / 2;
+  const n = Math.max(tools.length, 2);
+  const clash = { fontFamily: "var(--font-display)" };
+
+  const rows = tools.map((t, i) => ({
+    t,
+    y: TOP + (i * (BOTTOM - TOP)) / (n - 1),
+  }));
+
+  return (
+    <div aria-hidden className="absolute inset-0 bg-surface">
+      <svg
+        viewBox="0 0 400 500"
+        className="absolute inset-0 h-full w-full"
+        style={{ color: "var(--color-bg)" }}
+      >
+        <defs>
+          <radialGradient id="mcpGlow" cx="50%" cy="50%" r="50%">
+            <stop
+              offset="0%"
+              stopColor="var(--color-accent-warm)"
+              stopOpacity="0.5"
+            />
+            <stop
+              offset="58%"
+              stopColor="var(--color-accent-warm)"
+              stopOpacity="0.12"
+            />
+            <stop
+              offset="100%"
+              stopColor="var(--color-accent-warm)"
+              stopOpacity="0"
+            />
+          </radialGradient>
+        </defs>
+
+        <text
+          x="28"
+          y="50"
+          fontSize="13"
+          letterSpacing="2.5"
+          fill="currentColor"
+          fillOpacity="0.55"
+          style={{ fontFamily: "var(--font-sans)" }}
+        >
+          SERVEUR MCP
+        </text>
+
+        {/* Halo + courbes de convergence (sous le hub). */}
+        <circle cx={HUB_X} cy={HUB_Y} r="78" fill="url(#mcpGlow)" />
+        {rows.map((r) => (
+          <path
+            key={`l-${r.t}`}
+            d={`M${PORT_X} ${r.y} C 284 ${r.y}, 288 ${HUB_Y}, 305 ${HUB_Y}`}
+            fill="none"
+            stroke="currentColor"
+            strokeOpacity="0.32"
+            strokeWidth="1"
+          />
+        ))}
+
+        {/* Le nœud IA. */}
+        <circle
+          cx={HUB_X}
+          cy={HUB_Y}
+          r="24"
+          fill="none"
+          stroke="currentColor"
+          strokeOpacity="0.65"
+          strokeWidth="1.3"
+        />
+        <text
+          x={HUB_X}
+          y={HUB_Y + 7}
+          textAnchor="middle"
+          fontSize="21"
+          fill="currentColor"
+          style={clash}
+        >
+          IA
+        </text>
+
+        {/* Capacités + points de sortie. */}
+        {rows.map((r) => (
+          <g key={`t-${r.t}`}>
+            <text x="28" y={r.y + 6} fontSize="19" fill="currentColor" style={clash}>
+              {r.t}
+            </text>
+            <circle
+              cx={PORT_X}
+              cy={r.y}
+              r="3.4"
+              fill="var(--color-accent-warm)"
+            />
+          </g>
+        ))}
+      </svg>
+    </div>
   );
 }
 

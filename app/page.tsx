@@ -84,7 +84,8 @@ const FEATURED: SceneProject[] = [
     teaser:
       "Serveur MCP pour un salon de coiffure : ses outils de gestion branchés directement à l'IA.",
     tags: ["MCP", "IA"],
-    imageLabel: "Serveur MCP",
+    kind: "mcp",
+    tools: ["Réservations", "Disponibilités", "Fiches clients", "Prestations"],
     url: "https://mcp.oracoiffure.fr",
   },
 ];
