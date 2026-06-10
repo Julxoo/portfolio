@@ -19,21 +19,21 @@ type Principle = {
 const PRINCIPES: Principle[] = [
   {
     num: "01",
-    title: "Un projet à la fois",
+    title: "Vous avez tout mon temps",
     body:
-      "Pas de dossiers en parallèle. Quand je signe un projet, c'est le seul en cours — du premier appel jusqu'à la livraison. L'attention reste entière, les décisions ne se diluent pas entre trois clients.",
+      "Quand je signe, c'est le seul dossier en cours — du premier appel à la mise en ligne. Pas de file d'attente, pas d'attention partagée entre trois clients. La vôtre, entière.",
   },
   {
     num: "02",
-    title: "Pas de template",
+    title: "Un site qui vous ressemble",
     body:
-      "Chaque site est dessiné depuis la typographie, la palette, la grille — pas acheté sur ThemeForest et habillé. Si la DA ne se défend pas à l'oral devant vous, elle n'existe pas.",
+      "Chaque site est dessiné depuis la page blanche : typographie, palette, grille. Rien d'acheté, rien de recyclé. Si la direction artistique ne se défend pas à l'oral devant vous, elle n'existe pas.",
   },
   {
     num: "03",
-    title: "Publié au fil de l'eau",
+    title: "Le site est à vous",
     body:
-      "Pas de grande révélation finale. Le site se construit sur une URL privée, section par section. Vous commentez sur la version vivante, jamais sur une maquette figée.",
+      "À la fin, je vous remets tout : le code, le domaine, les accès. Pas d'abonnement à ma plateforme, pas de cadenas. Vous partez quand vous voulez — le site reste le vôtre.",
   },
 ];
 
