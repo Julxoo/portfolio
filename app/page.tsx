@@ -24,46 +24,68 @@ export const metadata: Metadata = {
   alternates: { canonical: "/" },
 };
 
-// Projets featured pour la scène 3D home — 4 projets existants sur
-// julestoussenel.com. À compléter avec des captures WebP dans /public/projets/
-// au fur et à mesure des études de cas publiées. Tant qu'imageSrc est absent,
-// la carte affiche un aplat kaki.
+// Projets featured du défilé home. Captures réelles dans /public/projets/ ;
+// la card ouvre le site live (url). ORA est un serveur MCP sans visuel de
+// site → repli kaki avec libellé dédié (imageLabel).
 const FEATURED: SceneProject[] = [
+  {
+    slug: "louma-pilates",
+    eyebrow: "Studio",
+    title: "LOUMA Pilates",
+    year: "2026",
+    teaser:
+      "Studio de Pilates Reformer et Mat à Sisteron. Un sanctuaire du mouvement, cours présentés et réservation en ligne.",
+    tags: ["Vitrine", "Réservation"],
+    imageSrc: "/projets/louma.jpg",
+    imageAlt: "Page d'accueil du site LOUMA Pilates",
+    url: "https://loumapilates.fr/",
+  },
+  {
+    slug: "swipe-up-agency",
+    eyebrow: "Agence",
+    title: "Swipe Up Agency",
+    year: "2026",
+    teaser:
+      "Agence de communication et marketing. Portfolio éditorial en accordéon, campagnes mises en scène, sans template.",
+    tags: ["Portfolio", "Éditorial"],
+    imageSrc: "/projets/swipe-up.jpg",
+    imageAlt: "Page d'accueil du site de Swipe Up Agency",
+    url: "https://0013-anahe-sabatie.vercel.app/",
+  },
+  {
+    slug: "redroom",
+    eyebrow: "Studio",
+    title: "RedRoom",
+    year: "2026",
+    teaser:
+      "Studio fitness réservé aux femmes à Dubaï. Cardio, barre Pilates et méditation, une image premium prête pour l'ouverture.",
+    tags: ["Premium", "Réservation"],
+    imageSrc: "/projets/redroom.jpg",
+    imageAlt: "Page d'accueil du site RedRoom",
+    url: "https://redroom.ae/",
+  },
   {
     slug: "le-vieux-tonneau",
     eyebrow: "Restauration",
     title: "Le Vieux Tonneau",
     year: "2025",
     teaser:
-      "Site vitrine éditorial pour un restaurant de cuisine bistronomique — carte animée, agenda saisonnier, réservation.",
-    tags: ["Next.js", "Sanity", "Éditorial"],
+      "Bar à vins, tapas et truffes au cœur du vieil Aix. Site éditorial, carte vivante, mise à jour en autonomie.",
+    tags: ["Vitrine", "Éditorial"],
+    imageSrc: "/projets/vieux-tonneau.jpg",
+    imageAlt: "Page d'accueil du site Le Vieux Tonneau",
+    url: "https://levieuxtonneau.fr/",
   },
   {
-    slug: "soma-pilates",
-    eyebrow: "Studio",
-    title: "SOMA Pilates",
-    year: "2025",
+    slug: "ora",
+    eyebrow: "Produit · MCP",
+    title: "ORA",
+    year: "2026",
     teaser:
-      "Studio de pilates à Sisteron. Prise de rendez-vous en ligne, présentation des cours, tarifs transparents.",
-    tags: ["Next.js", "Booking", "Design"],
-  },
-  {
-    slug: "tracker-analytics",
-    eyebrow: "Produit",
-    title: "Tracker Analytics",
-    year: "2024",
-    teaser:
-      "Plateforme d’analytics légère pour sites éditoriaux. Aucun cookie, données agrégées côté serveur.",
-    tags: ["SaaS", "Dashboard", "Node.js"],
-  },
-  {
-    slug: "telegram-bots",
-    eyebrow: "Produit",
-    title: "Telegram Bots Platform",
-    year: "2024",
-    teaser:
-      "Plateforme de création et supervision de bots Telegram pour automatiser communication et support client.",
-    tags: ["Node.js", "Admin"],
+      "Serveur MCP pour un salon de coiffure : ses outils de gestion branchés directement à l'IA.",
+    tags: ["MCP", "IA"],
+    imageLabel: "Serveur MCP",
+    url: "https://mcp.oracoiffure.fr",
   },
 ];
 
@@ -165,29 +187,26 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 🆕 placeholder — FAQ (SEO longue-traîne + objections) */}
-      <Faq />
-
       {/* =================================================================
-        BRISURE CHROMATIQUE — voile kaki qui fade-in au passage de la CTA.
-        Placé ici dans la page (pas dans layout) pour rester dans le
-        stacking context de <main>. La section CTA qui suit porte
-        data-contrast-mask-target et un z-index supérieur pour passer
-        devant le voile quand il est opaque.
+        BRISURE CHROMATIQUE — voile kaki qui fade-in À L'ENTRÉE de la CTA puis
+        fade-out à la sortie (transitoire), pour que la CTA prenne tout l'écran
+        en kaki sans recouvrir la FAQ qui suit. Placé ici (pas dans layout) pour
+        rester dans le stacking context de <main>. La CTA porte
+        data-contrast-mask-target et un z-index supérieur.
       ================================================================= */}
-      <ContrastMask />
+      <ContrastMask maxOpacity={1} />
 
       {/* =================================================================
-        CTA FINAL — bloc éditorial sobre avec email direct.
-        min-h-screen pour que l'arrivée soit un "flip" plein écran kaki.
+        CTA — « Un mot, une réponse sous deux jours. » Bloc plein écran
+        (min-h-[100svh] = arrivée en "flip" kaki), placé AVANT la FAQ.
         relative z-[25] pour rester au-dessus du ContrastMask (z:15).
       ================================================================= */}
       <section
         data-contrast-mask-target
-        className="relative z-[25] min-h-[100svh] flex items-center px-gutter py-section-xl bg-surface text-surface-foreground border-t border-rule"
+        className="relative z-[25] min-h-[100svh] flex items-center px-gutter py-section-lg bg-surface text-surface-foreground"
       >
         <div className="max-w-default mx-auto w-full">
-          <div className="grid md:grid-cols-[1.3fr_1fr] gap-16 items-end">
+          <div className="grid md:grid-cols-[1.3fr_1fr] gap-12 md:gap-16 items-end">
             <div>
               <p className="font-display italic text-lead text-accent-warm mb-6">
                 Un mot, une réponse sous deux jours.
@@ -214,6 +233,9 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* FAQ — désormais en clôture de page (SEO longue-traîne + objections). */}
+      <Faq />
     </div>
   );
 }

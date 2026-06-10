@@ -37,6 +37,10 @@ export type SceneProject = {
   tags?: string[];
   imageSrc?: string;
   imageAlt?: string;
+  /** Site live : si présent, la card ouvre ce lien externe (sinon /projets/{slug}). */
+  url?: string;
+  /** Libellé du repli kaki quand il n'y a pas de capture (défaut « Étude à venir »). */
+  imageLabel?: string;
 };
 
 function clamp(v: number, min: number, max: number) {
@@ -226,8 +230,11 @@ function ProjectCard({
   tags = [],
   imageSrc,
   imageAlt,
+  url,
+  imageLabel,
 }: SceneProject & { index: number }) {
-  const href = `/projets/${slug}`;
+  const external = Boolean(url);
+  const href = url ?? `/projets/${slug}`;
   const num = String(index + 1).padStart(2, "0");
 
   return (
@@ -262,7 +269,7 @@ function ProjectCard({
               {num}
             </span>
             <span className="absolute bottom-5 left-5 text-eyebrow uppercase text-bg/55">
-              Étude à venir
+              {imageLabel ?? "Étude à venir"}
             </span>
           </div>
         )}
@@ -274,6 +281,8 @@ function ProjectCard({
         <h3 className="font-display text-[clamp(1.45rem,2.2vw,1.9rem)] leading-[1.05] text-ink mb-3 [font-variation-settings:'wght'_480] lg:group-hover:[font-variation-settings:'wght'_660] transition-[font-variation-settings] duration-deliberate ease-out-quint motion-reduce:transition-none">
           <Link
             href={href}
+            target={external ? "_blank" : undefined}
+            rel={external ? "noopener noreferrer" : undefined}
             className="after:absolute after:inset-0 after:content-[''] focus-visible:outline-2 focus-visible:outline-offset-[4px] focus-visible:outline-accent-deep"
           >
             {title}

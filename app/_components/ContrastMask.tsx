@@ -3,20 +3,9 @@
 import { useLenis } from "lenis/react";
 import { useRef } from "react";
 
-// =====================================================================
-// ContrastMask — brisure chromatique scroll-driven (ticket #26).
-//
-// Voile kaki `var(--color-surface)` fixé en viewport, opacité animée
-// de 0 à `maxOpacity` quand l'utilisateur approche la section cible.
-// La section cible doit porter `data-contrast-mask-target` (ou passer
-// targetSelector explicitement) et stacker au-dessus via z-index > 15
-// dans le même contexte d'empilement.
-//
-// Le voile est positionné `z-index: 15`. À placer DANS le composant
-// page (et non dans layout) pour rester dans le stacking context de
-// `<main>`. La section CTA doit être `relative z-[25]` pour apparaître
-// au-dessus du voile quand il est opaque.
-// =====================================================================
+// ContrastMask — voile kaki fixe (z-15) dont l'opacité monte à l'entrée de la
+// cible [data-contrast-mask-target] et redescend à sa sortie. À placer dans la
+// page (pas le layout) ; la cible doit être `relative z-[25]` pour passer devant.
 
 type ContrastMaskProps = {
   /** CSS selector de la section cible. */
@@ -48,10 +37,14 @@ export function ContrastMask({
     const rect = target.getBoundingClientRect();
     const vh = window.innerHeight;
     const fadeZone = vh * fadeDistance;
+    const clamp01 = (v: number) => Math.max(0, Math.min(1, v));
 
-    // Progress : 0 quand la cible est hors viewport (top > fadeZone),
-    // 1 quand le top de la cible atteint le top du viewport.
-    const progress = Math.max(0, Math.min(1, 1 - rect.top / fadeZone));
+    // Le voile monte À L'ENTRÉE de la cible (son haut descend de fadeZone → 0)
+    // et redescend À LA SORTIE (son bas remonte de fadeZone → 0). Transitoire :
+    // plein écran kaki sur la cible, puis retrait pour laisser propre ce qui suit.
+    const enter = clamp01((fadeZone - rect.top) / fadeZone);
+    const exit = clamp01(rect.bottom / fadeZone);
+    const progress = Math.min(enter, exit);
     mask.style.opacity = String(progress * maxOpacity);
   });
 
